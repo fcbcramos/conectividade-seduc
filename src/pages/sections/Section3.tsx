@@ -43,8 +43,7 @@ const Section3 = () => {
 
       {/* Provisioning and Sustainability Model Section */}
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
-          <span className="text-muted-foreground">3.1.3</span>
+        <h2 className="text-xl font-semibold text-foreground">
           Modelo de Provisionamento e Sustentação
         </h2>
 
