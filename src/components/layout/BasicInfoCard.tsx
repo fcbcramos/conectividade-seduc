@@ -75,11 +75,6 @@ const BasicInfoCard = () => {
               </div>
             </div>
           </div>
-
-          <div className="border-t pt-4">
-            <p className="text-xs text-muted-foreground uppercase tracking-wider">Elaborado por</p>
-            <p className="font-semibold text-primary mt-1">{basicInfo.elaboratedBy}</p>
-          </div>
         </CardContent>
       </Card>
 
