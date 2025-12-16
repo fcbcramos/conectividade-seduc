@@ -82,29 +82,23 @@ const SolutionArchitecture = () => {
                       className="relative p-4 rounded-lg border-2 bg-card hover:shadow-md transition-shadow"
                       style={{ borderColor: layer.color }}
                     >
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-start gap-3">
                         <div
-                          className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0"
+                          className="w-12 h-12 rounded-lg flex items-center justify-center shrink-0 mt-1"
                           style={{ backgroundColor: `${layer.color}20` }}
                         >
                           <IconComponent className="w-6 h-6" style={{ color: layer.color }} />
                         </div>
-                        <div className="flex-1 min-w-0">
-                          <div className="flex items-center gap-2 mb-1">
-                            <span
-                              className="text-xs font-bold px-2 py-0.5 rounded"
-                              style={{ backgroundColor: layer.color, color: 'white' }}
-                            >
-                              {layer.shortName}
-                            </span>
-                            <span className="text-sm font-medium text-foreground truncate">
+                        <div className="flex-1 min-w-0 text-center">
+                          <div className="flex items-center justify-center gap-2 mb-1">
+                            <span className="text-sm font-medium text-foreground">
                               {layer.name.replace(` (${layer.shortName})`, '')}
                             </span>
                           </div>
                           <p className="text-xs text-muted-foreground leading-relaxed">
                             {layer.description}
                           </p>
-                          <div className="flex flex-wrap gap-1 mt-2">
+                          <div className="flex flex-wrap justify-center gap-1 mt-2">
                             {layer.components.map((comp) => (
                               <span
                                 key={comp}
