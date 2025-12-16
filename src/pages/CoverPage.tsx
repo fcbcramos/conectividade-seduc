@@ -25,9 +25,9 @@ const CoverPage = () => {
       </div>
 
       {/* Conteúdo principal */}
-      <div className="flex-1 flex flex-col min-h-screen p-4 md:p-6 lg:p-8 relative z-10">
-        {/* Header com logo SEDUC */}
-        <header className="flex justify-end items-start">
+      <div className="flex-1 flex flex-col min-h-screen relative z-10">
+        {/* Header com logo SEDUC - posição absoluta no canto superior direito */}
+        <header className="absolute top-2 right-2 md:top-4 md:right-4">
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
@@ -36,7 +36,7 @@ const CoverPage = () => {
         </header>
 
         {/* Conteúdo central */}
-        <main className="flex-1 flex flex-col justify-center items-center">
+        <main className="flex-1 flex flex-col justify-center items-center px-8 md:px-16">
           <div className="space-y-6 md:space-y-8 text-left">
             {/* Título principal - 70px base, responsivo */}
             <h1 
@@ -66,8 +66,8 @@ const CoverPage = () => {
           </div>
         </main>
 
-        {/* Footer com logos alinhados à direita e transparência */}
-        <footer className="flex items-center justify-end gap-6 md:gap-8">
+        {/* Footer com logos - posição absoluta no canto inferior direito */}
+        <footer className="absolute bottom-2 right-2 md:bottom-4 md:right-4 flex items-center gap-6 md:gap-8">
           <img 
             src={logoEscolasConectadas} 
             alt="Escolas Conectadas" 
