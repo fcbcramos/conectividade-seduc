@@ -14,30 +14,32 @@ export const basicInfo = {
 
 export const kpiData = {
   totalValue: 89971275.00,
-  disbursedValue: 54134450.00,
+  implantationValue: 54134450.00,
+  disbursedValue: 0,
   totalPhases: 7,
-  completedPhases: 4,
+  completedPhases: 0,
   executionPeriod: "60 meses",
+  startDate: "Janeiro/2026",
   contractModel: "Integrada, Lote Único, As a Service"
 };
 
 export const disbursementData = [
-  { phase: "RPTI", value: 4498563.75, percentage: 5, status: "Concluída" },
-  { phase: "PEP-I", value: 13495691.25, percentage: 15, status: "Concluída" },
-  { phase: "PEP-M1", value: 13495691.25, percentage: 15, status: "Concluída" },
-  { phase: "PEP-M2", value: 13495691.25, percentage: 15, status: "Concluída" },
-  { phase: "PEP-M3", value: 13495691.25, percentage: 15, status: "Em andamento" },
-  { phase: "PEP-F", value: 22492818.75, percentage: 25, status: "Pendente" },
-  { phase: "RTF", value: 8997127.50, percentage: 10, status: "Pendente" }
+  { phase: "RPTI", name: "Planejamento", value: 8997127.50, percentage: 10, month: "Jan/26", status: "Planejado", type: "planejamento" },
+  { phase: "PEP-I", name: "Mobilização", value: 5416478.70, percentage: 6, month: "Fev/26", status: "Planejado", type: "mobilizacao" },
+  { phase: "PEP-M1", name: "Onda 1", value: 8124717.00, percentage: 9, month: "Mar/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M2", name: "Onda 2", value: 9027464.50, percentage: 10, month: "Abr/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M3", name: "Onda 3", value: 9027464.50, percentage: 10, month: "Mai/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-F", name: "Finalização", value: 8124717.00, percentage: 9, month: "Jun/26", status: "Planejado", type: "execucao" },
+  { phase: "RTF", name: "Entrega", value: 5416480.80, percentage: 6, month: "Jul/26", status: "Planejado", type: "entrega" }
 ];
 
 export const slaMetrics = [
-  { metric: "Disponibilidade WAN", target: "99.5%", current: "99.7%", status: "Conforme" },
-  { metric: "Latência Máxima", target: "≤80ms", current: "45ms", status: "Conforme" },
-  { metric: "Jitter Máximo", target: "≤30ms", current: "12ms", status: "Conforme" },
-  { metric: "Perda de Pacotes", target: "≤1%", current: "0.2%", status: "Conforme" },
-  { metric: "TMA Suporte", target: "≤4h", current: "2.5h", status: "Conforme" },
-  { metric: "TMR Incidentes", target: "≤8h", current: "5h", status: "Conforme" }
+  { metric: "Disponibilidade WAN", target: "99.5%", current: "-", status: "Planejado" },
+  { metric: "Latência Máxima", target: "≤80ms", current: "-", status: "Planejado" },
+  { metric: "Jitter Máximo", target: "≤30ms", current: "-", status: "Planejado" },
+  { metric: "Perda de Pacotes", target: "≤1%", current: "-", status: "Planejado" },
+  { metric: "TMA Suporte", target: "≤4h", current: "-", status: "Planejado" },
+  { metric: "TMR Incidentes", target: "≤8h", current: "-", status: "Planejado" }
 ];
 
 export const riskMatrix = [
@@ -52,64 +54,71 @@ export const phases = [
   {
     id: "RPTI",
     name: "Relatório de Planejamento Técnico Inicial",
-    description: "Planejamento detalhado da implantação com cronograma, recursos e metodologia.",
+    description: "Documento técnico contendo o planejamento detalhado da execução, incluindo dimensionamento de recursos, cronograma de atividades e metodologia de implantação.",
     deliverables: ["Cronograma executivo", "Plano de recursos", "Metodologia de implantação"],
-    percentage: 5,
-    status: "Concluída"
+    percentage: 10,
+    month: "Jan/26",
+    status: "Planejado"
   },
   {
     id: "PEP-I",
     name: "Plano de Execução do Projeto - Inicial",
-    description: "Primeira fase de implantação cobrindo 25% das escolas prioritárias.",
-    deliverables: ["250 escolas conectadas", "Infraestrutura Wi-Fi instalada", "Relatório de aceite"],
-    percentage: 15,
-    status: "Concluída"
+    description: "Etapa de mobilização operacional e início da execução, contemplando a instalação piloto e validação dos processos de implantação.",
+    deliverables: ["Mobilização de equipes", "Instalações piloto", "Validação de processos"],
+    percentage: 6,
+    month: "Fev/26",
+    status: "Planejado"
   },
   {
     id: "PEP-M1",
-    name: "Plano de Execução do Projeto - Marco 1",
-    description: "Expansão para 50% das escolas da rede estadual.",
-    deliverables: ["500 escolas conectadas", "Ativos de rede configurados", "Testes de qualidade"],
-    percentage: 15,
-    status: "Concluída"
+    name: "Plano de Execução do Projeto - Onda 1",
+    description: "Continuidade da implantação com ampliação dos serviços de conectividade para o primeiro grupo de escolas da rede estadual.",
+    deliverables: ["Escolas conectadas (Onda 1)", "Infraestrutura Wi-Fi instalada", "Relatório de aceite"],
+    percentage: 9,
+    month: "Mar/26",
+    status: "Planejado"
   },
   {
     id: "PEP-M2",
-    name: "Plano de Execução do Projeto - Marco 2",
-    description: "Expansão para 75% das escolas da rede estadual.",
-    deliverables: ["750 escolas conectadas", "Monitoramento ativo", "Relatório de desempenho"],
-    percentage: 15,
-    status: "Concluída"
+    name: "Plano de Execução do Projeto - Onda 2",
+    description: "Expansão da cobertura para o segundo grupo de escolas, com instalação de infraestrutura e ativação de serviços.",
+    deliverables: ["Escolas conectadas (Onda 2)", "Ativos de rede configurados", "Testes de qualidade"],
+    percentage: 10,
+    month: "Abr/26",
+    status: "Planejado"
   },
   {
     id: "PEP-M3",
-    name: "Plano de Execução do Projeto - Marco 3",
-    description: "Conclusão da implantação em 100% das escolas.",
-    deliverables: ["1000 escolas conectadas", "Sistema de monitoramento", "Documentação completa"],
-    percentage: 15,
-    status: "Em andamento"
+    name: "Plano de Execução do Projeto - Onda 3",
+    description: "Terceira onda de implantação, consolidando a expansão da conectividade para mais unidades escolares.",
+    deliverables: ["Escolas conectadas (Onda 3)", "Monitoramento ativo", "Relatório de desempenho"],
+    percentage: 10,
+    month: "Mai/26",
+    status: "Planejado"
   },
   {
     id: "PEP-F",
     name: "Plano de Execução do Projeto - Final",
-    description: "Estabilização e operação assistida da infraestrutura.",
+    description: "Conclusão da implantação e estabilização dos serviços, com foco na operação assistida e ajustes finais.",
     deliverables: ["Operação estabilizada", "Suporte técnico ativo", "Relatórios mensais"],
-    percentage: 25,
-    status: "Pendente"
+    percentage: 9,
+    month: "Jun/26",
+    status: "Planejado"
   },
   {
     id: "RTF",
     name: "Relatório Técnico Final",
-    description: "Documentação final e transferência de conhecimento.",
+    description: "Documento conclusivo que apresenta a consolidação dos resultados, documentação técnica completa e transferência de conhecimento.",
     deliverables: ["Documentação as-built", "Manual operacional", "Termo de encerramento"],
-    percentage: 10,
-    status: "Pendente"
+    percentage: 6,
+    month: "Jul/26",
+    status: "Planejado"
   }
 ];
 
 export const governanceRoles = {
   contractor: {
-    name: "Piauí Link",
+    name: "A definir",
     responsibilities: [
       "Fornecimento de conectividade à internet",
       "Instalação de infraestrutura Wi-Fi",
@@ -133,12 +142,12 @@ export const governanceRoles = {
 };
 
 export const artifacts = [
-  { name: "RPTI", description: "Relatório de Planejamento Técnico Inicial", periodicity: "Única", status: "Entregue" },
-  { name: "PEP", description: "Plano de Execução do Projeto", periodicity: "Por fase", status: "Em andamento" },
-  { name: "RMD", description: "Relatório Mensal de Desempenho", periodicity: "Mensal", status: "Ativo" },
-  { name: "RSQ", description: "Relatório de SLA e Qualidade", periodicity: "Mensal", status: "Ativo" },
-  { name: "RAI", description: "Relatório de Ativos Instalados", periodicity: "Por fase", status: "Em andamento" },
-  { name: "RTF", description: "Relatório Técnico Final", periodicity: "Única", status: "Pendente" }
+  { name: "RPTI", description: "Relatório de Planejamento Técnico Inicial", periodicity: "Única", status: "Planejado" },
+  { name: "PEP", description: "Plano de Execução do Projeto", periodicity: "Por fase", status: "Planejado" },
+  { name: "RMD", description: "Relatório Mensal de Desempenho", periodicity: "Mensal", status: "Planejado" },
+  { name: "RSQ", description: "Relatório de SLA e Qualidade", periodicity: "Mensal", status: "Planejado" },
+  { name: "RAI", description: "Relatório de Ativos Instalados", periodicity: "Por fase", status: "Planejado" },
+  { name: "RTF", description: "Relatório Técnico Final", periodicity: "Única", status: "Planejado" }
 ];
 
 export const measurementDimensions = [

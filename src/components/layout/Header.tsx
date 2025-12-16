@@ -28,7 +28,7 @@ const Header = () => {
               <span>{currentDate}</span>
             </div>
             <span className="text-xs font-medium opacity-90 mt-0.5">
-              Contrato nº 045/2023
+              Início previsto: Janeiro/2026
             </span>
           </div>
         </div>
