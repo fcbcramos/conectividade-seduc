@@ -56,6 +56,12 @@ const Section1 = () => {
             <CardContent className="pt-6">
               <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-3">
                 <item.icon className="w-6 h-6 text-primary" />
+              </div>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider">{item.label}</p>
+              <p className="font-semibold mt-1">{item.value}</p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       {/* Service Metrics */}
@@ -88,7 +94,7 @@ const Section1 = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {equipmentMetrics.map((item) => (
               <div key={item.label} className="border rounded-lg p-4 text-center">
-                <div className={`w-10 h-10 mx-auto rounded-full bg-muted flex items-center justify-center mb-2`}>
+                <div className="w-10 h-10 mx-auto rounded-full bg-muted flex items-center justify-center mb-2">
                   <item.icon className={`w-5 h-5 ${item.color}`} />
                 </div>
                 <p className="text-2xl font-bold text-foreground">{item.value}</p>
@@ -98,12 +104,6 @@ const Section1 = () => {
           </div>
         </CardContent>
       </Card>
-              <p className="text-xs text-muted-foreground uppercase tracking-wider">{item.label}</p>
-              <p className="font-semibold mt-1">{item.value}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
 
       {/* Contract Details */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -174,7 +174,6 @@ const Section1 = () => {
           </CardContent>
         </Card>
       </div>
-
     </div>
   );
 };
