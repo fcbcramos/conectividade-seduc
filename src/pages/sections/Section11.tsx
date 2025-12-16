@@ -24,7 +24,8 @@ import {
   Activity,
   Wifi,
   Timer,
-  Headphones
+  Headphones,
+  Calculator
 } from "lucide-react";
 
 const Section11 = () => {
@@ -423,32 +424,118 @@ const Section11 = () => {
         </CardContent>
       </Card>
 
-      {/* Fórmula de Cálculo */}
+      {/* Fórmula de Cálculo - Visual Aprimorado */}
       <Card className="shadow-card">
         <CardHeader>
-          <CardTitle className="text-lg">Fórmula de Cálculo de Glosa</CardTitle>
+          <CardTitle className="text-lg flex items-center gap-2">
+            <Calculator className="h-5 w-5 text-primary" />
+            Fórmula de Cálculo de Glosa
+          </CardTitle>
         </CardHeader>
-        <CardContent>
-          <div className="bg-muted/30 p-6 rounded-lg font-mono text-center">
-            <p className="text-lg">
-              <span className="text-primary font-bold">Glosa</span> = 
-              (Meta<sub>SLA</sub> - Resultado<sub>Aferido</sub>) × 
-              <span className="text-accent font-bold"> Fator</span> × 
-              Valor<sub>Mensal</sub>
-            </p>
+        <CardContent className="space-y-6">
+          {/* Fórmula Visual */}
+          <div className="bg-gradient-to-r from-muted/40 to-muted/20 p-8 rounded-xl border">
+            <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
+              {/* Resultado */}
+              <div className="flex flex-col items-center">
+                <div className="bg-destructive text-destructive-foreground px-6 py-3 rounded-lg font-bold text-xl shadow-md">
+                  GLOSA
+                </div>
+                <span className="text-xs text-muted-foreground mt-1">Desconto</span>
+              </div>
+              
+              <span className="text-3xl font-light text-muted-foreground">=</span>
+              
+              {/* Parênteses com diferença */}
+              <div className="flex items-center gap-2 bg-background/80 px-4 py-3 rounded-lg border-2 border-dashed border-primary/30">
+                <span className="text-2xl text-muted-foreground">(</span>
+                <div className="flex flex-col items-center">
+                  <div className="bg-primary text-primary-foreground px-4 py-2 rounded font-semibold text-sm">
+                    Meta<sub className="text-xs">SLA</sub>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">Ex: 99,5%</span>
+                </div>
+                <span className="text-2xl font-bold text-destructive mx-1">−</span>
+                <div className="flex flex-col items-center">
+                  <div className="bg-accent text-accent-foreground px-4 py-2 rounded font-semibold text-sm">
+                    Resultado<sub className="text-xs">Aferido</sub>
+                  </div>
+                  <span className="text-[10px] text-muted-foreground">Ex: 97,0%</span>
+                </div>
+                <span className="text-2xl text-muted-foreground">)</span>
+              </div>
+              
+              <span className="text-2xl font-bold text-muted-foreground">×</span>
+              
+              {/* Fator */}
+              <div className="flex flex-col items-center">
+                <div className="bg-success text-success-foreground px-4 py-2 rounded font-semibold text-sm">
+                  Fator
+                </div>
+                <span className="text-[10px] text-muted-foreground">Peso</span>
+              </div>
+              
+              <span className="text-2xl font-bold text-muted-foreground">×</span>
+              
+              {/* Valor Mensal */}
+              <div className="flex flex-col items-center">
+                <div className="bg-secondary text-secondary-foreground px-4 py-2 rounded font-semibold text-sm border">
+                  Valor<sub className="text-xs">Mensal</sub>
+                </div>
+                <span className="text-[10px] text-muted-foreground">R$ Base</span>
+              </div>
+            </div>
           </div>
-          <div className="grid grid-cols-3 gap-4 mt-6">
-            <div className="text-center p-4 bg-primary/5 rounded-lg">
-              <p className="font-semibold text-primary">Meta SLA</p>
-              <p className="text-sm text-muted-foreground">Valor contratual definido</p>
+
+          {/* Exemplo Prático */}
+          <div className="bg-muted/20 p-4 rounded-lg border-l-4 border-accent">
+            <p className="text-sm font-semibold text-foreground mb-2">Exemplo Prático:</p>
+            <div className="flex flex-wrap items-center gap-2 text-sm font-mono">
+              <span className="bg-destructive/10 text-destructive px-2 py-1 rounded font-bold">Glosa</span>
+              <span>=</span>
+              <span>(</span>
+              <span className="bg-primary/10 text-primary px-2 py-1 rounded">99,5%</span>
+              <span>−</span>
+              <span className="bg-accent/10 text-accent px-2 py-1 rounded">97,0%</span>
+              <span>)</span>
+              <span>×</span>
+              <span className="bg-success/10 text-success px-2 py-1 rounded">4</span>
+              <span>×</span>
+              <span className="bg-secondary px-2 py-1 rounded">R$ 1.000</span>
+              <span>=</span>
+              <span className="bg-destructive text-destructive-foreground px-3 py-1 rounded font-bold">R$ 100,00</span>
             </div>
-            <div className="text-center p-4 bg-accent/5 rounded-lg">
-              <p className="font-semibold text-accent">Fator</p>
-              <p className="text-sm text-muted-foreground">Peso por tipo de métrica</p>
+          </div>
+
+          {/* Legenda das Variáveis */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+            <div className="flex items-start gap-2 p-3 bg-primary/5 rounded-lg border border-primary/20">
+              <div className="w-3 h-3 rounded bg-primary mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-sm text-primary">Meta SLA</p>
+                <p className="text-xs text-muted-foreground">Valor contratual mínimo exigido</p>
+              </div>
             </div>
-            <div className="text-center p-4 bg-secondary/10 rounded-lg">
-              <p className="font-semibold">Valor Mensal</p>
-              <p className="text-sm text-muted-foreground">Base de cálculo</p>
+            <div className="flex items-start gap-2 p-3 bg-accent/5 rounded-lg border border-accent/20">
+              <div className="w-3 h-3 rounded bg-accent mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-sm text-accent">Resultado Aferido</p>
+                <p className="text-xs text-muted-foreground">Medição real via SIMET</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 p-3 bg-success/5 rounded-lg border border-success/20">
+              <div className="w-3 h-3 rounded bg-success mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-sm text-success">Fator</p>
+                <p className="text-xs text-muted-foreground">Multiplicador por criticidade</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-2 p-3 bg-secondary/50 rounded-lg border">
+              <div className="w-3 h-3 rounded bg-secondary-foreground/50 mt-1 flex-shrink-0" />
+              <div>
+                <p className="font-semibold text-sm">Valor Mensal</p>
+                <p className="text-xs text-muted-foreground">Base de cálculo da escola</p>
+              </div>
             </div>
           </div>
         </CardContent>
