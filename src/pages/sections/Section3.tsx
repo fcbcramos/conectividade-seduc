@@ -1,7 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Server, Key, Headphones, CheckCircle, AlertCircle } from "lucide-react";
+import { Server, Key, Headphones, CheckCircle } from "lucide-react";
 import SolutionArchitecture from "@/components/dashboard/SolutionArchitecture";
+import NetworkTopology from "@/components/dashboard/NetworkTopology";
 
 const Section3 = () => {
   const turnKeyResponsibilities = [
@@ -40,6 +41,9 @@ const Section3 = () => {
 
       {/* Solution Architecture Diagram */}
       <SolutionArchitecture />
+
+      {/* Network Topology Diagram */}
+      <NetworkTopology />
 
       {/* Provisioning and Sustainability Model Section */}
       <div className="space-y-4">
