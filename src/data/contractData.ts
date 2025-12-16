@@ -149,7 +149,10 @@ export const artifacts = [
   { name: "RMD", description: "Relatório Mensal de Desempenho", periodicity: "Mensal", status: "Planejado" },
   { name: "RSQ", description: "Relatório de SLA e Qualidade", periodicity: "Mensal", status: "Planejado" },
   { name: "RAI", description: "Relatório de Ativos Instalados", periodicity: "Por fase", status: "Planejado" },
-  { name: "RTF", description: "Relatório Técnico Final", periodicity: "Única", status: "Planejado" }
+  { name: "RTF", description: "Relatório Técnico Final", periodicity: "Única", status: "Planejado" },
+  { name: "RAT", description: "Relatório de Atendimento Técnico", periodicity: "Por atendimento", status: "Planejado" },
+  { name: "PPI", description: "Projeto Provisório de Instalação", periodicity: "Por escola", status: "Planejado" },
+  { name: "PDI", description: "Projeto Definitivo de Instalação", periodicity: "Por escola", status: "Planejado" }
 ];
 
 export const measurementDimensions = [
