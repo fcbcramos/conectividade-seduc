@@ -8,6 +8,7 @@ import {
 import SolutionArchitecture from "@/components/dashboard/SolutionArchitecture";
 import NetworkTopology from "@/components/dashboard/NetworkTopology";
 import MonitoringArchitecture from "@/components/dashboard/MonitoringArchitecture";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section3 = () => {
   const turnKeyResponsibilities = [
@@ -42,6 +43,8 @@ const Section3 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={3} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 3</Badge>
         <h1 className="text-3xl font-bold text-foreground">Especificações Técnicas da Solução</h1>
@@ -368,6 +371,8 @@ const Section3 = () => {
           </CardContent>
         </Card>
       </div>
+
+      <SectionNavigation currentSection={3} />
     </div>
   );
 };

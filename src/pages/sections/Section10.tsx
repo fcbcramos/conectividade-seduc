@@ -4,6 +4,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { measurementDimensions } from "@/data/contractData";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
 import { Gauge, Wifi, Globe, Headphones, Activity, Info, ArrowRight } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section10 = () => {
   const radarData = [
@@ -23,6 +24,8 @@ const Section10 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={10} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 10</Badge>
         <h1 className="text-3xl font-bold text-foreground">Instrumentos de Medição</h1>
@@ -184,6 +187,8 @@ const Section10 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={10} />
     </div>
   );
 };

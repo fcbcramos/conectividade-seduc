@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Flag, CheckSquare, FileText, Users, ArrowRight, BookOpen } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section14 = () => {
   const encerramento = [
@@ -37,6 +38,8 @@ const Section14 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={14} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 14</Badge>
         <h1 className="text-3xl font-bold text-foreground">Encerramento Contratual e Legado</h1>
@@ -165,6 +168,8 @@ const Section14 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={14} />
     </div>
   );
 };

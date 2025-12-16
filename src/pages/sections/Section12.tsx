@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { riskMatrix } from "@/data/contractData";
 import { Shield, AlertTriangle, CheckCircle } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section12 = () => {
   const getImpactColor = (impact: string) => {
@@ -29,6 +30,8 @@ const Section12 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={12} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 12</Badge>
         <h1 className="text-3xl font-bold text-foreground">Gestão de Riscos</h1>
@@ -157,6 +160,8 @@ const Section12 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={12} />
     </div>
   );
 };
