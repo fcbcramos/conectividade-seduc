@@ -1,7 +1,6 @@
 import mecLogo from "@/assets/mec-gov-federal-logo.png";
+import govPiLogo from "@/assets/governo-piaui-logo.png";
 import escolasConectadasLogo from "@/assets/escolas-conectadas-logo.png";
-
-const govPiLogoUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Bras%C3%A3o_do_Piau%C3%AD.svg/200px-Bras%C3%A3o_do_Piau%C3%AD.svg.png";
 
 const InstitutionalFooter = () => {
   return (
@@ -20,17 +19,11 @@ const InstitutionalFooter = () => {
           <div className="hidden sm:block h-12 w-px bg-border" />
 
           {/* Logo Governo do Piauí */}
-          <div className="flex items-center gap-2">
-            <img 
-              src={govPiLogoUrl} 
-              alt="Governo do Estado do Piauí"
-              className="h-12 sm:h-14 w-auto object-contain"
-            />
-            <div className="flex flex-col">
-              <span className="text-xs font-bold text-foreground leading-tight">GOVERNO DO</span>
-              <span className="text-sm font-extrabold text-primary leading-tight">PIAUÍ</span>
-            </div>
-          </div>
+          <img 
+            src={govPiLogo} 
+            alt="Governo do Estado do Piauí"
+            className="h-14 sm:h-16 w-auto object-contain"
+          />
 
           {/* Separador */}
           <div className="hidden sm:block h-12 w-px bg-border" />
