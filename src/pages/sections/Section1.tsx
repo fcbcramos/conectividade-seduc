@@ -58,7 +58,15 @@ const Section1 = () => {
           <CardContent className="space-y-4">
             <div className="flex justify-between items-center py-2 border-b">
               <span className="text-muted-foreground">Valor Total</span>
-              <span className="font-bold text-lg">R$ 89.971.275,00</span>
+              <span className="font-bold text-lg text-foreground">R$ 89.971.275,00</span>
+            </div>
+            <div className="flex justify-between items-center py-2 border-b">
+              <span className="text-muted-foreground">Fonte 14.172</span>
+              <span className="font-bold text-lg text-primary">R$ 54.134.450,00</span>
+            </div>
+            <div className="flex justify-between items-center py-2 border-b">
+              <span className="text-muted-foreground">Fonte Tesouro</span>
+              <span className="font-bold text-lg text-destructive">R$ 35.836.825,00</span>
             </div>
             <div className="flex justify-between items-center py-2 border-b">
               <span className="text-muted-foreground">Prazo de Execução</span>
@@ -70,7 +78,7 @@ const Section1 = () => {
             </div>
             <div className="flex justify-between items-center py-2">
               <span className="text-muted-foreground">Status</span>
-              <Badge className="bg-accent/10 text-accent">Em Execução</Badge>
+              <Badge variant="outline" className="border-primary text-primary">{kpiData.status}</Badge>
             </div>
           </CardContent>
         </Card>
