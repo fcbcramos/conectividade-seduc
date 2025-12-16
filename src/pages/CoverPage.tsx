@@ -27,7 +27,7 @@ const CoverPage = () => {
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-h-screen relative z-10">
         {/* Header com logo SEDUC - posição absoluta no canto superior direito */}
-        <header className="absolute top-2 right-2 md:top-4 md:right-4">
+        <header className="absolute top-0 right-0">
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
