@@ -189,7 +189,7 @@ const Section11 = () => {
             <Table>
               <TableHeader>
                 <TableRow className="bg-muted/50">
-                  <TableHead className="w-16 font-bold">Cód.</TableHead>
+                  <TableHead className="w-20 font-bold">Cód.</TableHead>
                   <TableHead className="font-bold">Indicador</TableHead>
                   <TableHead className="font-bold">Descrição e Métrica</TableHead>
                   <TableHead className="w-48 font-bold">Meta (Alvo)</TableHead>
@@ -198,8 +198,8 @@ const Section11 = () => {
               <TableBody>
                 {slaIndicators.map((indicator) => (
                   <TableRow key={indicator.code} className="hover:bg-muted/30">
-                    <TableCell>
-                      <Badge variant="outline" className="font-mono font-bold">
+                    <TableCell className="whitespace-nowrap">
+                      <Badge variant="outline" className="font-mono font-bold whitespace-nowrap">
                         {indicator.code}
                       </Badge>
                     </TableCell>
