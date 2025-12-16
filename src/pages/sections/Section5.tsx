@@ -1,6 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, PlayCircle, Settings, Monitor, CheckCircle, XCircle } from "lucide-react";
+import { Clock, PlayCircle, Settings, Monitor, CheckCircle, Circle } from "lucide-react";
 
 const Section5 = () => {
   const phases = [
@@ -9,7 +9,8 @@ const Section5 = () => {
       description: "Preparação inicial, planejamento detalhado e alocação de recursos",
       icon: PlayCircle,
       duration: "2 meses",
-      status: "Concluída",
+      period: "Jan-Fev/2026",
+      status: "Pendente",
       activities: ["Planejamento técnico", "Alocação de equipe", "Definição de cronograma"]
     },
     {
@@ -17,7 +18,8 @@ const Section5 = () => {
       description: "Instalação física da infraestrutura nas unidades escolares",
       icon: Settings,
       duration: "24 meses",
-      status: "Em andamento",
+      period: "Mar/2026-Fev/2028",
+      status: "Pendente",
       activities: ["Instalação de links", "Configuração Wi-Fi", "Testes de qualidade"]
     },
     {
@@ -25,6 +27,7 @@ const Section5 = () => {
       description: "Ajustes finos e validação do funcionamento",
       icon: Clock,
       duration: "3 meses",
+      period: "Mar-Mai/2028",
       status: "Pendente",
       activities: ["Otimização de rede", "Correção de falhas", "Validação de SLAs"]
     },
@@ -33,6 +36,7 @@ const Section5 = () => {
       description: "Funcionamento pleno com monitoramento contínuo",
       icon: Monitor,
       duration: "28 meses",
+      period: "Jun/2028-Set/2030",
       status: "Pendente",
       activities: ["Monitoramento 24x7", "Suporte técnico", "Manutenção preventiva"]
     },
@@ -41,6 +45,7 @@ const Section5 = () => {
       description: "Finalização do contrato e transferência de conhecimento",
       icon: CheckCircle,
       duration: "3 meses",
+      period: "Out-Dez/2030",
       status: "Pendente",
       activities: ["Documentação final", "Transferência de ativos", "Relatório de encerramento"]
     }
@@ -80,6 +85,7 @@ const Section5 = () => {
                   </div>
                   <p className="font-bold mt-3 text-center">{phase.name}</p>
                   <Badge variant="outline" className="mt-1 text-xs">{phase.duration}</Badge>
+                  <span className="text-xs text-muted-foreground mt-1">{phase.period}</span>
                   <Badge className={`mt-2 text-xs ${getStatusColor(phase.status)}`}>
                     {phase.status}
                   </Badge>
@@ -114,14 +120,15 @@ const Section5 = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">{phase.description}</p>
+              <p className="text-sm text-muted-foreground mb-2">{phase.description}</p>
+              <p className="text-xs font-medium text-primary mb-4">Período: {phase.period}</p>
               <div className="space-y-2">
                 {phase.activities.map((activity) => (
                   <div key={activity} className="flex items-center gap-2 text-sm">
                     {phase.status === "Concluída" ? (
                       <CheckCircle className="w-4 h-4 text-accent" />
                     ) : (
-                      <XCircle className="w-4 h-4 text-muted-foreground" />
+                      <Circle className="w-4 h-4 text-muted-foreground" />
                     )}
                     {activity}
                   </div>
