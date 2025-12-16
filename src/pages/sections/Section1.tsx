@@ -1,13 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { kpiData, basicInfo } from "@/data/contractData";
-import { Globe, Wifi, Building2, Target, CheckCircle } from "lucide-react";
+import { Globe, Wifi, Building2, Target, CheckCircle, Satellite, Radio, Wrench, Router, Shield, Network } from "lucide-react";
+
 const Section1 = () => {
   const highlights = [
     { icon: Globe, label: "Conectividade", value: "Internet de alta velocidade" },
     { icon: Wifi, label: "Infraestrutura", value: "Rede Wi-Fi completa" },
     { icon: Building2, label: "Abrangência", value: "Rede Estadual de Ensino" },
     { icon: Target, label: "Modelo", value: "Contratação Integrada" },
+  ];
+
+  const serviceMetrics = [
+    { icon: Globe, label: "Serviço de Acesso à Internet (Dedicado)", value: "92.000", unit: "Mbps" },
+    { icon: Satellite, label: "Serviço de Acesso à Internet (Satélite)", value: "50", unit: "Kits" },
+    { icon: Radio, label: "Serviço de Acesso à Internet (Banda Larga)", value: "631", unit: "Links" },
+    { icon: Wrench, label: "Serviço de Adequação de Infraestrutura", value: "150", unit: "Unidades" },
+  ];
+
+  const equipmentMetrics = [
+    { icon: Wifi, label: "Access Points (Novos)", value: "2.776", color: "text-primary" },
+    { icon: Wifi, label: "Access Points (Legados)", value: "950", color: "text-muted-foreground" },
+    { icon: Router, label: "SQS - Sonda SIMET Box", value: "631", color: "text-accent" },
+    { icon: Shield, label: "Appliance Firewall", value: "631", color: "text-destructive" },
+    { icon: Network, label: "Switches", value: "664", color: "text-primary" },
   ];
 
   return (
@@ -40,7 +56,48 @@ const Section1 = () => {
             <CardContent className="pt-6">
               <div className="w-12 h-12 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-3">
                 <item.icon className="w-6 h-6 text-primary" />
+      </div>
+
+      {/* Service Metrics */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Serviços Contratados</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+            {serviceMetrics.map((item) => (
+              <div key={item.label} className="bg-muted/50 rounded-lg p-4 text-center">
+                <div className="w-10 h-10 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-2">
+                  <item.icon className="w-5 h-5 text-primary" />
+                </div>
+                <p className="text-2xl font-bold text-foreground">{item.value}</p>
+                <p className="text-xs text-muted-foreground">{item.unit}</p>
+                <p className="text-xs font-medium mt-1 leading-tight">{item.label}</p>
               </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Equipment Metrics */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Equipamentos</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {equipmentMetrics.map((item) => (
+              <div key={item.label} className="border rounded-lg p-4 text-center">
+                <div className={`w-10 h-10 mx-auto rounded-full bg-muted flex items-center justify-center mb-2`}>
+                  <item.icon className={`w-5 h-5 ${item.color}`} />
+                </div>
+                <p className="text-2xl font-bold text-foreground">{item.value}</p>
+                <p className="text-xs font-medium mt-1 leading-tight">{item.label}</p>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
               <p className="text-xs text-muted-foreground uppercase tracking-wider">{item.label}</p>
               <p className="font-semibold mt-1">{item.value}</p>
             </CardContent>
