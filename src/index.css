@@ -121,11 +121,81 @@
     background: linear-gradient(135deg, hsl(213 97% 25%) 0%, hsl(213 97% 35%) 100%);
   }
 
+  .gradient-institutional {
+    background: linear-gradient(90deg, 
+      hsl(var(--primary)) 0%, 
+      hsl(var(--accent)) 33%, 
+      hsl(var(--secondary)) 66%, 
+      hsl(var(--destructive)) 100%
+    );
+  }
+
   .shadow-card {
     box-shadow: 0 4px 20px -4px hsl(var(--primary) / 0.1);
   }
 
   .shadow-card-hover {
     box-shadow: 0 8px 30px -4px hsl(var(--primary) / 0.15);
+  }
+
+  .shadow-institutional {
+    box-shadow: 0 2px 12px -2px hsl(var(--primary) / 0.08);
+  }
+
+  /* Animated underline for links */
+  .link-underline {
+    @apply relative;
+  }
+  
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-secondary scale-x-0 origin-right transition-transform duration-300;
+  }
+  
+  .link-underline:hover::after {
+    @apply scale-x-100 origin-left;
+  }
+
+  /* Card hover animation */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply shadow-card-hover -translate-y-0.5;
+  }
+
+  /* Status colors with semantic meaning */
+  .status-success {
+    @apply bg-accent/10 text-accent border-accent/20;
+  }
+
+  .status-warning {
+    @apply bg-secondary/10 text-secondary-foreground border-secondary/30;
+  }
+
+  .status-danger {
+    @apply bg-destructive/10 text-destructive border-destructive/20;
+  }
+
+  .status-info {
+    @apply bg-primary/10 text-primary border-primary/20;
+  }
+
+  /* Progress bar animation */
+  @keyframes progress-shine {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+
+  .progress-animated {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--primary)) 0%,
+      hsl(var(--primary) / 0.8) 50%,
+      hsl(var(--primary)) 100%
+    );
+    background-size: 200% 100%;
+    animation: progress-shine 2s ease-in-out infinite;
   }
 }
