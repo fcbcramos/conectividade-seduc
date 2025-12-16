@@ -137,7 +137,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Scale className="w-5 h-5 text-primary" />
-            11.1 Conceito de Pagamento por Resultado (PPR)
+            Conceito de Pagamento por Resultado (PPR)
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -174,7 +174,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Gauge className="w-5 h-5 text-primary" />
-            11.2 Indicadores de Nível de Serviço (SLA)
+            Indicadores de Nível de Serviço (SLA)
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -228,7 +228,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Eye className="w-5 h-5 text-primary" />
-            11.3 Metodologia de Medição e Aferição
+            Metodologia de Medição e Aferição
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -293,7 +293,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <TrendingDown className="w-5 h-5 text-destructive" />
-            11.4 Mecanismo de Glosa e Sanções
+            Mecanismo de Glosa e Sanções
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -356,7 +356,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <FileText className="w-5 h-5 text-primary" />
-            11.5 Procedimentos de Fiscalização e Ateste
+            Procedimentos de Fiscalização e Ateste
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -394,7 +394,7 @@ const Section11 = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <AlertTriangle className="w-5 h-5 text-destructive" />
-            11.6 Regime Sancionatório
+            Regime Sancionatório
           </CardTitle>
         </CardHeader>
         <CardContent>
