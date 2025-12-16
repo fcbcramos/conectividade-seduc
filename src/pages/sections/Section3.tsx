@@ -26,7 +26,7 @@ const Section3 = () => {
       {/* Introduction Card */}
       <Card className="shadow-card border-l-4 border-l-primary">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
+          <CardTitle className="flex items-center gap-2 text-lg">
             <Server className="w-5 h-5 text-primary" />
             Visão Geral
           </CardTitle>
