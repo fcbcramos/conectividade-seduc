@@ -18,8 +18,8 @@ const Section5 = () => {
       name: "Implantação",
       description: "Instalação física da infraestrutura nas unidades escolares",
       icon: Settings,
-      duration: "24 meses",
-      period: "Mar/2026-Fev/2028",
+      duration: "5 meses",
+      period: "Mar-Jul/2026",
       status: "Pendente",
       activities: ["Instalação de links", "Configuração Wi-Fi", "Testes de qualidade"]
     },
@@ -27,8 +27,8 @@ const Section5 = () => {
       name: "Estabilização",
       description: "Ajustes finos e validação do funcionamento",
       icon: Clock,
-      duration: "3 meses",
-      period: "Mar-Mai/2028",
+      duration: "5 meses",
+      period: "Ago-Dez/2026",
       status: "Pendente",
       activities: ["Otimização de rede", "Correção de falhas", "Validação de SLAs"]
     },
@@ -36,8 +36,8 @@ const Section5 = () => {
       name: "Operação",
       description: "Funcionamento pleno com monitoramento contínuo",
       icon: Monitor,
-      duration: "28 meses",
-      period: "Jun/2028-Set/2030",
+      duration: "36 meses",
+      period: "Jan/2027-Dez/2030",
       status: "Pendente",
       activities: ["Monitoramento 24x7", "Suporte técnico", "Manutenção preventiva"]
     },
