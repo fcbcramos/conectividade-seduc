@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Maximize2 } from "lucide-react";
 import logoSeduc from "@/assets/logo-seduc.png";
 import logoEscolasConectadas from "@/assets/escolas-conectadas-logo.png";
 import logoNovoPac from "@/assets/novo-pac-logo.png";
@@ -6,15 +8,25 @@ import logoMec from "@/assets/mec-gov-federal-logo.png";
 
 const CoverPage = () => {
   const navigate = useNavigate();
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
-  const handleClick = () => {
-    navigate('/dashboard');
+  const handleEnterPresentation = async () => {
+    setIsTransitioning(true);
+    
+    try {
+      await document.documentElement.requestFullscreen();
+    } catch (error) {
+      console.log('Fullscreen não disponível');
+    }
+    
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 600);
   };
 
   return (
     <div 
-      className="min-h-screen bg-white cursor-pointer relative overflow-hidden flex"
-      onClick={handleClick}
+      className={`min-h-screen bg-white relative overflow-hidden flex transition-opacity duration-500 ${isTransitioning ? 'opacity-0' : 'opacity-100'}`}
     >
       {/* Barra lateral colorida - barras verticais de cima para baixo */}
       <div className="flex flex-col flex-shrink-0 w-3 md:w-4 h-screen z-20">
@@ -63,6 +75,17 @@ const CoverPage = () => {
                 REGC - Relatório Executivo de Governança Contratual
               </p>
             </div>
+
+            {/* Botão Modo Apresentação */}
+            <button
+              onClick={handleEnterPresentation}
+              className="mt-8 md:mt-10 px-8 py-4 bg-[#034ea2] text-white font-semibold 
+                         rounded-lg shadow-lg hover:bg-[#023a7a] transition-all duration-300
+                         hover:scale-105 flex items-center gap-3 group"
+            >
+              <Maximize2 className="w-5 h-5 group-hover:animate-pulse" />
+              Clique para Entrar em Modo Apresentação
+            </button>
           </div>
         </main>
 
