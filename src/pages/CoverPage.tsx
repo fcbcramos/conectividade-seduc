@@ -45,58 +45,62 @@ const CoverPage = () => {
 
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-h-screen p-8 md:p-12 lg:p-16 relative z-10">
-        {/* Header com texto SEDUC e logo */}
-        <header className="flex justify-end items-center gap-4">
-          <div className="text-right">
-            <span className="text-sm md:text-base text-muted-foreground tracking-wide">
-              SECRETARIA DA <span className="font-bold text-foreground">EDUCAÇÃO</span> - SEDUC
-            </span>
-          </div>
+        {/* Header com logo SEDUC */}
+        <header className="flex justify-end items-center">
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-14 md:h-16 lg:h-20 object-contain"
+            className="h-20 md:h-28 lg:h-32 object-contain"
           />
         </header>
 
         {/* Conteúdo central */}
-        <main className="flex-1 flex flex-col justify-center max-w-4xl">
+        <main className="flex-1 flex flex-col justify-center max-w-5xl">
           <div className="space-y-6 md:space-y-8">
-            {/* Título principal - cor escura */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold text-foreground leading-tight">
+            {/* Título principal - 70px base, responsivo */}
+            <h1 
+              className="font-extrabold text-foreground leading-tight"
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 4.375rem)' }}
+            >
               Caravana Digital
             </h1>
             
-            {/* Subtítulo */}
-            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground leading-relaxed max-w-3xl">
+            {/* Subtítulo - 35px base, responsivo */}
+            <p 
+              className="text-muted-foreground leading-relaxed max-w-4xl"
+              style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2.2rem)' }}
+            >
               Modernização da Infraestrutura Tecnológica e Conectividade das Escolas da Rede Estadual do Piauí
             </p>
 
-            {/* REGC em linha única */}
+            {/* REGC em linha única - 35px base, responsivo */}
             <div className="pt-4 md:pt-6">
-              <p className="text-base md:text-lg lg:text-xl font-semibold text-foreground">
+              <p 
+                className="font-semibold text-foreground"
+                style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2.2rem)' }}
+              >
                 REGC - Relatório Executivo de Governança Contratual
               </p>
             </div>
           </div>
         </main>
 
-        {/* Footer com logos alinhados à direita */}
+        {/* Footer com logos alinhados à direita e transparência */}
         <footer className="flex items-center justify-end gap-6 md:gap-8 pt-6">
           <img 
             src={logoEscolasConectadas} 
             alt="Escolas Conectadas" 
-            className="h-10 md:h-12 lg:h-14 object-contain"
+            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
           />
           <img 
             src={logoNovoPac} 
             alt="Novo PAC" 
-            className="h-10 md:h-12 lg:h-14 object-contain"
+            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
           />
           <img 
             src={logoMec} 
             alt="MEC - Governo Federal" 
-            className="h-10 md:h-12 lg:h-14 object-contain"
+            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
           />
         </footer>
       </div>
