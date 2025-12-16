@@ -36,8 +36,8 @@ const Section5 = () => {
       name: "Operação",
       description: "Funcionamento pleno com monitoramento contínuo",
       icon: Monitor,
-      duration: "36 meses",
-      period: "Jan/2027-Dez/2030",
+      duration: "24 meses",
+      period: "Jan/2027-Dez/2028",
       status: "Pendente",
       activities: ["Monitoramento 24x7", "Suporte técnico", "Manutenção preventiva"]
     },
@@ -46,7 +46,7 @@ const Section5 = () => {
       description: "Finalização do contrato e transferência de conhecimento",
       icon: CheckCircle,
       duration: "3 meses",
-      period: "Out-Dez/2030",
+      period: "Out-Dez/2028",
       status: "Pendente",
       activities: ["Documentação final", "Transferência de ativos", "Relatório de encerramento"]
     }
