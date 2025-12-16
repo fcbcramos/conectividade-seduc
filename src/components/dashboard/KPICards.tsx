@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { kpiData } from "@/data/contractData";
-import { Wallet, TrendingUp, Layers, Clock, Building, CheckCircle } from "lucide-react";
+import { Wallet, TrendingUp, Layers, Clock, Building, Calendar } from "lucide-react";
 
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -12,9 +12,6 @@ const formatCurrency = (value: number) => {
 };
 
 const KPICards = () => {
-  const progressPercentage = (kpiData.completedPhases / kpiData.totalPhases) * 100;
-  const disbursementPercentage = (kpiData.disbursedValue / kpiData.totalValue) * 100;
-
   const kpis = [
     {
       title: "Valor Total do Contrato",
@@ -25,22 +22,20 @@ const KPICards = () => {
       bgColor: "bg-primary/10"
     },
     {
-      title: "Desembolso Realizado",
-      value: formatCurrency(kpiData.disbursedValue),
-      subtitle: `${disbursementPercentage.toFixed(1)}% do total`,
+      title: "Fase de Implantação",
+      value: formatCurrency(kpiData.implantationValue),
+      subtitle: "60% do valor total",
       icon: TrendingUp,
       color: "accent",
-      bgColor: "bg-accent/10",
-      progress: disbursementPercentage
+      bgColor: "bg-accent/10"
     },
     {
-      title: "Fases Concluídas",
-      value: `${kpiData.completedPhases}/${kpiData.totalPhases}`,
-      subtitle: `${progressPercentage.toFixed(0)}% concluído`,
+      title: "Total de Fases",
+      value: `${kpiData.totalPhases} fases`,
+      subtitle: "Projeto de implantação",
       icon: Layers,
       color: "secondary",
-      bgColor: "bg-secondary/20",
-      progress: progressPercentage
+      bgColor: "bg-secondary/20"
     },
     {
       title: "Prazo de Execução",
@@ -59,10 +54,10 @@ const KPICards = () => {
       bgColor: "bg-primary/10"
     },
     {
-      title: "Status Geral",
-      value: "Em Execução",
-      subtitle: "Dentro do cronograma",
-      icon: CheckCircle,
+      title: "Início Previsto",
+      value: kpiData.startDate,
+      subtitle: "Fase de implantação",
+      icon: Calendar,
       color: "accent",
       bgColor: "bg-accent/10"
     }
@@ -84,19 +79,6 @@ const KPICards = () => {
                 </p>
                 <p className="text-2xl font-bold text-foreground">{kpi.value}</p>
                 <p className="text-sm text-muted-foreground mt-1">{kpi.subtitle}</p>
-                
-                {kpi.progress !== undefined && (
-                  <div className="mt-3">
-                    <div className="h-2 bg-muted rounded-full overflow-hidden">
-                      <div 
-                        className={`h-full rounded-full transition-all duration-1000 ${
-                          kpi.color === 'accent' ? 'bg-accent' : 'bg-secondary'
-                        }`}
-                        style={{ width: `${kpi.progress}%` }}
-                      />
-                    </div>
-                  </div>
-                )}
               </div>
               <div className={`${kpi.bgColor} p-3 rounded-lg`}>
                 <kpi.icon className={`w-6 h-6 ${
