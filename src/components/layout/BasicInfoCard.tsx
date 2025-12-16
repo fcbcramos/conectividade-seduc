@@ -42,24 +42,36 @@ const BasicInfoCard = () => {
           <div className="border-t pt-4">
             <p className="text-xs text-muted-foreground uppercase tracking-wider mb-3 flex items-center gap-2">
               <Users className="w-4 h-4" />
-              Equipe Responsável
+              Grupo Técnico de Planejamento
             </p>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div className="bg-muted/50 p-3 rounded-lg">
-                <p className="text-xs text-muted-foreground">Diretor</p>
-                <p className="font-medium">{basicInfo.director}</p>
+                <p className="text-xs text-muted-foreground">Diretoria de Tecnologia</p>
+                <p className="font-medium">Marcel Rufino de Carvalho</p>
+              </div>
+              <div className="bg-muted/50 p-3 rounded-lg">
+                <p className="text-xs text-muted-foreground">Diretoria de Licitação</p>
+                <p className="font-medium">Larissa Rocha Pires Ferreira</p>
+              </div>
+              <div className="bg-muted/50 p-3 rounded-lg">
+                <p className="text-xs text-muted-foreground">Assessoria Jurídica e Administrativa</p>
+                <p className="font-medium">Vanilson Carvalho Fontenele</p>
               </div>
               <div className="bg-muted/50 p-3 rounded-lg">
                 <p className="text-xs text-muted-foreground">Gerência Operacional</p>
-                <p className="font-medium">{basicInfo.operationalManager}</p>
-              </div>
-              <div className="bg-muted/50 p-3 rounded-lg">
-                <p className="text-xs text-muted-foreground">Gerência Estratégica</p>
-                <p className="font-medium">{basicInfo.strategyManager}</p>
+                <p className="font-medium">Heulem Veras Barros</p>
               </div>
               <div className="bg-muted/50 p-3 rounded-lg">
                 <p className="text-xs text-muted-foreground">Gerência de Compras</p>
-                <p className="font-medium">{basicInfo.purchasingManager}</p>
+                <p className="font-medium">Clarice Mauriz Lira</p>
+              </div>
+              <div className="bg-muted/50 p-3 rounded-lg">
+                <p className="text-xs text-muted-foreground">Coordenação de Suporte</p>
+                <p className="font-medium">Felipe Castelo Branco C. Ramos</p>
+              </div>
+              <div className="bg-muted/50 p-3 rounded-lg">
+                <p className="text-xs text-muted-foreground">Coordenação de Redes</p>
+                <p className="font-medium">Danilo de Almeida César</p>
               </div>
             </div>
           </div>
