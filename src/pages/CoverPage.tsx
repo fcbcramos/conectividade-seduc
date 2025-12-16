@@ -31,7 +31,7 @@ const CoverPage = () => {
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-44 md:h-56 lg:h-64 object-contain"
+            className="h-24 md:h-28 lg:h-32 object-contain"
           />
         </header>
 
