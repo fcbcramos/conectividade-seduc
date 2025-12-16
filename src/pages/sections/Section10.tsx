@@ -6,12 +6,12 @@ import { Gauge, Wifi, Globe, Headphones, Activity } from "lucide-react";
 
 const Section10 = () => {
   const radarData = [
-    { dimension: "Disponibilidade", value: 95, fullMark: 100 },
-    { dimension: "Latência", value: 90, fullMark: 100 },
-    { dimension: "Jitter", value: 88, fullMark: 100 },
-    { dimension: "Throughput", value: 85, fullMark: 100 },
-    { dimension: "TMA", value: 92, fullMark: 100 },
-    { dimension: "TMR", value: 88, fullMark: 100 }
+    { dimension: "Disponibilidade", value: 0, fullMark: 100, meta: 99.5 },
+    { dimension: "Latência", value: 0, fullMark: 100, meta: 100 },
+    { dimension: "Jitter", value: 0, fullMark: 100, meta: 100 },
+    { dimension: "Throughput", value: 0, fullMark: 100, meta: 100 },
+    { dimension: "TMA", value: 0, fullMark: 100, meta: 100 },
+    { dimension: "TMR", value: 0, fullMark: 100, meta: 100 }
   ];
 
   const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -49,8 +49,8 @@ const Section10 = () => {
               <p className="text-xs text-muted-foreground">Monitoramento</p>
             </div>
             <div className="text-center p-4 bg-accent/5 rounded-lg">
-              <p className="text-2xl font-bold text-accent">1000+</p>
-              <p className="text-xs text-muted-foreground">Sondas instaladas</p>
+              <p className="text-2xl font-bold text-accent">631</p>
+              <p className="text-xs text-muted-foreground">Sondas planejadas</p>
             </div>
             <div className="text-center p-4 bg-secondary/10 rounded-lg">
               <p className="text-2xl font-bold">Tempo real</p>
@@ -66,8 +66,9 @@ const Section10 = () => {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Gauge className="w-5 h-5 text-primary" />
-              Índice de Qualidade por Dimensão
+              Metas de Qualidade por Dimensão
             </CardTitle>
+            <p className="text-xs text-muted-foreground">Valores a aferir após início da execução (Jan/2026)</p>
           </CardHeader>
           <CardContent>
             <div className="h-80">

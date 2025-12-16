@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { slaMetrics } from "@/data/contractData";
-import { CheckCircle, AlertCircle } from "lucide-react";
+import { CheckCircle, AlertCircle, Clock } from "lucide-react";
 
 const SLAGauges = () => {
   return (
@@ -22,6 +22,8 @@ const SLAGauges = () => {
                 </p>
                 {metric.status === "Conforme" ? (
                   <CheckCircle className="w-4 h-4 text-accent" />
+                ) : metric.status === "Planejado" ? (
+                  <Clock className="w-4 h-4 text-muted-foreground" />
                 ) : (
                   <AlertCircle className="w-4 h-4 text-destructive" />
                 )}
@@ -33,10 +35,12 @@ const SLAGauges = () => {
               </div>
               
               <Badge 
-                variant={metric.status === "Conforme" ? "default" : "destructive"}
+                variant={metric.status === "Conforme" ? "default" : metric.status === "Planejado" ? "secondary" : "destructive"}
                 className={`mt-2 text-xs ${
                   metric.status === "Conforme" 
                     ? "bg-accent/10 text-accent hover:bg-accent/20" 
+                    : metric.status === "Planejado"
+                    ? "bg-muted text-muted-foreground hover:bg-muted/80"
                     : ""
                 }`}
               >

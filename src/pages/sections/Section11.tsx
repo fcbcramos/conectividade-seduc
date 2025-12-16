@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { slaMetrics } from "@/data/contractData";
-import { CheckCircle, AlertTriangle, XCircle, Gauge, TrendingDown } from "lucide-react";
+import { CheckCircle, AlertTriangle, XCircle, Gauge, TrendingDown, Clock } from "lucide-react";
 
 const Section11 = () => {
   const glosaRules = [
@@ -44,12 +44,16 @@ const Section11 = () => {
                 className={`p-4 rounded-lg border-2 text-center ${
                   metric.status === "Conforme" 
                     ? "border-accent/30 bg-accent/5" 
+                    : metric.status === "Planejado"
+                    ? "border-muted bg-muted/30"
                     : "border-destructive/30 bg-destructive/5"
                 }`}
               >
                 <div className="flex justify-center mb-2">
                   {metric.status === "Conforme" ? (
                     <CheckCircle className="w-8 h-8 text-accent" />
+                  ) : metric.status === "Planejado" ? (
+                    <Clock className="w-8 h-8 text-muted-foreground" />
                   ) : (
                     <XCircle className="w-8 h-8 text-destructive" />
                   )}
