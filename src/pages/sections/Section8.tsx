@@ -1,114 +1,137 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { artifacts } from "@/data/contractData";
-import { FileText, CheckCircle, Clock, AlertCircle, FolderOpen } from "lucide-react";
+import { ClipboardCheck, Eye, FileCheck, BarChart3, Search, ArrowRight } from "lucide-react";
 
 const Section8 = () => {
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case "Entregue": return <CheckCircle className="w-4 h-4 text-accent" />;
-      case "Em andamento": return <Clock className="w-4 h-4 text-secondary" />;
-      case "Ativo": return <CheckCircle className="w-4 h-4 text-primary" />;
-      default: return <AlertCircle className="w-4 h-4 text-muted-foreground" />;
+  const fiscalizationDimensions = [
+    {
+      title: "Fiscalização Técnica",
+      description: "Acompanhamento da qualidade técnica das entregas e conformidade com especificações",
+      icon: Search,
+      color: "bg-primary",
+      items: ["Qualidade da conexão", "Configuração de equipamentos", "Conformidade com projeto"]
+    },
+    {
+      title: "Fiscalização Administrativa",
+      description: "Controle documental e verificação de obrigações contratuais",
+      icon: FileCheck,
+      color: "bg-secondary",
+      items: ["Documentação fiscal", "Certidões", "Relatórios obrigatórios"]
+    },
+    {
+      title: "Fiscalização por Indicadores",
+      description: "Monitoramento de métricas de desempenho e SLAs",
+      icon: BarChart3,
+      color: "bg-accent",
+      items: ["Disponibilidade", "Latência", "Tempo de atendimento"]
+    },
+    {
+      title: "Fiscalização por Evidências",
+      description: "Verificação in loco e análise de provas documentais",
+      icon: Eye,
+      color: "bg-primary",
+      items: ["Visitas técnicas", "Fotos e vídeos", "Logs de sistema"]
     }
-  };
+  ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Entregue": return "bg-accent/10 text-accent";
-      case "Em andamento": return "bg-secondary/20 text-secondary-foreground";
-      case "Ativo": return "bg-primary/10 text-primary";
-      default: return "bg-muted text-muted-foreground";
-    }
-  };
+  const processSteps = [
+    { step: 1, title: "Coleta", description: "Coleta de dados e evidências" },
+    { step: 2, title: "Análise", description: "Análise técnica e documental" },
+    { step: 3, title: "Validação", description: "Validação de conformidade" },
+    { step: 4, title: "Registro", description: "Registro em sistema" },
+    { step: 5, title: "Atestação", description: "Emissão de parecer" }
+  ];
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 8</Badge>
-        <h1 className="text-3xl font-bold text-foreground">Artefatos Contratuais</h1>
+        <h1 className="text-3xl font-bold text-foreground">Modelo de Fiscalização</h1>
         <p className="text-muted-foreground mt-2">
-          Documentos obrigatórios previstos no contrato e sua periodicidade
+          Dimensões e processos de acompanhamento da execução contratual
         </p>
       </div>
 
-      {/* Summary */}
-      <Card className="shadow-card bg-gradient-to-r from-primary/5 to-accent/5">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-              <FolderOpen className="w-8 h-8 text-primary" />
-            </div>
-            <div>
-              <p className="text-sm text-muted-foreground">Total de Artefatos</p>
-              <p className="text-3xl font-bold">{artifacts.length} documentos</p>
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Artifacts Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {artifacts.map((artifact) => (
-          <Card key={artifact.name} className="shadow-card hover:shadow-card-hover transition-shadow">
-            <CardContent className="pt-6">
-              <div className="flex items-start justify-between mb-4">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <FileText className="w-6 h-6 text-primary" />
+      {/* Dimensions Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {fiscalizationDimensions.map((dimension) => (
+          <Card key={dimension.title} className="shadow-card hover:shadow-card-hover transition-shadow">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                <div className={`w-10 h-10 rounded-lg ${dimension.color} flex items-center justify-center`}>
+                  <dimension.icon className="w-5 h-5 text-white" />
                 </div>
-                {getStatusIcon(artifact.status)}
-              </div>
-              
-              <Badge variant="outline" className="font-mono mb-2">{artifact.name}</Badge>
-              <h3 className="font-semibold text-sm mb-2">{artifact.description}</h3>
-              
-              <div className="flex items-center justify-between mt-4 pt-4 border-t">
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-xs text-muted-foreground">{artifact.periodicity}</span>
-                </div>
-                <Badge className={`text-xs ${getStatusColor(artifact.status)}`}>
-                  {artifact.status}
-                </Badge>
+                <span className="text-lg">{dimension.title}</span>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-muted-foreground mb-4">{dimension.description}</p>
+              <div className="space-y-2">
+                {dimension.items.map((item) => (
+                  <div key={item} className="flex items-center gap-2 text-sm">
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    {item}
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
         ))}
       </div>
 
-      {/* Details Table */}
+      {/* Process Flow */}
       <Card className="shadow-card">
         <CardHeader>
-          <CardTitle className="text-lg">Detalhamento dos Artefatos</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <ClipboardCheck className="w-5 h-5 text-primary" />
+            Fluxo de Fiscalização
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="border-b bg-muted/30">
-                  <th className="text-left py-3 px-4 font-semibold">Sigla</th>
-                  <th className="text-left py-3 px-4 font-semibold">Descrição</th>
-                  <th className="text-center py-3 px-4 font-semibold">Periodicidade</th>
-                  <th className="text-center py-3 px-4 font-semibold">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {artifacts.map((artifact) => (
-                  <tr key={artifact.name} className="border-b hover:bg-muted/20">
-                    <td className="py-3 px-4">
-                      <Badge variant="outline" className="font-mono">{artifact.name}</Badge>
-                    </td>
-                    <td className="py-3 px-4">{artifact.description}</td>
-                    <td className="text-center py-3 px-4">{artifact.periodicity}</td>
-                    <td className="text-center py-3 px-4">
-                      <Badge className={`text-xs ${getStatusColor(artifact.status)}`}>
-                        {artifact.status}
-                      </Badge>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="flex items-center justify-between flex-wrap gap-4 py-4">
+            {processSteps.map((step, index) => (
+              <div key={step.step} className="flex items-center">
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
+                    {step.step}
+                  </div>
+                  <p className="font-semibold mt-2">{step.title}</p>
+                  <p className="text-xs text-muted-foreground max-w-[100px]">{step.description}</p>
+                </div>
+                {index < processSteps.length - 1 && (
+                  <ArrowRight className="w-6 h-6 text-muted-foreground mx-4" />
+                )}
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Responsible Parties */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Responsáveis pela Fiscalização</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="p-4 bg-primary/5 rounded-lg border border-primary/20">
+              <p className="font-semibold text-primary">Fiscal Técnico</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Responsável pela verificação da qualidade técnica das entregas
+              </p>
+            </div>
+            <div className="p-4 bg-accent/5 rounded-lg border border-accent/20">
+              <p className="font-semibold text-accent">Fiscal Administrativo</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Responsável pelo controle documental e financeiro
+              </p>
+            </div>
+            <div className="p-4 bg-secondary/10 rounded-lg border border-secondary/30">
+              <p className="font-semibold">Gestor do Contrato</p>
+              <p className="text-sm text-muted-foreground mt-1">
+                Coordenação geral e tomada de decisões
+              </p>
+            </div>
           </div>
         </CardContent>
       </Card>

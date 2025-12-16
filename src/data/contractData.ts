@@ -176,17 +176,18 @@ export const measurementDimensions = [
 export const navigationItems = [
   { id: 1, title: "Visão Geral do Contrato", path: "/secao/1" },
   { id: 2, title: "Modelo de Governança", path: "/secao/2" },
-  { id: 3, title: "Papéis e Responsabilidades", path: "/secao/3" },
-  { id: 4, title: "Ciclo de Vida da Execução", path: "/secao/4" },
-  { id: 5, title: "Fases do Projeto e Marcos", path: "/secao/5" },
-  { id: 6, title: "Cronograma de Desembolso", path: "/secao/6" },
-  { id: 7, title: "Modelo de Fiscalização", path: "/secao/7" },
-  { id: 8, title: "Artefatos Contratuais", path: "/secao/8" },
-  { id: 9, title: "Instrumentos de Medição", path: "/secao/9" },
-  { id: 10, title: "Gestão de SLA e Penalidades", path: "/secao/10" },
-  { id: 11, title: "Gestão de Riscos", path: "/secao/11" },
-  { id: 12, title: "Governança da Operação", path: "/secao/12" },
-  { id: 13, title: "Encerramento e Legado", path: "/secao/13" }
+  { id: 3, title: "Especificações Técnicas", path: "/secao/3" },
+  { id: 4, title: "Papéis e Responsabilidades", path: "/secao/4" },
+  { id: 5, title: "Ciclo de Vida da Execução", path: "/secao/5" },
+  { id: 6, title: "Fases do Projeto e Marcos", path: "/secao/6" },
+  { id: 7, title: "Cronograma de Desembolso", path: "/secao/7" },
+  { id: 8, title: "Modelo de Fiscalização", path: "/secao/8" },
+  { id: 9, title: "Artefatos Contratuais", path: "/secao/9" },
+  { id: 10, title: "Instrumentos de Medição", path: "/secao/10" },
+  { id: 11, title: "Gestão de SLA e Penalidades", path: "/secao/11" },
+  { id: 12, title: "Gestão de Riscos", path: "/secao/12" },
+  { id: 13, title: "Governança da Operação", path: "/secao/13" },
+  { id: 14, title: "Encerramento e Legado", path: "/secao/14" }
 ];
 
 export const solutionArchitecture = [
