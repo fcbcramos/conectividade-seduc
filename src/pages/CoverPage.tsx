@@ -27,11 +27,11 @@ const CoverPage = () => {
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-h-screen relative z-10">
         {/* Header com logo SEDUC - posição absoluta no canto superior direito */}
-        <header className="absolute top-0 right-0">
+        <header className="absolute top-4 right-6 md:top-6 md:right-8 lg:top-8 lg:right-10">
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-24 md:h-28 lg:h-32 object-contain"
+            className="h-20 md:h-24 lg:h-28 object-contain"
           />
         </header>
 
@@ -67,21 +67,21 @@ const CoverPage = () => {
         </main>
 
         {/* Footer com logos - posição absoluta no canto inferior direito */}
-        <footer className="absolute bottom-2 right-2 md:bottom-4 md:right-4 flex items-center gap-6 md:gap-8">
+        <footer className="absolute bottom-6 right-6 md:bottom-8 md:right-8 lg:bottom-10 lg:right-10 flex items-center gap-4 md:gap-6">
           <img 
             src={logoEscolasConectadas} 
             alt="Escolas Conectadas" 
-            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
+            className="h-7 md:h-8 lg:h-9 object-contain mix-blend-multiply"
           />
           <img 
             src={logoNovoPac} 
             alt="Novo PAC" 
-            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
+            className="h-7 md:h-8 lg:h-9 object-contain mix-blend-multiply"
           />
           <img 
             src={logoMec} 
             alt="MEC - Governo Federal" 
-            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
+            className="h-7 md:h-8 lg:h-9 object-contain mix-blend-multiply"
           />
         </footer>
       </div>
