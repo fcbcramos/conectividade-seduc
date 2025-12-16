@@ -1,6 +1,7 @@
 import mecLogo from "@/assets/mec-gov-federal-logo.png";
 import govPiLogo from "@/assets/governo-piaui-logo.png";
 import escolasConectadasLogo from "@/assets/escolas-conectadas-logo.png";
+import novoPacLogo from "@/assets/novo-pac-logo.png";
 
 const InstitutionalFooter = () => {
   return (
@@ -32,6 +33,16 @@ const InstitutionalFooter = () => {
           <img 
             src={escolasConectadasLogo} 
             alt="Programa Escolas Conectadas"
+            className="h-12 sm:h-14 w-auto object-contain"
+          />
+
+          {/* Separador */}
+          <div className="hidden sm:block h-12 w-px bg-border" />
+
+          {/* Logo Novo PAC */}
+          <img 
+            src={novoPacLogo} 
+            alt="Novo PAC - Desenvolvimento e Sustentabilidade"
             className="h-12 sm:h-14 w-auto object-contain"
           />
         </div>
