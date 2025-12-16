@@ -17,7 +17,7 @@ const CoverPage = () => {
       onClick={handleClick}
     >
       {/* Barra lateral colorida - 4 cores oficiais */}
-      <div className="flex flex-shrink-0 h-screen">
+      <div className="flex flex-shrink-0 h-screen z-20">
         <div className="w-3 md:w-4 bg-gov-blue" />
         <div className="w-3 md:w-4 bg-gov-yellow" />
         <div className="w-3 md:w-4 bg-gov-green" />
@@ -50,7 +50,7 @@ const CoverPage = () => {
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-20 md:h-28 lg:h-32 object-contain"
+            className="h-28 md:h-36 lg:h-44 object-contain"
           />
         </header>
 
