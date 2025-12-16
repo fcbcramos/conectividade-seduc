@@ -37,40 +37,48 @@ const SolutionArchitecture = () => {
                   <div className="grid grid-cols-2 gap-3">
                     {solutionArchitecture.filter(l => l.id === "sdn" || l.id === "sgi").map((mgmtLayer) => {
                       const MgmtIcon = iconMap[mgmtLayer.icon] || Globe;
+                      const fullName = mgmtLayer.id === "sdn" 
+                        ? "Software-Defined Networking" 
+                        : "Sistema de Gestão Integrada";
                       return (
                         <div
                           key={mgmtLayer.id}
                           className="relative p-4 rounded-lg border-2 bg-card hover:shadow-md transition-shadow"
                           style={{ borderColor: mgmtLayer.color }}
                         >
-                          <div className="flex items-center gap-3 mb-2">
+                          <div className="flex items-start gap-3">
                             <div
-                              className="w-10 h-10 rounded-lg flex items-center justify-center"
+                              className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0 mt-1"
                               style={{ backgroundColor: `${mgmtLayer.color}20` }}
                             >
                               <MgmtIcon className="w-5 h-5" style={{ color: mgmtLayer.color }} />
                             </div>
-                            <div>
-                              <span
-                                className="text-xs font-bold px-2 py-0.5 rounded"
-                                style={{ backgroundColor: mgmtLayer.color, color: 'white' }}
-                              >
-                                {mgmtLayer.shortName}
-                              </span>
+                            <div className="flex-1 text-center">
+                              <div className="flex items-center justify-center gap-2 mb-1">
+                                <span
+                                  className="text-xs font-bold px-2 py-0.5 rounded"
+                                  style={{ backgroundColor: mgmtLayer.color, color: 'white' }}
+                                >
+                                  {mgmtLayer.shortName}
+                                </span>
+                                <span className="text-sm font-medium text-foreground">
+                                  {fullName}
+                                </span>
+                              </div>
+                              <p className="text-xs text-muted-foreground leading-relaxed">
+                                {mgmtLayer.description}
+                              </p>
+                              <div className="flex flex-wrap justify-center gap-1 mt-2">
+                                {mgmtLayer.components.slice(0, 2).map((comp) => (
+                                  <span
+                                    key={comp}
+                                    className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
+                                  >
+                                    {comp}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
-                          </div>
-                          <p className="text-xs text-muted-foreground leading-relaxed">
-                            {mgmtLayer.description}
-                          </p>
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {mgmtLayer.components.slice(0, 2).map((comp) => (
-                              <span
-                                key={comp}
-                                className="text-[10px] px-1.5 py-0.5 rounded bg-muted text-muted-foreground"
-                              >
-                                {comp}
-                              </span>
-                            ))}
                           </div>
                         </div>
                       );
