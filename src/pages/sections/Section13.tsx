@@ -446,10 +446,10 @@ const Section13 = () => {
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { label: "Reuniões realizadas", value: "12/12", status: "100%" },
-              { label: "Relatórios entregues", value: "11/12", status: "92%" },
-              { label: "Auditorias concluídas", value: "3/4", status: "75%" },
-              { label: "Decisões pendentes", value: "2", status: "Em análise" }
+              { label: "Reuniões realizadas", value: "0/12", status: "Planejado" },
+              { label: "Relatórios entregues", value: "0/12", status: "Planejado" },
+              { label: "Auditorias concluídas", value: "0/4", status: "Planejado" },
+              { label: "Decisões pendentes", value: "0", status: "Aguardando" }
             ].map((indicator) => (
               <div key={indicator.label} className="text-center p-4 bg-muted/30 rounded-lg">
                 <p className="text-2xl font-bold text-primary">{indicator.value}</p>
