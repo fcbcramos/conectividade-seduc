@@ -1,8 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 import { measurementDimensions } from "@/data/contractData";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
-import { Gauge, Wifi, Globe, Headphones, Activity } from "lucide-react";
+import { Gauge, Wifi, Globe, Headphones, Activity, Info, ArrowRight } from "lucide-react";
 
 const Section10 = () => {
   const radarData = [
@@ -59,6 +60,20 @@ const Section10 = () => {
           </div>
         </CardContent>
       </Card>
+
+      {/* Referência Cruzada - Seção 11 */}
+      <Alert className="border-primary/30 bg-primary/5">
+        <Info className="h-4 w-4 text-primary" />
+        <AlertDescription className="text-sm">
+          <span className="font-semibold">Instrumento Oficial de Medição:</span> A Sonda SIMET/SQS constitui a 
+          <span className="font-semibold text-primary"> "verdade oficial"</span> para aferição dos indicadores técnicos (IC-1 a IC-4), 
+          sobrepondo-se a relatórios manuais ou sistemas proprietários da Contratada.
+          <span className="flex items-center gap-1 mt-2 text-primary font-medium">
+            <ArrowRight className="h-3 w-3" />
+            Metodologia completa e fórmulas de cálculo definidas na Seção 11 — Gestão de SLA, Glosas e Penalidades
+          </span>
+        </AlertDescription>
+      </Alert>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Radar Chart */}
