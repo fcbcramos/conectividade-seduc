@@ -17,7 +17,8 @@ import {
   Settings, 
   Flag,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Menu
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -45,48 +46,46 @@ const Sidebar = () => {
   return (
     <aside 
       className={cn(
-        "bg-sidebar text-sidebar-foreground h-screen sticky top-0 transition-all duration-300 flex flex-col",
-        collapsed ? "w-16" : "w-64"
+        "bg-sidebar text-sidebar-foreground h-screen sticky top-0 transition-all duration-300 flex flex-col shadow-lg",
+        collapsed ? "w-16" : "w-72"
       )}
     >
-      {/* Toggle button */}
-      <Button
-        variant="ghost"
-        size="icon"
-        onClick={() => setCollapsed(!collapsed)}
-        className="absolute -right-3 top-20 z-10 h-6 w-6 rounded-full bg-primary text-primary-foreground hover:bg-primary/90 shadow-md"
-      >
-        {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
-      </Button>
-
-      {/* Logo area */}
+      {/* Header com toggle */}
       <div className={cn(
-        "p-4 border-b border-sidebar-border",
-        collapsed ? "px-2" : "px-4"
+        "p-4 border-b border-sidebar-border flex items-center",
+        collapsed ? "justify-center" : "justify-between"
       )}>
-        <NavLink to="/" className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-sidebar-primary flex items-center justify-center flex-shrink-0">
-            <LayoutDashboard className="w-5 h-5 text-sidebar-primary-foreground" />
-          </div>
-          {!collapsed && (
-            <div className="overflow-hidden">
+        {!collapsed && (
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-lg bg-secondary flex items-center justify-center">
+              <LayoutDashboard className="w-5 h-5 text-secondary-foreground" />
+            </div>
+            <div>
               <p className="font-bold text-sm">SEDUC-PI</p>
               <p className="text-xs opacity-70">Governança Contratual</p>
             </div>
-          )}
-        </NavLink>
+          </div>
+        )}
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setCollapsed(!collapsed)}
+          className="h-8 w-8 text-sidebar-foreground hover:bg-sidebar-accent"
+        >
+          {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+        </Button>
       </div>
 
       {/* Navigation */}
       <nav className="flex-1 overflow-y-auto py-4">
-        <div className={cn("mb-4", collapsed ? "px-2" : "px-4")}>
+        <div className={cn("mb-4", collapsed ? "px-2" : "px-3")}>
           <NavLink
             to="/"
             className={({ isActive }) =>
               cn(
                 "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all",
                 isActive
-                  ? "bg-sidebar-primary text-sidebar-primary-foreground"
+                  ? "bg-secondary text-secondary-foreground font-semibold"
                   : "hover:bg-sidebar-accent text-sidebar-foreground"
               )
             }
@@ -97,12 +96,12 @@ const Sidebar = () => {
         </div>
 
         {!collapsed && (
-          <p className="px-4 text-xs uppercase tracking-wider opacity-50 mb-2">
+          <p className="px-4 text-xs uppercase tracking-wider opacity-50 mb-3 font-semibold">
             Seções do Relatório
           </p>
         )}
 
-        <div className={cn("space-y-1", collapsed ? "px-2" : "px-4")}>
+        <div className={cn("space-y-1", collapsed ? "px-2" : "px-3")}>
           {navigationItems.map((item) => {
             const Icon = iconMap[item.id];
             const isActive = location.pathname === item.path;
@@ -112,18 +111,20 @@ const Sidebar = () => {
                 key={item.id}
                 to={item.path}
                 className={cn(
-                  "flex items-center gap-3 px-3 py-2 rounded-lg transition-all text-sm",
+                  "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all text-sm group",
                   isActive
-                    ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium"
-                    : "hover:bg-sidebar-accent/50 opacity-80 hover:opacity-100"
+                    ? "bg-sidebar-accent text-sidebar-accent-foreground font-medium border-l-4 border-secondary ml-0 pl-2"
+                    : "hover:bg-sidebar-accent/50 opacity-85 hover:opacity-100"
                 )}
-                title={collapsed ? item.title : undefined}
+                title={collapsed ? `${item.id}. ${item.title}` : undefined}
               >
                 <div className={cn(
-                  "w-6 h-6 rounded flex items-center justify-center flex-shrink-0 text-xs font-bold",
-                  isActive ? "bg-sidebar-primary text-sidebar-primary-foreground" : "bg-sidebar-accent/50"
+                  "w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0 text-xs font-bold transition-colors",
+                  isActive 
+                    ? "bg-secondary text-secondary-foreground" 
+                    : "bg-sidebar-accent/60 group-hover:bg-sidebar-accent"
                 )}>
-                  {collapsed ? item.id : <Icon className="w-4 h-4" />}
+                  {item.id}
                 </div>
                 {!collapsed && (
                   <span className="truncate">{item.title}</span>
@@ -137,8 +138,8 @@ const Sidebar = () => {
       {/* Footer */}
       {!collapsed && (
         <div className="p-4 border-t border-sidebar-border text-xs opacity-60 text-center">
-          <p>© 2024 SEDUC-PI</p>
-          <p>Todos os direitos reservados</p>
+          <p className="font-medium">Escolas Conectadas</p>
+          <p className="mt-0.5">Piauí • 2024</p>
         </div>
       )}
     </aside>
