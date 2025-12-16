@@ -1,4 +1,5 @@
-import { FileText, Calendar } from "lucide-react";
+import { Calendar, Clock } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 const Header = () => {
   const currentDate = new Date().toLocaleDateString('pt-BR', {
@@ -6,6 +7,13 @@ const Header = () => {
     month: 'long',
     year: 'numeric'
   });
+
+  // Cálculo de dias restantes até o início do projeto
+  const startDate = new Date('2026-01-05');
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const diffTime = startDate.getTime() - today.getTime();
+  const daysRemaining = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   return (
     <header className="gradient-header text-primary-foreground py-5 px-6 lg:px-8">
@@ -21,15 +29,19 @@ const Header = () => {
             </p>
           </div>
 
-          {/* Data e Processo */}
-          <div className="hidden md:flex flex-col items-end text-right text-sm">
-            <div className="flex items-center gap-1.5 opacity-80">
+          {/* Data e Contador */}
+          <div className="hidden md:flex flex-col items-end text-right gap-1">
+            <div className="flex items-center gap-1.5">
               <Calendar className="w-4 h-4" />
-              <span>{currentDate}</span>
+              <span className="text-base font-semibold">{currentDate}</span>
             </div>
-            <span className="text-xs font-medium opacity-90 mt-0.5">
-              Início previsto: Janeiro/2026
+            <span className="text-xs opacity-80">
+              Início: 05/01/2026
             </span>
+            <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0 text-xs">
+              <Clock className="w-3 h-3 mr-1" />
+              {daysRemaining > 0 ? `${daysRemaining} dias para iniciar` : 'Projeto iniciado'}
+            </Badge>
           </div>
         </div>
       </div>
