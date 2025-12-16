@@ -18,30 +18,11 @@ const CoverPage = () => {
     >
       {/* Barra lateral colorida - 4 cores oficiais */}
       <div className="flex flex-shrink-0 h-screen z-20">
-        <div className="w-3 md:w-4 bg-gov-blue" />
-        <div className="w-3 md:w-4 bg-gov-yellow" />
-        <div className="w-3 md:w-4 bg-gov-green" />
-        <div className="w-3 md:w-4 bg-gov-red" />
+        <div className="w-3 md:w-4" style={{ backgroundColor: '#034ea2' }} />
+        <div className="w-3 md:w-4" style={{ backgroundColor: '#fdb913' }} />
+        <div className="w-3 md:w-4" style={{ backgroundColor: '#007932' }} />
+        <div className="w-3 md:w-4" style={{ backgroundColor: '#ef4123' }} />
       </div>
-
-      {/* Ondas diagonais cinza decorativas */}
-      <svg 
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        preserveAspectRatio="none"
-        viewBox="0 0 1000 1000"
-      >
-        {/* Linhas diagonais cinza claro */}
-        {[...Array(8)].map((_, i) => (
-          <path
-            key={i}
-            d={`M${-200 + i * 200},1000 Q${300 + i * 200},500 ${-200 + i * 200},0`}
-            fill="none"
-            stroke="#e5e7eb"
-            strokeWidth="80"
-            opacity="0.5"
-          />
-        ))}
-      </svg>
 
       {/* Conteúdo principal */}
       <div className="flex-1 flex flex-col min-h-screen p-8 md:p-12 lg:p-16 relative z-10">
@@ -50,7 +31,7 @@ const CoverPage = () => {
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-28 md:h-36 lg:h-44 object-contain"
+            className="h-56 md:h-72 lg:h-[22rem] object-contain"
           />
         </header>
 
@@ -90,17 +71,17 @@ const CoverPage = () => {
           <img 
             src={logoEscolasConectadas} 
             alt="Escolas Conectadas" 
-            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
+            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
           />
           <img 
             src={logoNovoPac} 
             alt="Novo PAC" 
-            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
+            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
           />
           <img 
             src={logoMec} 
             alt="MEC - Governo Federal" 
-            className="h-12 md:h-14 lg:h-16 object-contain mix-blend-multiply"
+            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
           />
         </footer>
       </div>
