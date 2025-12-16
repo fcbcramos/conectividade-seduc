@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { kpiData, basicInfo } from "@/data/contractData";
 import { Globe, Wifi, Building2, Target, CheckCircle, Satellite, Radio, Wrench, Router, Shield, Network } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section1 = () => {
   const highlights = [
@@ -28,6 +29,8 @@ const Section1 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={1} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 1</Badge>
         <h1 className="text-3xl font-bold text-foreground">Visão Geral do Contrato</h1>
@@ -174,6 +177,8 @@ const Section1 = () => {
           </CardContent>
         </Card>
       </div>
+
+      <SectionNavigation currentSection={1} />
     </div>
   );
 };

@@ -2,6 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { artifacts } from "@/data/contractData";
 import { FileText, CheckCircle, Clock, AlertCircle, FolderOpen } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section9 = () => {
   const getStatusIcon = (status: string) => {
@@ -24,6 +25,8 @@ const Section9 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={9} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 9</Badge>
         <h1 className="text-3xl font-bold text-foreground">Artefatos Contratuais</h1>
@@ -112,6 +115,8 @@ const Section9 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={9} />
     </div>
   );
 };

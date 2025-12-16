@@ -21,6 +21,7 @@ import {
   ClipboardList,
   UserCheck
 } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section2 = () => {
   const governanceLevels = [
@@ -133,6 +134,8 @@ const Section2 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={2} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 2</Badge>
         <h1 className="text-3xl font-bold text-foreground">Modelo de Governança Contratual</h1>
@@ -388,6 +391,8 @@ const Section2 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={2} />
     </div>
   );
 };

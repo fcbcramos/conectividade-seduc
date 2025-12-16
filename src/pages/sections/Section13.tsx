@@ -6,6 +6,7 @@ import {
   Bell, CheckCircle2, AlertTriangle, TrendingUp, MapPin, Activity,
   Target, ClipboardList, Eye, BarChart3
 } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section13 = () => {
   const routines = [
@@ -68,6 +69,8 @@ const Section13 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={13} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 13</Badge>
         <h1 className="text-3xl font-bold text-foreground">Governança da Operação Contínua</h1>
@@ -460,6 +463,8 @@ const Section13 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={13} />
     </div>
   );
 };

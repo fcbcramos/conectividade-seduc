@@ -2,10 +2,12 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { governanceRoles } from "@/data/contractData";
 import { Building2, CheckSquare, Users } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section4 = () => {
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={4} />
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 4</Badge>
         <h1 className="text-3xl font-bold text-foreground">Papéis e Responsabilidades</h1>
@@ -96,6 +98,8 @@ const Section4 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={4} />
     </div>
   );
 };

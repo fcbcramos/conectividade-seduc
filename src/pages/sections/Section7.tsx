@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { disbursementData, kpiData } from "@/data/contractData";
 import { Wallet, TrendingUp, Calendar, Landmark, ArrowRight } from "lucide-react";
 import ExecutiveTimeline from "@/components/dashboard/ExecutiveTimeline";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const resourceAllocation = [
   { 
@@ -98,6 +99,8 @@ const Section7 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={7} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 7</Badge>
         <h1 className="text-3xl font-bold text-foreground">Cronograma de Desembolso</h1>
@@ -293,6 +296,8 @@ const Section7 = () => {
           </div>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={7} />
     </div>
   );
 };

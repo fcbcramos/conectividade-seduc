@@ -3,12 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { phases } from "@/data/contractData";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Circle, Milestone, Calendar } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section6 = () => {
   const totalPercentage = phases.reduce((acc, p) => acc + p.percentage, 0);
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={6} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 6</Badge>
         <h1 className="text-3xl font-bold text-foreground">Fases do Projeto e Marcos</h1>
@@ -106,6 +109,8 @@ const Section6 = () => {
           </Accordion>
         </CardContent>
       </Card>
+
+      <SectionNavigation currentSection={6} />
     </div>
   );
 };

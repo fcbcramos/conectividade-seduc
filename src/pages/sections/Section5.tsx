@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, PlayCircle, Settings, Monitor, CheckCircle, Circle } from "lucide-react";
+import SectionNavigation from "@/components/navigation/SectionNavigation";
 
 const Section5 = () => {
   const phases = [
@@ -61,6 +62,8 @@ const Section5 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
+      <SectionNavigation currentSection={5} />
+      
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 5</Badge>
         <h1 className="text-3xl font-bold text-foreground">Ciclo de Vida da Execução</h1>
@@ -138,6 +141,8 @@ const Section5 = () => {
           </Card>
         ))}
       </div>
+
+      <SectionNavigation currentSection={5} />
     </div>
   );
 };
