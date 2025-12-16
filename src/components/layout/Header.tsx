@@ -1,41 +1,48 @@
-import { FileText } from "lucide-react";
+import { FileText, Calendar } from "lucide-react";
 
 const Header = () => {
+  const currentDate = new Date().toLocaleDateString('pt-BR', {
+    day: '2-digit',
+    month: 'long',
+    year: 'numeric'
+  });
+
   return (
-    <header className="gradient-header text-primary-foreground py-6 px-8">
+    <header className="gradient-header text-primary-foreground py-4 px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center gap-6">
-          {/* Logo placeholder - Government of Piauí */}
-          <div className="flex items-center gap-4">
-            <div className="w-16 h-16 bg-primary-foreground/10 rounded-lg flex items-center justify-center border border-primary-foreground/20">
-              <img 
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/Bras%C3%A3o_do_Piau%C3%AD.svg/800px-Bras%C3%A3o_do_Piau%C3%AD.svg.png" 
-                alt="Brasão do Piauí"
-                className="w-12 h-12 object-contain"
-              />
-            </div>
-            <div className="h-12 w-px bg-primary-foreground/30" />
-            <div className="flex items-center gap-3">
-              <FileText className="w-8 h-8" />
-              <div>
-                <p className="text-sm font-medium opacity-90">SEDUC-PI</p>
-                <p className="text-xs opacity-70">Secretaria da Educação</p>
+        <div className="flex items-center justify-between gap-4">
+          {/* SEDUC-PI Badge */}
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary-foreground/10 border border-primary-foreground/20">
+              <FileText className="w-5 h-5" />
+              <div className="hidden sm:block">
+                <p className="text-sm font-bold leading-tight">SEDUC-PI</p>
+                <p className="text-xs opacity-80 leading-tight">Secretaria da Educação</p>
               </div>
             </div>
           </div>
           
+          {/* Título Central */}
           <div className="flex-1 text-center">
-            <h1 className="text-2xl font-bold tracking-tight">
+            <h1 className="text-lg sm:text-xl lg:text-2xl font-extrabold tracking-tight">
               Relatório Executivo de Governança Contratual
             </h1>
-            <p className="text-sm opacity-80 mt-1">
+            <p className="text-xs sm:text-sm opacity-80 mt-0.5">
               Conectividade à Internet e Infraestrutura Wi-Fi - Rede Estadual
             </p>
           </div>
 
-          <div className="text-right text-sm opacity-80">
-            <p>Governo do Estado do Piauí</p>
-            <p className="text-xs opacity-70">Transformação Digital na Educação</p>
+          {/* Data e Processo */}
+          <div className="hidden md:flex items-center gap-2 text-right text-sm">
+            <div className="flex flex-col items-end">
+              <div className="flex items-center gap-1.5 text-xs opacity-70">
+                <Calendar className="w-3.5 h-3.5" />
+                <span>{currentDate}</span>
+              </div>
+              <span className="text-xs font-medium opacity-90">
+                Contrato nº 045/2023
+              </span>
+            </div>
           </div>
         </div>
       </div>
