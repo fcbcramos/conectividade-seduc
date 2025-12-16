@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
+import CoverPage from "./pages/CoverPage";
 import Dashboard from "./pages/Dashboard";
 import Section1 from "./pages/sections/Section1";
 import Section2 from "./pages/sections/Section2";
@@ -30,8 +31,12 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          {/* Tela de Capa - fora do MainLayout */}
+          <Route path="/" element={<CoverPage />} />
+          
+          {/* Conteúdo do sistema - dentro do MainLayout */}
           <Route element={<MainLayout />}>
-            <Route path="/" element={<Dashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/secao/1" element={<Section1 />} />
             <Route path="/secao/2" element={<Section2 />} />
             <Route path="/secao/3" element={<Section3 />} />

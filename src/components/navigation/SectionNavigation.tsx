@@ -21,7 +21,7 @@ const SectionNavigation = ({ currentSection }: SectionNavigationProps) => {
       {/* Previous Button */}
       {currentSection === 1 ? (
         <Button variant="outline" asChild onClick={handleClick}>
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/dashboard" className="flex items-center gap-2">
             <Home className="w-4 h-4" />
             <span className="hidden sm:inline">Dashboard</span>
           </Link>
@@ -49,7 +49,7 @@ const SectionNavigation = ({ currentSection }: SectionNavigationProps) => {
         </Button>
       ) : (
         <Button variant="outline" asChild onClick={handleClick}>
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/dashboard" className="flex items-center gap-2">
             <span className="hidden sm:inline">Voltar ao Dashboard</span>
             <span className="sm:hidden">Dashboard</span>
             <Home className="w-4 h-4" />
