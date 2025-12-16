@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { kpiData, basicInfo } from "@/data/contractData";
 import { Globe, Wifi, Building2, Target, CheckCircle } from "lucide-react";
-import SolutionArchitecture from "@/components/dashboard/SolutionArchitecture";
 const Section1 = () => {
   const highlights = [
     { icon: Globe, label: "Conectividade", value: "Internet de alta velocidade" },
@@ -119,8 +118,6 @@ const Section1 = () => {
         </Card>
       </div>
 
-      {/* Solution Architecture */}
-      <SolutionArchitecture />
     </div>
   );
 };

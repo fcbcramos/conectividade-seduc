@@ -1,167 +1,149 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Flag, CheckSquare, FileText, Users, ArrowRight, BookOpen } from "lucide-react";
+import { Calendar, Users, FileText, RefreshCw, Settings } from "lucide-react";
 
 const Section13 = () => {
-  const encerramento = [
-    { item: "Relatório Técnico Final (RTF)", status: "Pendente" },
-    { item: "Documentação As-Built completa", status: "Pendente" },
-    { item: "Transferência de ativos", status: "Pendente" },
-    { item: "Quitação de obrigações financeiras", status: "Pendente" },
-    { item: "Devolução de garantias", status: "Pendente" },
-    { item: "Termo de encerramento", status: "Pendente" }
+  const routines = [
+    { name: "Reunião de Governança", frequency: "Mensal", participants: "SEDUC + Piauí Link", icon: Users },
+    { name: "Relatório de Desempenho", frequency: "Mensal", participants: "Piauí Link", icon: FileText },
+    { name: "Auditoria de SLA", frequency: "Trimestral", participants: "SEDUC", icon: RefreshCw },
+    { name: "Revisão Contratual", frequency: "Anual", participants: "SEDUC + Piauí Link", icon: Settings }
   ];
 
-  const legado = [
-    {
-      title: "Infraestrutura Instalada",
-      description: "Rede de conectividade e Wi-Fi em 1000+ escolas",
-      icon: FileText
-    },
-    {
-      title: "Conhecimento Transferido",
-      description: "Documentação técnica e operacional completa",
-      icon: BookOpen
-    },
-    {
-      title: "Capacitação de Equipes",
-      description: "Equipes da SEDUC treinadas para gestão",
-      icon: Users
-    },
-    {
-      title: "Base para Continuidade",
-      description: "Processos definidos para próxima contratação",
-      icon: ArrowRight
-    }
+  const meetingStructure = [
+    { type: "Operacional", frequency: "Semanal", focus: "Acompanhamento de implantação e incidentes" },
+    { type: "Tático", frequency: "Quinzenal", focus: "Análise de indicadores e ajustes de rota" },
+    { type: "Estratégico", frequency: "Mensal", focus: "Decisões de alto nível e diretrizes" }
   ];
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 13</Badge>
-        <h1 className="text-3xl font-bold text-foreground">Encerramento Contratual e Legado</h1>
+        <h1 className="text-3xl font-bold text-foreground">Governança da Operação Contínua</h1>
         <p className="text-muted-foreground mt-2">
-          Procedimentos de encerramento e garantia de continuidade dos serviços
+          Rotinas de acompanhamento e estrutura de governança durante a operação
         </p>
       </div>
 
-      {/* Encerramento Checklist */}
+      {/* Calendar of Routines */}
       <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Flag className="w-5 h-5 text-primary" />
-            Checklist de Encerramento
+            <Calendar className="w-5 h-5 text-primary" />
+            Calendário de Rotinas
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            {encerramento.map((item, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {routines.map((routine) => (
               <div 
-                key={item.item}
-                className="flex items-center gap-4 p-4 bg-muted/30 rounded-lg"
+                key={routine.name}
+                className="p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg border border-border/50"
               >
-                <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center font-bold text-sm">
-                  {index + 1}
+                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
+                  <routine.icon className="w-5 h-5 text-primary" />
                 </div>
-                <CheckSquare className="w-5 h-5 text-muted-foreground" />
-                <span className="flex-1">{item.item}</span>
-                <Badge className="bg-muted text-muted-foreground">
-                  {item.status}
-                </Badge>
+                <h3 className="font-semibold text-sm">{routine.name}</h3>
+                <Badge variant="outline" className="mt-2 text-xs">{routine.frequency}</Badge>
+                <p className="text-xs text-muted-foreground mt-2">{routine.participants}</p>
               </div>
             ))}
           </div>
         </CardContent>
       </Card>
 
-      {/* Transfer Process */}
+      {/* Meeting Structure */}
       <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="text-lg">Processo de Transferência</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-between flex-wrap gap-4 py-4">
-            {[
-              { step: 1, title: "Preparação", desc: "Consolidação de documentos" },
-              { step: 2, title: "Validação", desc: "Verificação de entregas" },
-              { step: 3, title: "Transferência", desc: "Passagem de conhecimento" },
-              { step: 4, title: "Aceite", desc: "Validação final" },
-              { step: 5, title: "Encerramento", desc: "Formalização" }
-            ].map((item, index) => (
-              <div key={item.step} className="flex items-center">
-                <div className="flex flex-col items-center text-center">
-                  <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-bold text-lg">
-                    {item.step}
-                  </div>
-                  <p className="font-semibold mt-2 text-sm">{item.title}</p>
-                  <p className="text-xs text-muted-foreground max-w-[100px]">{item.desc}</p>
-                </div>
-                {index < 4 && (
-                  <ArrowRight className="w-6 h-6 text-muted-foreground mx-4" />
-                )}
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Legacy */}
-      <Card className="shadow-card bg-gradient-to-r from-primary/5 to-accent/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-primary" />
-            Legado do Contrato
+            <Users className="w-5 h-5 text-primary" />
+            Estrutura de Reuniões
           </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {legado.map((item) => (
-              <div 
-                key={item.title}
-                className="flex items-start gap-4 p-4 bg-card rounded-lg shadow-sm"
-              >
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                  <item.icon className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="font-semibold">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground mt-1">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Continuity Plan */}
-      <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="text-lg">Plano de Continuidade</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            <div className="p-4 bg-accent/5 border border-accent/20 rounded-lg">
-              <h4 className="font-semibold text-accent">Garantia de Serviços Essenciais</h4>
-              <p className="text-sm text-muted-foreground mt-2">
-                O contrato prevê mecanismos para garantir a continuidade dos serviços de conectividade
-                mesmo após o encerramento, incluindo período de transição e suporte à nova contratação.
-              </p>
-            </div>
+            {meetingStructure.map((meeting, index) => (
+              <div 
+                key={meeting.type}
+                className={`p-4 rounded-lg border-l-4 ${
+                  index === 0 ? "border-l-accent bg-accent/5" :
+                  index === 1 ? "border-l-secondary bg-secondary/10" :
+                  "border-l-primary bg-primary/5"
+                }`}
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <h3 className="font-semibold">Nível {meeting.type}</h3>
+                    <p className="text-sm text-muted-foreground mt-1">{meeting.focus}</p>
+                  </div>
+                  <Badge className={
+                    index === 0 ? "bg-accent/10 text-accent" :
+                    index === 1 ? "bg-secondary/20 text-secondary-foreground" :
+                    "bg-primary/10 text-primary"
+                  }>
+                    {meeting.frequency}
+                  </Badge>
+                </div>
+              </div>
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Annual Timeline */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Linha do Tempo Anual</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="relative">
+            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" />
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <p className="text-2xl font-bold text-primary">90 dias</p>
-                <p className="text-sm text-muted-foreground">Período de transição</p>
-              </div>
-              <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <p className="text-2xl font-bold text-primary">100%</p>
-                <p className="text-sm text-muted-foreground">Documentação entregue</p>
-              </div>
-              <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <p className="text-2xl font-bold text-primary">Garantido</p>
-                <p className="text-sm text-muted-foreground">Suporte pós-contrato</p>
-              </div>
+            <div className="space-y-8">
+              {[
+                { month: "Jan-Mar", event: "Auditoria Q1", type: "audit" },
+                { month: "Abr-Jun", event: "Auditoria Q2", type: "audit" },
+                { month: "Jul", event: "Revisão Semestral", type: "review" },
+                { month: "Jul-Set", event: "Auditoria Q3", type: "audit" },
+                { month: "Out-Dez", event: "Auditoria Q4", type: "audit" },
+                { month: "Dez", event: "Revisão Anual", type: "review" }
+              ].map((item, index) => (
+                <div key={item.month} className={`flex items-center gap-4 ${index % 2 === 0 ? "" : "flex-row-reverse"}`}>
+                  <div className={`flex-1 ${index % 2 === 0 ? "text-right" : "text-left"}`}>
+                    <Badge variant="outline">{item.month}</Badge>
+                    <p className="font-medium mt-1">{item.event}</p>
+                  </div>
+                  <div className={`w-4 h-4 rounded-full z-10 ${
+                    item.type === "review" ? "bg-primary" : "bg-accent"
+                  }`} />
+                  <div className="flex-1" />
+                </div>
+              ))}
             </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Governance Indicators */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Indicadores de Governança</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {[
+              { label: "Reuniões realizadas", value: "12/12", status: "100%" },
+              { label: "Relatórios entregues", value: "11/12", status: "92%" },
+              { label: "Auditorias concluídas", value: "3/4", status: "75%" },
+              { label: "Decisões pendentes", value: "2", status: "Em análise" }
+            ].map((indicator) => (
+              <div key={indicator.label} className="text-center p-4 bg-muted/30 rounded-lg">
+                <p className="text-2xl font-bold text-primary">{indicator.value}</p>
+                <p className="text-xs text-muted-foreground mt-1">{indicator.label}</p>
+                <Badge variant="outline" className="mt-2 text-xs">{indicator.status}</Badge>
+              </div>
+            ))}
           </div>
         </CardContent>
       </Card>

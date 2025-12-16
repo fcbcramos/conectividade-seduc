@@ -1,164 +1,170 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { slaMetrics } from "@/data/contractData";
-import { CheckCircle, AlertTriangle, XCircle, Gauge, TrendingDown } from "lucide-react";
+import { measurementDimensions } from "@/data/contractData";
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
+import { Gauge, Wifi, Globe, Headphones, Activity } from "lucide-react";
 
 const Section10 = () => {
-  const glosaRules = [
-    { violation: "Disponibilidade < 99%", glosa: "5% do valor mensal", severity: "Alta" },
-    { violation: "Latência > 100ms", glosa: "3% do valor mensal", severity: "Média" },
-    { violation: "TMA > 6h", glosa: "2% do valor mensal", severity: "Média" },
-    { violation: "Não entrega de relatório", glosa: "1% do valor mensal", severity: "Baixa" }
+  const radarData = [
+    { dimension: "Disponibilidade", value: 95, fullMark: 100 },
+    { dimension: "Latência", value: 90, fullMark: 100 },
+    { dimension: "Jitter", value: 88, fullMark: 100 },
+    { dimension: "Throughput", value: 85, fullMark: 100 },
+    { dimension: "TMA", value: 92, fullMark: 100 },
+    { dimension: "TMR", value: 88, fullMark: 100 }
   ];
 
-  const penalties = [
-    { type: "Advertência", condition: "1ª ocorrência de descumprimento leve", icon: AlertTriangle },
-    { type: "Multa 0,5%", condition: "Reincidência ou descumprimento moderado", icon: TrendingDown },
-    { type: "Multa 2%", condition: "Descumprimento grave ou reiterado", icon: XCircle },
-    { type: "Rescisão", condition: "Descumprimento total ou abandono", icon: XCircle }
-  ];
+  const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+    "WAN": Globe,
+    "LAN/WLAN": Wifi,
+    "Suporte": Headphones
+  };
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 10</Badge>
-        <h1 className="text-3xl font-bold text-foreground">Gestão de SLA, Glosas e Penalidades</h1>
+        <h1 className="text-3xl font-bold text-foreground">Instrumentos de Medição</h1>
         <p className="text-muted-foreground mt-2">
-          Regras de aferição, cálculo de glosas e regime sancionatório
+          Ferramentas e metodologias para aferição da qualidade dos serviços
         </p>
       </div>
 
-      {/* SLA Dashboard */}
-      <Card className="shadow-card">
+      {/* SIMET/SQS Card */}
+      <Card className="shadow-card border-l-4 border-l-primary">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Gauge className="w-5 h-5 text-primary" />
-            Dashboard de SLA
+            <Activity className="w-5 h-5 text-primary" />
+            Sondas de Qualidade - SIMET/SQS
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {slaMetrics.map((metric) => (
-              <div 
-                key={metric.metric}
-                className={`p-4 rounded-lg border-2 text-center ${
-                  metric.status === "Conforme" 
-                    ? "border-accent/30 bg-accent/5" 
-                    : "border-destructive/30 bg-destructive/5"
-                }`}
-              >
-                <div className="flex justify-center mb-2">
-                  {metric.status === "Conforme" ? (
-                    <CheckCircle className="w-8 h-8 text-accent" />
-                  ) : (
-                    <XCircle className="w-8 h-8 text-destructive" />
-                  )}
-                </div>
-                <p className="text-xs text-muted-foreground truncate">{metric.metric}</p>
-                <p className="text-xl font-bold mt-1">{metric.current}</p>
-                <p className="text-xs text-muted-foreground">Meta: {metric.target}</p>
-              </div>
-            ))}
+          <p className="text-sm text-muted-foreground mb-4">
+            Sistema de medição automatizada instalado nas unidades escolares para coleta contínua 
+            de métricas de qualidade da conexão, permitindo aferição objetiva dos SLAs contratuais.
+          </p>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-primary/5 rounded-lg">
+              <p className="text-2xl font-bold text-primary">24/7</p>
+              <p className="text-xs text-muted-foreground">Monitoramento</p>
+            </div>
+            <div className="text-center p-4 bg-accent/5 rounded-lg">
+              <p className="text-2xl font-bold text-accent">1000+</p>
+              <p className="text-xs text-muted-foreground">Sondas instaladas</p>
+            </div>
+            <div className="text-center p-4 bg-secondary/10 rounded-lg">
+              <p className="text-2xl font-bold">Tempo real</p>
+              <p className="text-xs text-muted-foreground">Coleta de dados</p>
+            </div>
           </div>
         </CardContent>
       </Card>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Glosa Rules */}
+        {/* Radar Chart */}
         <Card className="shadow-card">
           <CardHeader>
-            <CardTitle className="text-lg">Matriz de Glosas</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Gauge className="w-5 h-5 text-primary" />
+              Índice de Qualidade por Dimensão
+            </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              {glosaRules.map((rule) => (
-                <div 
-                  key={rule.violation}
-                  className={`p-4 rounded-lg border-l-4 ${
-                    rule.severity === "Alta" ? "border-l-destructive bg-destructive/5" :
-                    rule.severity === "Média" ? "border-l-secondary bg-secondary/10" :
-                    "border-l-muted bg-muted/30"
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium text-sm">{rule.violation}</p>
-                      <p className="text-xs text-muted-foreground mt-1">Desconto: {rule.glosa}</p>
-                    </div>
-                    <Badge className={
-                      rule.severity === "Alta" ? "bg-destructive/10 text-destructive" :
-                      rule.severity === "Média" ? "bg-secondary/20 text-secondary-foreground" :
-                      "bg-muted text-muted-foreground"
-                    }>
-                      {rule.severity}
-                    </Badge>
-                  </div>
-                </div>
-              ))}
+            <div className="h-80">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart data={radarData}>
+                  <PolarGrid stroke="hsl(214, 20%, 88%)" />
+                  <PolarAngleAxis 
+                    dataKey="dimension" 
+                    tick={{ fontSize: 11, fill: "hsl(215, 15%, 45%)" }}
+                  />
+                  <PolarRadiusAxis 
+                    angle={30} 
+                    domain={[0, 100]}
+                    tick={{ fontSize: 10, fill: "hsl(215, 15%, 45%)" }}
+                  />
+                  <Radar
+                    name="Índice"
+                    dataKey="value"
+                    stroke="hsl(213, 97%, 32%)"
+                    fill="hsl(213, 97%, 32%)"
+                    fillOpacity={0.3}
+                  />
+                </RadarChart>
+              </ResponsiveContainer>
             </div>
           </CardContent>
         </Card>
 
-        {/* Penalties */}
-        <Card className="shadow-card">
-          <CardHeader>
-            <CardTitle className="text-lg">Regime Sancionatório</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {penalties.map((penalty, index) => (
-                <div 
-                  key={penalty.type}
-                  className="flex items-start gap-4 p-4 bg-muted/30 rounded-lg"
-                >
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    index === 0 ? "bg-secondary/20" :
-                    index === 1 ? "bg-secondary" :
-                    index === 2 ? "bg-destructive/80" :
-                    "bg-destructive"
-                  }`}>
-                    <penalty.icon className={`w-5 h-5 ${
-                      index === 0 ? "text-secondary-foreground" : "text-white"
-                    }`} />
+        {/* Dimensions Cards */}
+        <div className="space-y-4">
+          {measurementDimensions.map((dimension) => {
+            const Icon = iconMap[dimension.name] || Activity;
+            return (
+              <Card key={dimension.name} className="shadow-card">
+                <CardContent className="pt-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="flex items-center justify-between">
+                        <h3 className="font-semibold">{dimension.name}</h3>
+                        <Badge variant="outline" className="text-xs">{dimension.tool}</Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-1">{dimension.description}</p>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {dimension.metrics.map((metric) => (
+                          <Badge key={metric} className="bg-primary/10 text-primary text-xs">
+                            {metric}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold">{penalty.type}</p>
-                    <p className="text-sm text-muted-foreground">{penalty.condition}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+                </CardContent>
+              </Card>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Calculation Formula */}
+      {/* Metrics Table */}
       <Card className="shadow-card">
         <CardHeader>
-          <CardTitle className="text-lg">Fórmula de Cálculo de Glosa</CardTitle>
+          <CardTitle className="text-lg">Métricas Auditáveis</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="bg-muted/30 p-6 rounded-lg font-mono text-center">
-            <p className="text-lg">
-              <span className="text-primary font-bold">Glosa</span> = 
-              (Meta<sub>SLA</sub> - Resultado<sub>Aferido</sub>) × 
-              <span className="text-accent font-bold"> Fator</span> × 
-              Valor<sub>Mensal</sub>
-            </p>
-          </div>
-          <div className="grid grid-cols-3 gap-4 mt-6">
-            <div className="text-center p-4 bg-primary/5 rounded-lg">
-              <p className="font-semibold text-primary">Meta SLA</p>
-              <p className="text-sm text-muted-foreground">Valor contratual definido</p>
-            </div>
-            <div className="text-center p-4 bg-accent/5 rounded-lg">
-              <p className="font-semibold text-accent">Fator</p>
-              <p className="text-sm text-muted-foreground">Peso por tipo de métrica</p>
-            </div>
-            <div className="text-center p-4 bg-secondary/10 rounded-lg">
-              <p className="font-semibold">Valor Mensal</p>
-              <p className="text-sm text-muted-foreground">Base de cálculo</p>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b bg-muted/30">
+                  <th className="text-left py-3 px-4">Métrica</th>
+                  <th className="text-center py-3 px-4">Unidade</th>
+                  <th className="text-center py-3 px-4">Meta SLA</th>
+                  <th className="text-center py-3 px-4">Método de Coleta</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { metric: "Disponibilidade", unit: "%", target: "≥99.5%", method: "SIMET" },
+                  { metric: "Latência", unit: "ms", target: "≤80ms", method: "SIMET" },
+                  { metric: "Jitter", unit: "ms", target: "≤30ms", method: "SIMET" },
+                  { metric: "Perda de Pacotes", unit: "%", target: "≤1%", method: "SIMET" },
+                  { metric: "TMA", unit: "horas", target: "≤4h", method: "Sistema de Chamados" },
+                  { metric: "TMR", unit: "horas", target: "≤8h", method: "Sistema de Chamados" }
+                ].map((item) => (
+                  <tr key={item.metric} className="border-b hover:bg-muted/20">
+                    <td className="py-3 px-4 font-medium">{item.metric}</td>
+                    <td className="text-center py-3 px-4">{item.unit}</td>
+                    <td className="text-center py-3 px-4">
+                      <Badge variant="outline">{item.target}</Badge>
+                    </td>
+                    <td className="text-center py-3 px-4 text-muted-foreground">{item.method}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </CardContent>
       </Card>

@@ -1,136 +1,101 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Clock, PlayCircle, Settings, Monitor, CheckCircle, XCircle } from "lucide-react";
+import { governanceRoles } from "@/data/contractData";
+import { Building2, CheckSquare, Users } from "lucide-react";
 
 const Section4 = () => {
-  const phases = [
-    {
-      name: "Mobilização",
-      description: "Preparação inicial, planejamento detalhado e alocação de recursos",
-      icon: PlayCircle,
-      duration: "2 meses",
-      status: "Concluída",
-      activities: ["Planejamento técnico", "Alocação de equipe", "Definição de cronograma"]
-    },
-    {
-      name: "Implantação",
-      description: "Instalação física da infraestrutura nas unidades escolares",
-      icon: Settings,
-      duration: "24 meses",
-      status: "Em andamento",
-      activities: ["Instalação de links", "Configuração Wi-Fi", "Testes de qualidade"]
-    },
-    {
-      name: "Estabilização",
-      description: "Ajustes finos e validação do funcionamento",
-      icon: Clock,
-      duration: "3 meses",
-      status: "Pendente",
-      activities: ["Otimização de rede", "Correção de falhas", "Validação de SLAs"]
-    },
-    {
-      name: "Operação",
-      description: "Funcionamento pleno com monitoramento contínuo",
-      icon: Monitor,
-      duration: "28 meses",
-      status: "Pendente",
-      activities: ["Monitoramento 24x7", "Suporte técnico", "Manutenção preventiva"]
-    },
-    {
-      name: "Encerramento",
-      description: "Finalização do contrato e transferência de conhecimento",
-      icon: CheckCircle,
-      duration: "3 meses",
-      status: "Pendente",
-      activities: ["Documentação final", "Transferência de ativos", "Relatório de encerramento"]
-    }
-  ];
-
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Concluída": return "bg-accent/10 text-accent";
-      case "Em andamento": return "bg-secondary/20 text-secondary-foreground";
-      default: return "bg-muted text-muted-foreground";
-    }
-  };
-
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 4</Badge>
-        <h1 className="text-3xl font-bold text-foreground">Ciclo de Vida da Execução</h1>
+        <h1 className="text-3xl font-bold text-foreground">Papéis e Responsabilidades</h1>
         <p className="text-muted-foreground mt-2">
-          As cinco fases do ciclo de vida do contrato de conectividade
+          Definição clara das atribuições de cada parte no contrato
         </p>
       </div>
 
-      {/* Timeline horizontal */}
-      <Card className="shadow-card overflow-hidden">
-        <CardContent className="p-6">
-          <div className="flex overflow-x-auto pb-4">
-            {phases.map((phase, index) => (
-              <div key={phase.name} className="flex items-center min-w-[200px]">
-                <div className="flex flex-col items-center">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                    phase.status === "Concluída" ? "bg-accent text-accent-foreground" :
-                    phase.status === "Em andamento" ? "bg-secondary text-secondary-foreground" :
-                    "bg-muted text-muted-foreground"
-                  }`}>
-                    <phase.icon className="w-8 h-8" />
-                  </div>
-                  <p className="font-bold mt-3 text-center">{phase.name}</p>
-                  <Badge variant="outline" className="mt-1 text-xs">{phase.duration}</Badge>
-                  <Badge className={`mt-2 text-xs ${getStatusColor(phase.status)}`}>
-                    {phase.status}
-                  </Badge>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Contractor */}
+        <Card className="shadow-card border-t-4 border-t-primary">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Building2 className="w-5 h-5 text-primary" />
+              Contratada
+            </CardTitle>
+            <Badge className="w-fit">{governanceRoles.contractor.name}</Badge>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {governanceRoles.contractor.responsibilities.map((resp, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckSquare className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                  <p className="text-sm">{resp}</p>
                 </div>
-                {index < phases.length - 1 && (
-                  <div className={`h-1 w-16 mx-2 ${
-                    phase.status === "Concluída" ? "bg-accent" : "bg-muted"
-                  }`} />
-                )}
-              </div>
-            ))}
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Contracting */}
+        <Card className="shadow-card border-t-4 border-t-accent">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5 text-accent" />
+              Contratante
+            </CardTitle>
+            <Badge className="w-fit bg-accent/10 text-accent">{governanceRoles.contracting.name}</Badge>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-3">
+              {governanceRoles.contracting.responsibilities.map((resp, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <CheckSquare className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                  <p className="text-sm">{resp}</p>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Interaction Matrix */}
+      <Card className="shadow-card">
+        <CardHeader>
+          <CardTitle className="text-lg">Matriz de Interação</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b">
+                  <th className="text-left py-3 px-4 font-semibold">Atividade</th>
+                  <th className="text-center py-3 px-4 font-semibold">Piauí Link</th>
+                  <th className="text-center py-3 px-4 font-semibold">SEDUC-PI</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { activity: "Implantação de infraestrutura", contractor: "Executa", contracting: "Fiscaliza" },
+                  { activity: "Suporte técnico", contractor: "Executa", contracting: "Acompanha" },
+                  { activity: "Relatórios de desempenho", contractor: "Elabora", contracting: "Valida" },
+                  { activity: "Pagamentos", contractor: "Recebe", contracting: "Autoriza" },
+                  { activity: "Decisões estratégicas", contractor: "Propõe", contracting: "Decide" },
+                ].map((row) => (
+                  <tr key={row.activity} className="border-b hover:bg-muted/30">
+                    <td className="py-3 px-4">{row.activity}</td>
+                    <td className="text-center py-3 px-4">
+                      <Badge variant="outline">{row.contractor}</Badge>
+                    </td>
+                    <td className="text-center py-3 px-4">
+                      <Badge variant="outline">{row.contracting}</Badge>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </CardContent>
       </Card>
-
-      {/* Phase Details */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {phases.map((phase) => (
-          <Card key={phase.name} className="shadow-card hover:shadow-card-hover transition-shadow">
-            <CardHeader className="pb-3">
-              <div className="flex items-center justify-between">
-                <CardTitle className="text-lg flex items-center gap-2">
-                  <phase.icon className={`w-5 h-5 ${
-                    phase.status === "Concluída" ? "text-accent" :
-                    phase.status === "Em andamento" ? "text-secondary" : "text-muted-foreground"
-                  }`} />
-                  {phase.name}
-                </CardTitle>
-                <Badge className={`text-xs ${getStatusColor(phase.status)}`}>
-                  {phase.status}
-                </Badge>
-              </div>
-            </CardHeader>
-            <CardContent>
-              <p className="text-sm text-muted-foreground mb-4">{phase.description}</p>
-              <div className="space-y-2">
-                {phase.activities.map((activity) => (
-                  <div key={activity} className="flex items-center gap-2 text-sm">
-                    {phase.status === "Concluída" ? (
-                      <CheckCircle className="w-4 h-4 text-accent" />
-                    ) : (
-                      <XCircle className="w-4 h-4 text-muted-foreground" />
-                    )}
-                    {activity}
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
     </div>
   );
 };

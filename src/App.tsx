@@ -18,6 +18,7 @@ import Section10 from "./pages/sections/Section10";
 import Section11 from "./pages/sections/Section11";
 import Section12 from "./pages/sections/Section12";
 import Section13 from "./pages/sections/Section13";
+import Section14 from "./pages/sections/Section14";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/secao/11" element={<Section11 />} />
             <Route path="/secao/12" element={<Section12 />} />
             <Route path="/secao/13" element={<Section13 />} />
+            <Route path="/secao/14" element={<Section14 />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

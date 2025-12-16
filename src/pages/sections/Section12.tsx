@@ -1,149 +1,159 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, Users, FileText, RefreshCw, Settings } from "lucide-react";
+import { riskMatrix } from "@/data/contractData";
+import { Shield, AlertTriangle, CheckCircle } from "lucide-react";
 
 const Section12 = () => {
-  const routines = [
-    { name: "Reunião de Governança", frequency: "Mensal", participants: "SEDUC + Piauí Link", icon: Users },
-    { name: "Relatório de Desempenho", frequency: "Mensal", participants: "Piauí Link", icon: FileText },
-    { name: "Auditoria de SLA", frequency: "Trimestral", participants: "SEDUC", icon: RefreshCw },
-    { name: "Revisão Contratual", frequency: "Anual", participants: "SEDUC + Piauí Link", icon: Settings }
-  ];
+  const getImpactColor = (impact: string) => {
+    switch (impact) {
+      case "Alto": return "bg-destructive/10 text-destructive border-destructive/30";
+      case "Médio": return "bg-secondary/20 text-secondary-foreground border-secondary/30";
+      default: return "bg-muted text-muted-foreground border-muted";
+    }
+  };
 
-  const meetingStructure = [
-    { type: "Operacional", frequency: "Semanal", focus: "Acompanhamento de implantação e incidentes" },
-    { type: "Tático", frequency: "Quinzenal", focus: "Análise de indicadores e ajustes de rota" },
-    { type: "Estratégico", frequency: "Mensal", focus: "Decisões de alto nível e diretrizes" }
+  const getProbabilityColor = (prob: string) => {
+    switch (prob) {
+      case "Alta": return "bg-destructive";
+      case "Média": return "bg-secondary";
+      default: return "bg-accent";
+    }
+  };
+
+  // Risk matrix visualization data
+  const matrixData = [
+    { prob: "Alta", low: 0, med: 0, high: 0 },
+    { prob: "Média", low: 0, med: 2, high: 0 },
+    { prob: "Baixa", low: 0, med: 1, high: 2 }
   ];
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
       <div className="mb-8">
         <Badge variant="outline" className="mb-2">Seção 12</Badge>
-        <h1 className="text-3xl font-bold text-foreground">Governança da Operação Contínua</h1>
+        <h1 className="text-3xl font-bold text-foreground">Gestão de Riscos</h1>
         <p className="text-muted-foreground mt-2">
-          Rotinas de acompanhamento e estrutura de governança durante a operação
+          Identificação, análise e estratégias de mitigação de riscos contratuais
         </p>
       </div>
 
-      {/* Calendar of Routines */}
+      {/* Risk Matrix Visual */}
       <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-primary" />
-            Calendário de Rotinas
+            <AlertTriangle className="w-5 h-5 text-primary" />
+            Matriz de Riscos (Probabilidade x Impacto)
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {routines.map((routine) => (
-              <div 
-                key={routine.name}
-                className="p-4 bg-gradient-to-br from-primary/5 to-accent/5 rounded-lg border border-border/50"
-              >
-                <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center mb-3">
-                  <routine.icon className="w-5 h-5 text-primary" />
-                </div>
-                <h3 className="font-semibold text-sm">{routine.name}</h3>
-                <Badge variant="outline" className="mt-2 text-xs">{routine.frequency}</Badge>
-                <p className="text-xs text-muted-foreground mt-2">{routine.participants}</p>
-              </div>
-            ))}
+          <div className="overflow-x-auto">
+            <table className="w-full">
+              <thead>
+                <tr>
+                  <th className="w-24"></th>
+                  <th className="text-center p-3 text-sm font-medium">Baixo</th>
+                  <th className="text-center p-3 text-sm font-medium">Médio</th>
+                  <th className="text-center p-3 text-sm font-medium">Alto</th>
+                </tr>
+              </thead>
+              <tbody>
+                {matrixData.map((row) => (
+                  <tr key={row.prob}>
+                    <td className="text-sm font-medium p-3">{row.prob}</td>
+                    <td className="p-2">
+                      <div className={`h-16 rounded-lg flex items-center justify-center ${
+                        row.prob === "Alta" ? "bg-secondary/30" :
+                        row.prob === "Média" ? "bg-accent/20" : "bg-accent/10"
+                      }`}>
+                        {row.low > 0 && <span className="font-bold text-lg">{row.low}</span>}
+                      </div>
+                    </td>
+                    <td className="p-2">
+                      <div className={`h-16 rounded-lg flex items-center justify-center ${
+                        row.prob === "Alta" ? "bg-destructive/30" :
+                        row.prob === "Média" ? "bg-secondary/30" : "bg-secondary/20"
+                      }`}>
+                        {row.med > 0 && <span className="font-bold text-lg">{row.med}</span>}
+                      </div>
+                    </td>
+                    <td className="p-2">
+                      <div className={`h-16 rounded-lg flex items-center justify-center ${
+                        row.prob === "Alta" ? "bg-destructive" :
+                        row.prob === "Média" ? "bg-destructive/50" : "bg-destructive/30"
+                      }`}>
+                        {row.high > 0 && <span className="font-bold text-lg text-white">{row.high}</span>}
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+          <p className="text-xs text-muted-foreground text-center mt-4">
+            Eixo X: Impacto | Eixo Y: Probabilidade
+          </p>
         </CardContent>
       </Card>
 
-      {/* Meeting Structure */}
-      <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Users className="w-5 h-5 text-primary" />
-            Estrutura de Reuniões
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {meetingStructure.map((meeting, index) => (
-              <div 
-                key={meeting.type}
-                className={`p-4 rounded-lg border-l-4 ${
-                  index === 0 ? "border-l-accent bg-accent/5" :
-                  index === 1 ? "border-l-secondary bg-secondary/10" :
-                  "border-l-primary bg-primary/5"
-                }`}
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="font-semibold">Nível {meeting.type}</h3>
-                    <p className="text-sm text-muted-foreground mt-1">{meeting.focus}</p>
+      {/* Risk Cards */}
+      <div className="space-y-4">
+        {riskMatrix.map((risk) => (
+          <Card key={risk.id} className="shadow-card hover:shadow-card-hover transition-shadow">
+            <CardContent className="pt-6">
+              <div className="flex items-start gap-4">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 ${getProbabilityColor(risk.probability)}`}>
+                  <span className="text-white font-bold">{risk.id}</span>
+                </div>
+                <div className="flex-1">
+                  <div className="flex items-center justify-between flex-wrap gap-2">
+                    <h3 className="font-semibold">{risk.risk}</h3>
+                    <div className="flex gap-2">
+                      <Badge variant="outline">{risk.category}</Badge>
+                      <Badge className={getImpactColor(risk.impact)}>
+                        Impacto {risk.impact}
+                      </Badge>
+                    </div>
                   </div>
-                  <Badge className={
-                    index === 0 ? "bg-accent/10 text-accent" :
-                    index === 1 ? "bg-secondary/20 text-secondary-foreground" :
-                    "bg-primary/10 text-primary"
-                  }>
-                    {meeting.frequency}
-                  </Badge>
+                  
+                  <div className="flex items-center gap-4 mt-3 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className={`w-3 h-3 rounded-full ${getProbabilityColor(risk.probability)}`} />
+                      <span className="text-muted-foreground">Probabilidade: {risk.probability}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 p-4 bg-accent/5 rounded-lg border border-accent/20">
+                    <div className="flex items-start gap-2">
+                      <Shield className="w-5 h-5 text-accent mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-sm font-medium text-accent">Estratégia de Mitigação</p>
+                        <p className="text-sm text-muted-foreground mt-1">{risk.mitigation}</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
 
-      {/* Annual Timeline */}
+      {/* Risk Categories */}
       <Card className="shadow-card">
         <CardHeader>
-          <CardTitle className="text-lg">Linha do Tempo Anual</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="relative">
-            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2" />
-            
-            <div className="space-y-8">
-              {[
-                { month: "Jan-Mar", event: "Auditoria Q1", type: "audit" },
-                { month: "Abr-Jun", event: "Auditoria Q2", type: "audit" },
-                { month: "Jul", event: "Revisão Semestral", type: "review" },
-                { month: "Jul-Set", event: "Auditoria Q3", type: "audit" },
-                { month: "Out-Dez", event: "Auditoria Q4", type: "audit" },
-                { month: "Dez", event: "Revisão Anual", type: "review" }
-              ].map((item, index) => (
-                <div key={item.month} className={`flex items-center gap-4 ${index % 2 === 0 ? "" : "flex-row-reverse"}`}>
-                  <div className={`flex-1 ${index % 2 === 0 ? "text-right" : "text-left"}`}>
-                    <Badge variant="outline">{item.month}</Badge>
-                    <p className="font-medium mt-1">{item.event}</p>
-                  </div>
-                  <div className={`w-4 h-4 rounded-full z-10 ${
-                    item.type === "review" ? "bg-primary" : "bg-accent"
-                  }`} />
-                  <div className="flex-1" />
-                </div>
-              ))}
-            </div>
-          </div>
-        </CardContent>
-      </Card>
-
-      {/* Governance Indicators */}
-      <Card className="shadow-card">
-        <CardHeader>
-          <CardTitle className="text-lg">Indicadores de Governança</CardTitle>
+          <CardTitle className="text-lg">Categorias de Risco</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { label: "Reuniões realizadas", value: "12/12", status: "100%" },
-              { label: "Relatórios entregues", value: "11/12", status: "92%" },
-              { label: "Auditorias concluídas", value: "3/4", status: "75%" },
-              { label: "Decisões pendentes", value: "2", status: "Em análise" }
-            ].map((indicator) => (
-              <div key={indicator.label} className="text-center p-4 bg-muted/30 rounded-lg">
-                <p className="text-2xl font-bold text-primary">{indicator.value}</p>
-                <p className="text-xs text-muted-foreground mt-1">{indicator.label}</p>
-                <Badge variant="outline" className="mt-2 text-xs">{indicator.status}</Badge>
-              </div>
-            ))}
+            {["Operacional", "Financeiro", "Tecnológico", "Técnico"].map((category) => {
+              const count = riskMatrix.filter(r => r.category === category).length;
+              return (
+                <div key={category} className="text-center p-4 bg-muted/30 rounded-lg">
+                  <p className="text-2xl font-bold text-primary">{count}</p>
+                  <p className="text-sm text-muted-foreground">{category}</p>
+                </div>
+              );
+            })}
           </div>
         </CardContent>
       </Card>
