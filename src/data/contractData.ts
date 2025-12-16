@@ -188,3 +188,60 @@ export const navigationItems = [
   { id: 12, title: "Governança da Operação", path: "/secao/12" },
   { id: 13, title: "Encerramento e Legado", path: "/secao/13" }
 ];
+
+export const solutionArchitecture = [
+  {
+    id: "wan",
+    name: "Camada de Acesso (WAN)",
+    shortName: "WAN",
+    icon: "Globe",
+    color: "hsl(var(--gov-green))",
+    description: "Tráfego de internet via Links Dedicados (Fibra Óptica) com redundância automática via Links Secundários (Banda Larga ou Satélite)",
+    components: ["Link Primário (Fibra Óptica)", "Link Secundário (Backup)", "CPE/ONU Gerenciado"]
+  },
+  {
+    id: "edge",
+    name: "Camada de Segurança e Controle (Edge)",
+    shortName: "EDGE",
+    icon: "Shield",
+    color: "hsl(var(--gov-red))",
+    description: "Appliance Firewall dedicado para inspeção, balanceamento de carga, filtragem de conteúdo, prevenção de intrusão e QoS",
+    components: ["Balanceamento de carga", "Filtragem de conteúdo", "Prevenção de intrusão (IPS)", "Políticas de QoS"]
+  },
+  {
+    id: "sqs",
+    name: "Camada de Medição e Auditoria (SQS)",
+    shortName: "SQS",
+    icon: "Activity",
+    color: "hsl(var(--gov-yellow))",
+    description: "Sonda de Qualidade de Serviços (SIMET Box) para medições contínuas, independentes e auditáveis dos parâmetros de qualidade",
+    components: ["Medição de velocidade", "Medição de latência", "Medição de perda de pacotes", "Conformidade SLA"]
+  },
+  {
+    id: "lan",
+    name: "Camada de Distribuição e Acesso (LAN/WLAN)",
+    shortName: "LAN/WLAN",
+    icon: "Wifi",
+    color: "hsl(var(--gov-blue))",
+    description: "Rede local gerenciada com Switches PoE e Access Points Wi-Fi 6 de alta densidade para cobertura 100% dos ambientes",
+    components: ["Switches PoE", "Access Points Wi-Fi 6", "Cobertura 100%", "Alta densidade"]
+  },
+  {
+    id: "sdn",
+    name: "Gestão Centralizada (SDN)",
+    shortName: "SDN",
+    icon: "Network",
+    color: "hsl(var(--primary))",
+    description: "Plataforma Software Defined Networking para gestão massiva de ativos de rede com segregação do plano de gerência",
+    components: ["Provisionamento remoto", "Configuração centralizada", "Monitoramento em tempo real", "Gestão apartada do Firewall"]
+  },
+  {
+    id: "sgi",
+    name: "Gestão Administrativa e Operacional (SGI)",
+    shortName: "SGI",
+    icon: "LayoutDashboard",
+    color: "hsl(var(--gov-green))",
+    description: "Sistema de Gestão Integrada (Web/Mobile) para orquestração do ciclo de vida do contrato e interface de fiscalização",
+    components: ["Cadastro técnico", "Inventário de ativos", "Gestão de OS/RATs", "Controle de SLA"]
+  }
+];
