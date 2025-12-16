@@ -67,11 +67,11 @@ const BasicInfoCard = () => {
               </div>
               <div className="bg-muted/50 p-3 rounded-lg">
                 <p className="text-xs text-muted-foreground">Coordenação de Suporte</p>
-                <p className="font-medium">Felipe Castelo Branco C. Ramos</p>
+                <p className="font-medium">Felipe Castelo Branco Crisóstomo Ramos</p>
               </div>
               <div className="bg-muted/50 p-3 rounded-lg">
                 <p className="text-xs text-muted-foreground">Coordenação de Redes</p>
-                <p className="font-medium">Danilo de Almeida César</p>
+                <p className="font-medium">Danilo César Ribeiro da Silva Mendes</p>
               </div>
             </div>
           </div>
