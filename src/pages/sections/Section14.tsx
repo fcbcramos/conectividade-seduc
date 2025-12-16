@@ -15,7 +15,7 @@ const Section14 = () => {
   const legado = [
     {
       title: "Infraestrutura Instalada",
-      description: "Rede de conectividade e Wi-Fi em 1000+ escolas",
+      description: "Rede de conectividade e Wi-Fi nas escolas da rede estadual",
       icon: FileText
     },
     {
