@@ -16,12 +16,12 @@ const CoverPage = () => {
       className="min-h-screen bg-white cursor-pointer relative overflow-hidden flex"
       onClick={handleClick}
     >
-      {/* Barra lateral colorida - 4 cores oficiais */}
-      <div className="flex flex-shrink-0 h-screen z-20">
-        <div className="w-3 md:w-4" style={{ backgroundColor: '#034ea2' }} />
-        <div className="w-3 md:w-4" style={{ backgroundColor: '#fdb913' }} />
-        <div className="w-3 md:w-4" style={{ backgroundColor: '#007932' }} />
-        <div className="w-3 md:w-4" style={{ backgroundColor: '#ef4123' }} />
+      {/* Barra lateral colorida - barras verticais de cima para baixo */}
+      <div className="flex flex-col flex-shrink-0 w-3 md:w-4 h-screen z-20">
+        <div className="flex-1" style={{ backgroundColor: '#034ea2' }} />
+        <div className="flex-1" style={{ backgroundColor: '#fdb913' }} />
+        <div className="flex-1" style={{ backgroundColor: '#ef4123' }} />
+        <div className="flex-1" style={{ backgroundColor: '#007932' }} />
       </div>
 
       {/* Conteúdo principal */}
@@ -31,13 +31,13 @@ const CoverPage = () => {
           <img 
             src={logoSeduc} 
             alt="Governo do Piauí - SEDUC" 
-            className="h-56 md:h-72 lg:h-[22rem] object-contain"
+            className="h-44 md:h-56 lg:h-64 object-contain"
           />
         </header>
 
         {/* Conteúdo central */}
-        <main className="flex-1 flex flex-col justify-center max-w-5xl">
-          <div className="space-y-6 md:space-y-8">
+        <main className="flex-1 flex flex-col justify-center items-center">
+          <div className="space-y-6 md:space-y-8 text-center">
             {/* Título principal - 70px base, responsivo */}
             <h1 
               className="font-extrabold text-foreground leading-tight"
@@ -48,7 +48,7 @@ const CoverPage = () => {
             
             {/* Subtítulo - 35px base, responsivo */}
             <p 
-              className="text-muted-foreground leading-relaxed max-w-4xl"
+              className="text-muted-foreground leading-relaxed"
               style={{ fontSize: 'clamp(1.25rem, 2.5vw, 2.2rem)' }}
             >
               Modernização da Infraestrutura Tecnológica e Conectividade das Escolas da Rede Estadual do Piauí
@@ -71,17 +71,17 @@ const CoverPage = () => {
           <img 
             src={logoEscolasConectadas} 
             alt="Escolas Conectadas" 
-            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
+            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
           />
           <img 
             src={logoNovoPac} 
             alt="Novo PAC" 
-            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
+            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
           />
           <img 
             src={logoMec} 
             alt="MEC - Governo Federal" 
-            className="h-6 md:h-7 lg:h-8 object-contain mix-blend-multiply"
+            className="h-8 md:h-9 lg:h-10 object-contain mix-blend-multiply"
           />
         </footer>
       </div>
