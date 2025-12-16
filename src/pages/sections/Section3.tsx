@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import SolutionArchitecture from "@/components/dashboard/SolutionArchitecture";
 import NetworkTopology from "@/components/dashboard/NetworkTopology";
+import MonitoringArchitecture from "@/components/dashboard/MonitoringArchitecture";
 
 const Section3 = () => {
   const turnKeyResponsibilities = [
@@ -144,6 +145,9 @@ const Section3 = () => {
         <h2 className="text-xl font-semibold text-foreground">
           Monitoramento, Inteligência de Dados e Suporte Técnico
         </h2>
+
+        {/* Monitoring Architecture Diagram */}
+        <MonitoringArchitecture />
 
         {/* 3.5.1 - Visão Individual por Unidade Escolar */}
         <Card className="shadow-card border-l-4" style={{ borderLeftColor: '#034ea2' }}>
