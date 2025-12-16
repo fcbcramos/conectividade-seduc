@@ -345,6 +345,14 @@ const Section3 = () => {
                   </tbody>
                 </table>
               </div>
+              
+              {/* Legenda TTR e TMR */}
+              <div className="mt-3 p-3 rounded-lg bg-muted/30 border border-dashed">
+                <p className="text-xs text-muted-foreground">
+                  <strong className="text-foreground">TTR</strong> = Tempo de Tomada de Responsabilidade (tempo máximo para assumir o chamado) | 
+                  <strong className="text-foreground ml-2">TMR</strong> = Tempo Máximo de Resolução (tempo máximo para solucionar o problema)
+                </p>
+              </div>
             </div>
 
             {/* Field Service */}
