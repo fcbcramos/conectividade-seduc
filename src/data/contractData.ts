@@ -14,13 +14,15 @@ export const basicInfo = {
 
 export const kpiData = {
   totalValue: 89971275.00,
-  implantationValue: 54134450.00,
+  fonte14172: 54134450.00,
+  fontTesouro: 35836825.00,
   disbursedValue: 0,
   totalPhases: 7,
   completedPhases: 0,
-  executionPeriod: "60 meses",
+  executionPeriod: "36 meses",
   startDate: "Janeiro/2026",
-  contractModel: "Integrada, Lote Único, As a Service"
+  contractModel: "Integrada, Lote Único, As a Service",
+  status: "Aguardando"
 };
 
 export const disbursementData = [

@@ -22,18 +22,18 @@ const KPICards = () => {
       bgColor: "bg-primary/10"
     },
     {
-      title: "Fase de Implantação",
-      value: formatCurrency(kpiData.implantationValue),
-      subtitle: "60% do valor total",
+      title: "Fonte Lei 14.172",
+      value: formatCurrency(kpiData.fonte14172),
+      subtitle: "FUST - Escolas Conectadas",
       icon: TrendingUp,
       color: "accent",
       bgColor: "bg-accent/10"
     },
     {
-      title: "Total de Fases",
-      value: `${kpiData.totalPhases} fases`,
-      subtitle: "Projeto de implantação",
-      icon: Layers,
+      title: "Fonte Tesouro",
+      value: formatCurrency(kpiData.fontTesouro),
+      subtitle: "Recursos estaduais",
+      icon: Wallet,
       color: "secondary",
       bgColor: "bg-secondary/20"
     },
@@ -47,16 +47,16 @@ const KPICards = () => {
     },
     {
       title: "Modelo de Contratação",
-      value: "Integrada",
-      subtitle: "Lote Único, As a Service",
+      value: kpiData.contractModel,
+      subtitle: "Pagamento por resultados",
       icon: Building,
       color: "primary",
       bgColor: "bg-primary/10"
     },
     {
-      title: "Início Previsto",
-      value: kpiData.startDate,
-      subtitle: "Fase de implantação",
+      title: "Status",
+      value: kpiData.status,
+      subtitle: `Início: ${kpiData.startDate}`,
       icon: Calendar,
       color: "accent",
       bgColor: "bg-accent/10"
