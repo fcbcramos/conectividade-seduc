@@ -198,4 +198,77 @@
     background-size: 200% 100%;
     animation: progress-shine 2s ease-in-out infinite;
   }
+
+  /* PDF Export Styles */
+  .pdf-mode {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .pdf-mode .shadow-card {
+    box-shadow: none !important;
+    border: 1px solid hsl(var(--border));
+  }
+
+  .pdf-page {
+    background: white;
+    page-break-after: always;
+  }
+
+  .pdf-page:last-child {
+    page-break-after: auto;
+  }
+
+  .pdf-page-break {
+    page-break-before: always;
+  }
+
+  .pdf-content {
+    break-inside: avoid-page;
+  }
+
+  .pdf-content .animate-fade-in {
+    animation: none !important;
+  }
+
+  /* Hide navigation elements in PDF */
+  .pdf-mode .pdf-hide {
+    display: none !important;
+  }
+
+  /* Optimize cards for print */
+  .pdf-mode .card-hover {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .pdf-mode .card-hover:hover {
+    transform: none !important;
+  }
+
+  /* Ensure proper page breaks */
+  .pdf-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Print-specific adjustments */
+  @media print {
+    .pdf-mode {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .pdf-header,
+    .pdf-footer {
+      position: fixed;
+    }
+
+    .pdf-header {
+      top: 0;
+    }
+
+    .pdf-footer {
+      bottom: 0;
+    }
+  }
 }
