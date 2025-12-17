@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./components/layout/MainLayout";
 import CoverPage from "./pages/CoverPage";
 import Dashboard from "./pages/Dashboard";
+import PDFPreview from "./pages/PDFPreview";
 import Section1 from "./pages/sections/Section1";
 import Section2 from "./pages/sections/Section2";
 import Section3 from "./pages/sections/Section3";
@@ -33,6 +34,9 @@ const App = () => (
         <Routes>
           {/* Tela de Capa - fora do MainLayout */}
           <Route path="/" element={<CoverPage />} />
+          
+          {/* PDF Preview - fora do MainLayout */}
+          <Route path="/pdf-preview" element={<PDFPreview />} />
           
           {/* Conteúdo do sistema - dentro do MainLayout */}
           <Route element={<MainLayout />}>

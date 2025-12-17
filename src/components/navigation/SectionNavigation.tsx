@@ -2,12 +2,14 @@ import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navigationItems } from "@/data/contractData";
+import PDFExportButton from "@/components/pdf/PDFExportButton";
 
 interface SectionNavigationProps {
   currentSection: number;
+  showExport?: boolean;
 }
 
-const SectionNavigation = ({ currentSection }: SectionNavigationProps) => {
+const SectionNavigation = ({ currentSection, showExport = false }: SectionNavigationProps) => {
   const currentIndex = navigationItems.findIndex(item => item.id === currentSection);
   const prevSection = currentIndex > 0 ? navigationItems[currentIndex - 1] : null;
   const nextSection = currentIndex < navigationItems.length - 1 ? navigationItems[currentIndex + 1] : null;
@@ -17,7 +19,7 @@ const SectionNavigation = ({ currentSection }: SectionNavigationProps) => {
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 py-4">
+    <div className="flex items-center justify-between gap-4 py-4 pdf-hide">
       {/* Previous Button */}
       {currentSection === 1 ? (
         <Button variant="outline" asChild onClick={handleClick}>
@@ -36,6 +38,16 @@ const SectionNavigation = ({ currentSection }: SectionNavigationProps) => {
         </Button>
       ) : (
         <div />
+      )}
+
+      {/* Export Button (shown only on first navigation instance) */}
+      {showExport && (
+        <PDFExportButton 
+          mode="section" 
+          sectionNumber={currentSection} 
+          variant="ghost" 
+          size="sm"
+        />
       )}
 
       {/* Next Button */}
