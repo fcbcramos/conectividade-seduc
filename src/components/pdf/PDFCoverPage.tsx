@@ -14,12 +14,12 @@ const PDFCoverPage = () => {
 
   return (
     <div className="pdf-page pdf-cover-page relative bg-white min-h-[297mm] w-[210mm] flex flex-col">
-      {/* Barra lateral colorida */}
+      {/* Barra lateral colorida (cores institucionais) */}
       <div className="absolute left-0 top-0 bottom-0 w-3 flex flex-col">
-        <div className="flex-1 bg-[#034ea2]" />
-        <div className="flex-1 bg-[#fdb913]" />
-        <div className="flex-1 bg-[#ef4123]" />
-        <div className="flex-1 bg-[#007932]" />
+        <div className="flex-1 bg-primary" />
+        <div className="flex-1 bg-secondary" />
+        <div className="flex-1 bg-destructive" />
+        <div className="flex-1 bg-accent" />
       </div>
 
       {/* Header com logo SEDUC */}
@@ -35,7 +35,7 @@ const PDFCoverPage = () => {
       <main className="flex-1 flex flex-col justify-center px-12 pl-16">
         <div className="space-y-6">
           {/* Título principal */}
-          <h1 className="text-5xl font-extrabold text-[#034ea2] tracking-tight leading-tight">
+          <h1 className="text-5xl font-extrabold text-primary tracking-tight leading-tight">
             Caravana Digital
           </h1>
           

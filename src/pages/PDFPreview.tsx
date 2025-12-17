@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { usePDF } from "react-to-pdf";
-import { Loader2, Download, ArrowLeft, CheckCircle } from "lucide-react";
+import { Loader2, Download, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import PDFCoverPage from "@/components/pdf/PDFCoverPage";
 import PDFTableOfContents from "@/components/pdf/PDFTableOfContents";
 import PDFHeader from "@/components/pdf/PDFHeader";
@@ -49,9 +48,6 @@ const PDFPreview = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isReady, setIsReady] = useState(false);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [isComplete, setIsComplete] = useState(false);
 
   // Parse options from URL
   const mode = searchParams.get("mode") || "full";
@@ -69,7 +65,7 @@ const PDFPreview = () => {
     ? `REGC_Caravana_Digital_${dateStr}_${timeStr}.pdf`
     : `REGC_Secao_${sectionNumber}_${dateStr}_${timeStr}.pdf`;
 
-  const { toPDF, targetRef: pdfTargetRef } = usePDF({
+  const { targetRef: pdfTargetRef } = usePDF({
     filename,
     page: {
       format: 'A4',
@@ -106,24 +102,8 @@ const PDFPreview = () => {
   }, [pdfTargetRef]);
 
   const handleGeneratePDF = async () => {
-    setIsGenerating(true);
-    setProgress(10);
-
-    // Simulate progress
-    const progressInterval = setInterval(() => {
-      setProgress(prev => Math.min(prev + 15, 85));
-    }, 500);
-
-    try {
-      await toPDF();
-      setProgress(100);
-      setIsComplete(true);
-    } catch (error) {
-      console.error("Erro ao gerar PDF:", error);
-    } finally {
-      clearInterval(progressInterval);
-      setIsGenerating(false);
-    }
+    // Abordagem robusta: impressão nativa do navegador (Salvar como PDF / impressão física)
+    window.print();
   };
 
   // Calculate estimated pages
@@ -139,7 +119,7 @@ const PDFPreview = () => {
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Control Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm">
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm pdf-control-bar">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button 
@@ -163,42 +143,23 @@ const PDFPreview = () => {
           </div>
 
           <div className="flex items-center gap-4">
-            {isGenerating && (
-              <div className="flex items-center gap-3 min-w-[200px]">
-                <Progress value={progress} className="h-2" />
-                <span className="text-xs text-muted-foreground whitespace-nowrap">{progress}%</span>
-              </div>
-            )}
-            
-            {isComplete ? (
-              <div className="flex items-center gap-2 text-accent">
-                <CheckCircle className="h-4 w-4" />
-                <span className="text-sm font-medium">PDF Gerado!</span>
-              </div>
-            ) : (
-              <Button 
-                onClick={handleGeneratePDF}
-                disabled={!isReady || isGenerating}
-                className="gap-2"
-              >
-                {isGenerating ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Gerando...
-                  </>
-                ) : !isReady ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Preparando...
-                  </>
-                ) : (
-                  <>
-                    <Download className="h-4 w-4" />
-                    Baixar PDF
-                  </>
-                )}
-              </Button>
-            )}
+            <Button 
+              onClick={handleGeneratePDF}
+              disabled={!isReady}
+              className="gap-2"
+            >
+              {!isReady ? (
+                <>
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                  Preparando...
+                </>
+              ) : (
+                <>
+                  <Download className="h-4 w-4" />
+                  Imprimir / Salvar PDF
+                </>
+              )}
+            </Button>
           </div>
         </div>
       </div>
@@ -207,8 +168,8 @@ const PDFPreview = () => {
       <div className="pt-20 pb-8 px-4">
         <div className="max-w-[210mm] mx-auto space-y-4">
           {/* Preview indicator */}
-          <div className="text-center text-sm text-muted-foreground mb-4">
-            Pré-visualização do PDF • O documento será gerado em formato A4
+          <div className="text-center text-sm text-muted-foreground mb-4 pdf-preview-indicator">
+            Pré-visualização do PDF • Para exportar, clique em “Imprimir / Salvar PDF” e selecione “Salvar como PDF”.
           </div>
 
           {/* PDF Target Container */}
