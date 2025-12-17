@@ -2,8 +2,11 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Clock, PlayCircle, Settings, Monitor, CheckCircle, Circle } from "lucide-react";
 import SectionNavigation from "@/components/navigation/SectionNavigation";
+import { usePDFMode } from "@/contexts/PDFContext";
 
 const Section5 = () => {
+  const { isPDFMode } = usePDFMode();
+  
   const phases = [
     {
       name: "Mobilização",
@@ -72,31 +75,57 @@ const Section5 = () => {
         </p>
       </div>
 
-      {/* Timeline horizontal */}
+      {/* Timeline - Vertical for PDF, Horizontal for screen */}
       <Card className="shadow-card overflow-hidden">
         <CardContent className="p-6">
-          <div className="flex overflow-x-auto pb-4">
+          <div className={isPDFMode ? "flex flex-col space-y-4" : "flex overflow-x-auto pb-4 timeline-horizontal"}>
             {phases.map((phase, index) => (
-              <div key={phase.name} className="flex items-center min-w-[200px]">
-                <div className="flex flex-col items-center">
-                  <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
-                    phase.status === "Concluída" ? "bg-accent text-accent-foreground" :
-                    phase.status === "Em andamento" ? "bg-secondary text-secondary-foreground" :
-                    "bg-muted text-muted-foreground"
-                  }`}>
-                    <phase.icon className="w-8 h-8" />
-                  </div>
-                  <p className="font-bold mt-3 text-center">{phase.name}</p>
-                  <Badge variant="outline" className="mt-1 text-xs">{phase.duration}</Badge>
-                  <span className="text-xs text-muted-foreground mt-1">{phase.period}</span>
-                  <Badge className={`mt-2 text-xs ${getStatusColor(phase.status)}`}>
-                    {phase.status}
-                  </Badge>
-                </div>
-                {index < phases.length - 1 && (
-                  <div className={`h-1 w-16 mx-2 ${
-                    phase.status === "Concluída" ? "bg-accent" : "bg-muted"
-                  }`} />
+              <div key={phase.name} className={isPDFMode ? "flex items-center gap-4 w-full" : "flex items-center min-w-[200px]"}>
+                {isPDFMode ? (
+                  /* PDF Layout - Horizontal row per phase */
+                  <>
+                    <div className={`w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      phase.status === "Concluída" ? "bg-accent text-accent-foreground" :
+                      phase.status === "Em andamento" ? "bg-secondary text-secondary-foreground" :
+                      "bg-muted text-muted-foreground"
+                    }`}>
+                      <phase.icon className="w-6 h-6" />
+                    </div>
+                    <div className="flex-1 flex items-center gap-4">
+                      <div className="min-w-[100px]">
+                        <p className="font-bold">{phase.name}</p>
+                        <span className="text-xs text-muted-foreground">{phase.period}</span>
+                      </div>
+                      <Badge variant="outline" className="text-xs">{phase.duration}</Badge>
+                      <Badge className={`text-xs ${getStatusColor(phase.status)}`}>
+                        {phase.status}
+                      </Badge>
+                    </div>
+                  </>
+                ) : (
+                  /* Screen Layout - Original vertical cards */
+                  <>
+                    <div className="flex flex-col items-center">
+                      <div className={`w-16 h-16 rounded-full flex items-center justify-center ${
+                        phase.status === "Concluída" ? "bg-accent text-accent-foreground" :
+                        phase.status === "Em andamento" ? "bg-secondary text-secondary-foreground" :
+                        "bg-muted text-muted-foreground"
+                      }`}>
+                        <phase.icon className="w-8 h-8" />
+                      </div>
+                      <p className="font-bold mt-3 text-center">{phase.name}</p>
+                      <Badge variant="outline" className="mt-1 text-xs">{phase.duration}</Badge>
+                      <span className="text-xs text-muted-foreground mt-1">{phase.period}</span>
+                      <Badge className={`mt-2 text-xs ${getStatusColor(phase.status)}`}>
+                        {phase.status}
+                      </Badge>
+                    </div>
+                    {index < phases.length - 1 && (
+                      <div className={`h-1 w-16 mx-2 timeline-connector ${
+                        phase.status === "Concluída" ? "bg-accent" : "bg-muted"
+                      }`} />
+                    )}
+                  </>
                 )}
               </div>
             ))}
