@@ -198,185 +198,356 @@
     background-size: 200% 100%;
     animation: progress-shine 2s ease-in-out infinite;
   }
+}
 
-  /* PDF Export Styles */
-  .pdf-mode {
-    font-family: 'Montserrat', sans-serif;
+/* ========================================
+   PDF / PRINT STYLES
+   ======================================== */
+
+/* PDF Mode Base */
+.pdf-mode {
+  font-family: 'Montserrat', sans-serif;
+  background: white !important;
+  color: #1a1a2e !important;
+  font-size: 10pt;
+  line-height: 1.4;
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
+
+/* Remove shadows and simplify cards */
+.pdf-mode .shadow-card,
+.pdf-mode .shadow-card-hover {
+  box-shadow: none !important;
+  border: 1px solid hsl(var(--border));
+}
+
+/* Disable all animations */
+.pdf-mode * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Hide navigation elements */
+.pdf-mode nav,
+.pdf-mode [data-navigation],
+.pdf-mode .pdf-hide {
+  display: none !important;
+}
+
+/* Hide section internal headers (avoid duplication with PDFSectionHeader) */
+.pdf-mode .max-w-5xl > .mb-8:first-child,
+.pdf-mode .max-w-4xl > .mb-8:first-child {
+  display: none !important;
+}
+
+/* Typography scaling for print */
+.pdf-mode h1 {
+  font-size: 16pt !important;
+  line-height: 1.2 !important;
+  margin-bottom: 8pt !important;
+}
+
+.pdf-mode h2 {
+  font-size: 13pt !important;
+  line-height: 1.3 !important;
+  margin-bottom: 6pt !important;
+}
+
+.pdf-mode h3 {
+  font-size: 11pt !important;
+  line-height: 1.3 !important;
+  margin-bottom: 4pt !important;
+}
+
+.pdf-mode p,
+.pdf-mode span,
+.pdf-mode li {
+  font-size: 9pt !important;
+  line-height: 1.4 !important;
+}
+
+/* Table optimization */
+.pdf-mode table {
+  font-size: 8pt !important;
+  width: 100% !important;
+  table-layout: fixed !important;
+  border-collapse: collapse !important;
+}
+
+.pdf-mode thead {
+  display: table-header-group !important; /* Repeat header on each page */
+}
+
+.pdf-mode th {
+  font-weight: 600 !important;
+  padding: 6px 8px !important;
+  background: hsl(var(--muted)) !important;
+  border-bottom: 2px solid hsl(var(--border)) !important;
+  text-align: left !important;
+}
+
+.pdf-mode td {
+  padding: 5px 8px !important;
+  border-bottom: 1px solid hsl(var(--border)) !important;
+  word-wrap: break-word !important;
+  overflow-wrap: break-word !important;
+}
+
+.pdf-mode tbody tr {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+/* Remove overflow scroll - show all content */
+.pdf-mode .overflow-x-auto,
+.pdf-mode .overflow-auto,
+.pdf-mode .overflow-y-auto,
+.pdf-mode .overflow-hidden {
+  overflow: visible !important;
+}
+
+/* Badge optimization */
+.pdf-mode .badge,
+.pdf-mode [class*="Badge"] {
+  font-size: 7pt !important;
+  padding: 2px 6px !important;
+  border-radius: 3px !important;
+  display: inline-block !important;
+}
+
+/* Card optimization */
+.pdf-mode .card,
+.pdf-mode [class*="Card"] {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+  margin-bottom: 10pt !important;
+  border: 1px solid hsl(var(--border)) !important;
+  box-shadow: none !important;
+}
+
+.pdf-mode .card-hover:hover {
+  transform: none !important;
+}
+
+/* Grid compaction */
+.pdf-mode .grid {
+  gap: 8pt !important;
+}
+
+.pdf-mode .grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+.pdf-mode .grid-cols-4 {
+  grid-template-columns: repeat(2, 1fr) !important;
+}
+
+.pdf-mode .grid-cols-5 {
+  grid-template-columns: repeat(3, 1fr) !important;
+}
+
+/* Chart containers */
+.pdf-mode .recharts-wrapper {
+  overflow: visible !important;
+}
+
+/* Timeline - force vertical layout */
+.pdf-mode .timeline-horizontal {
+  flex-direction: column !important;
+  gap: 8pt !important;
+}
+
+.pdf-mode .timeline-horizontal > div {
+  min-width: auto !important;
+  width: 100% !important;
+}
+
+.pdf-mode .timeline-connector {
+  display: none !important;
+}
+
+/* ========================================
+   PDF PAGE STRUCTURE
+   ======================================== */
+
+/* Cover page - isolated */
+.pdf-cover-page {
+  page-break-after: always !important;
+  break-after: page !important;
+  min-height: 100vh;
+}
+
+/* TOC page - isolated */
+.pdf-toc-page {
+  page-break-after: always !important;
+  break-after: page !important;
+  padding: 20mm 15mm;
+}
+
+/* Content flow container */
+.pdf-content-flow {
+  padding: 0;
+}
+
+/* Section content - new page for each */
+.pdf-section-content {
+  page-break-before: always !important;
+  break-before: page !important;
+  padding: 15mm 12mm 20mm 12mm;
+}
+
+.pdf-section-content:first-child {
+  page-break-before: auto !important;
+  break-before: auto !important;
+}
+
+/* Section header - never orphan */
+.pdf-section-header {
+  page-break-after: avoid !important;
+  break-after: avoid !important;
+  margin-bottom: 12pt;
+}
+
+/* Section body */
+.pdf-section-body {
+  /* Content flows naturally */
+}
+
+/* Prevent specific elements from breaking */
+.pdf-avoid-break,
+.pdf-mode .pdf-avoid-break {
+  break-inside: avoid !important;
+  page-break-inside: avoid !important;
+}
+
+/* ========================================
+   PRINT MEDIA QUERY
+   ======================================== */
+
+@media print {
+  /* Page setup */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 10mm 15mm 10mm;
+  }
+
+  @page :first {
+    margin-top: 0;
+  }
+
+  /* Reset everything for print */
+  html, body {
+    width: 210mm !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
     background: white !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  .pdf-mode .shadow-card {
-    box-shadow: none !important;
-    border: 1px solid hsl(var(--border));
-  }
-
-  /* Remove ALL overflow scrolling in PDF mode */
-  .pdf-mode .overflow-x-auto,
-  .pdf-mode .overflow-auto,
-  .pdf-mode .overflow-y-auto {
-    overflow: visible !important;
-  }
-
-  /* Force tables to fit A4 width */
-  .pdf-mode table {
-    font-size: 8pt !important;
-    width: 100% !important;
-    table-layout: fixed !important;
-  }
-
-  .pdf-mode th,
-  .pdf-mode td {
-    padding: 4px 6px !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-  }
-
-  /* Reduce badge sizes for print */
-  .pdf-mode .badge,
-  .pdf-mode [class*="Badge"] {
-    font-size: 7pt !important;
-    padding: 2px 6px !important;
-  }
-
-  /* Timeline horizontal -> vertical in PDF */
-  .pdf-mode .timeline-horizontal {
-    flex-direction: column !important;
-    gap: 1rem !important;
-  }
-
-  .pdf-mode .timeline-horizontal > div {
-    min-width: auto !important;
-    width: 100% !important;
-  }
-
-  .pdf-mode .timeline-connector {
+  /* Hide non-print elements */
+  .print\\:hidden,
+  [class*="print:hidden"] {
     display: none !important;
   }
 
-  /* Ensure cards don't overflow */
-  .pdf-mode .grid {
-    gap: 0.75rem !important;
+  /* Control bar and preview indicator */
+  .fixed,
+  nav,
+  button,
+  .pdf-control-bar {
+    display: none !important;
   }
 
-  .pdf-mode .card,
-  .pdf-mode [class*="Card"] {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* Smaller text for print legibility */
+  /* PDF container reset */
   .pdf-mode {
-    font-size: 10pt !important;
-    line-height: 1.4 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
   }
 
-  .pdf-mode h1 {
-    font-size: 18pt !important;
+  /* Cover page full bleed */
+  .pdf-cover-page {
+    margin: -12mm -10mm 0 -10mm !important;
+    padding: 0 !important;
+    width: calc(100% + 20mm) !important;
+    min-height: 297mm !important;
+    page-break-after: always !important;
   }
 
-  .pdf-mode h2 {
+  .pdf-cover-page > * {
+    min-height: 297mm !important;
+  }
+
+  /* TOC styling */
+  .pdf-toc-page {
+    padding: 15mm 10mm !important;
+  }
+
+  /* Section pages */
+  .pdf-section-content {
+    padding: 0 !important;
+    page-break-before: always !important;
+  }
+
+  /* Section header prominent */
+  .pdf-section-header {
+    background: linear-gradient(to right, hsl(213 97% 32% / 0.1), transparent) !important;
+    padding: 10pt 12pt !important;
+    margin-bottom: 12pt !important;
+    border-left: 4px solid hsl(213 97% 32%) !important;
+    border-bottom: none !important;
+    page-break-after: avoid !important;
+  }
+
+  .pdf-section-header h2 {
     font-size: 14pt !important;
   }
 
-  .pdf-mode h3 {
-    font-size: 12pt !important;
+  /* Force colors */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
   }
 
-  .pdf-mode p,
-  .pdf-mode span,
-  .pdf-mode li {
-    font-size: 9pt !important;
+  /* Background colors for badges and highlights */
+  .bg-primary,
+  .bg-secondary,
+  .bg-accent,
+  .bg-destructive,
+  .bg-muted {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
-  /* Fix chart containers */
-  .pdf-mode .recharts-wrapper {
+  /* Charts */
+  .recharts-wrapper,
+  .recharts-surface {
     overflow: visible !important;
   }
 
-  .pdf-page {
-    background: white;
-    page-break-after: always;
-    min-height: 297mm;
-    width: 210mm;
-    padding: 10mm;
-    box-sizing: border-box;
+  /* Ensure images load */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid !important;
   }
 
-  .pdf-page:last-child {
-    page-break-after: auto;
+  /* Links - show as text */
+  a {
+    text-decoration: none !important;
+    color: inherit !important;
   }
 
-  .pdf-page-break {
-    page-break-before: always;
+  /* Footer for pages - using CSS counters */
+  .pdf-content-flow {
+    counter-reset: page-counter;
   }
 
-  .pdf-content {
-    break-inside: avoid-page;
-  }
-
-  .pdf-content .animate-fade-in {
-    animation: none !important;
-  }
-
-  /* Hide navigation elements in PDF */
-  .pdf-mode .pdf-hide,
-  .pdf-mode nav,
-  .pdf-mode [data-navigation] {
-    display: none !important;
-  }
-
-  /* Optimize cards for print */
-  .pdf-mode .card-hover {
-    transform: none !important;
-    transition: none !important;
-  }
-
-  .pdf-mode .card-hover:hover {
-    transform: none !important;
-  }
-
-  /* Ensure proper page breaks */
-  .pdf-avoid-break {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  .pdf-section {
-    page-break-after: always;
-    break-after: page;
-  }
-
-  .pdf-section:last-child {
-    page-break-after: auto;
-    break-after: auto;
-  }
-
-  /* Print-specific adjustments */
-  @media print {
-    /* Hide the preview UI (top control bar, hints) */
-    .pdf-control-bar,
-    .pdf-preview-indicator {
-      display: none !important;
-    }
-
-    body {
-      background: white !important;
-    }
-
-    .pdf-mode {
-      -webkit-print-color-adjust: exact !important;
-      print-color-adjust: exact !important;
-    }
-
-    /* Keep header/footer in normal flow (we already render them per page) */
-    .pdf-header,
-    .pdf-footer {
-      position: static !important;
-    }
-
-    @page {
-      size: A4 portrait;
-      margin: 0;
-    }
+  .pdf-section-content {
+    counter-increment: page-counter;
   }
 }
