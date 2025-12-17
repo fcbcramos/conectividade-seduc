@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { usePDF } from "react-to-pdf";
 import { Loader2, Download, ArrowLeft, CheckCircle } from "lucide-react";
@@ -9,6 +9,7 @@ import PDFTableOfContents from "@/components/pdf/PDFTableOfContents";
 import PDFHeader from "@/components/pdf/PDFHeader";
 import PDFFooter from "@/components/pdf/PDFFooter";
 import { navigationItems } from "@/data/contractData";
+import { PDFProvider } from "@/contexts/PDFContext";
 
 // Import all section components
 import Section1 from "@/pages/sections/Section1";
@@ -47,7 +48,6 @@ const sectionComponents: { [key: number]: React.ComponentType } = {
 const PDFPreview = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const targetRef = useRef<HTMLDivElement>(null);
   const [isReady, setIsReady] = useState(false);
   const [isGenerating, setIsGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -74,21 +74,36 @@ const PDFPreview = () => {
     page: {
       format: 'A4',
       orientation: 'portrait',
-      margin: 10,
+      margin: 5,
     },
     canvas: {
       mimeType: 'image/png',
       qualityRatio: quality === 'high' ? 1 : 0.8,
+      useCORS: true,
+      logging: false,
     },
+    overrides: {
+      canvas: {
+        useCORS: true,
+        allowTaint: false,
+        scale: quality === 'high' ? 2 : 1.5,
+      }
+    }
   });
 
   // Wait for content to render before allowing PDF generation
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsReady(true);
-    }, 1500);
+      // Verify content is rendered
+      if (pdfTargetRef.current && pdfTargetRef.current.offsetHeight > 0) {
+        setIsReady(true);
+      } else {
+        // Retry if not ready
+        setTimeout(() => setIsReady(true), 1000);
+      }
+    }, 3000);
     return () => clearTimeout(timer);
-  }, []);
+  }, [pdfTargetRef]);
 
   const handleGeneratePDF = async () => {
     setIsGenerating(true);
@@ -197,56 +212,59 @@ const PDFPreview = () => {
           </div>
 
           {/* PDF Target Container */}
-          <div 
-            ref={pdfTargetRef} 
-            className="pdf-mode bg-white shadow-2xl"
-          >
-            {/* Cover Page */}
-            {includeCover && <PDFCoverPage />}
+          <PDFProvider isPDFMode={true}>
+            <div 
+              ref={pdfTargetRef} 
+              className="pdf-mode bg-white shadow-2xl"
+              style={{ width: '210mm', minHeight: '297mm' }}
+            >
+              {/* Cover Page */}
+              {includeCover && <PDFCoverPage />}
 
-            {/* Table of Contents */}
-            {mode === "full" && includeTOC && <PDFTableOfContents />}
+              {/* Table of Contents */}
+              {mode === "full" && includeTOC && <PDFTableOfContents />}
 
-            {/* Content */}
-            {mode === "full" ? (
-              <>
-                {/* Dashboard */}
-                <div className="pdf-page bg-white">
-                  <PDFHeader sectionTitle="Dashboard Executivo" />
-                  <div className="p-6 pdf-content">
-                    <Dashboard />
-                  </div>
-                  {includePageNumbers && <PDFFooter pageNumber={includeCover && includeTOC ? 3 : includeCover ? 2 : 1} totalPages={estimatedPages} />}
-                </div>
-
-                {/* All Sections */}
-                {Object.entries(sectionComponents).map(([num, Component], index) => {
-                  const title = navigationItems.find(item => item.id === parseInt(num))?.title;
-                  const pageNum = (includeCover ? 1 : 0) + (includeTOC ? 1 : 0) + 2 + index;
-                  return (
-                    <div key={num} className="pdf-page bg-white pdf-page-break">
-                      <PDFHeader sectionTitle={`Seção ${num} - ${title}`} />
-                      <div className="p-6 pdf-content">
-                        <Component />
-                      </div>
-                      {includePageNumbers && <PDFFooter pageNumber={pageNum} totalPages={estimatedPages} />}
+              {/* Content */}
+              {mode === "full" ? (
+                <>
+                  {/* Dashboard */}
+                  <div className="pdf-page bg-white pdf-section">
+                    <PDFHeader sectionTitle="Dashboard Executivo" />
+                    <div className="p-4 pdf-content">
+                      <Dashboard />
                     </div>
-                  );
-                })}
-              </>
-            ) : (
-              /* Single Section */
-              SectionComponent && (
-                <div className="pdf-page bg-white">
-                  <PDFHeader sectionTitle={`Seção ${sectionNumber} - ${sectionTitle}`} />
-                  <div className="p-6 pdf-content">
-                    <SectionComponent />
+                    {includePageNumbers && <PDFFooter pageNumber={includeCover && includeTOC ? 3 : includeCover ? 2 : 1} totalPages={estimatedPages} />}
                   </div>
-                  {includePageNumbers && <PDFFooter pageNumber={includeCover ? 2 : 1} totalPages={estimatedPages} />}
-                </div>
-              )
-            )}
-          </div>
+
+                  {/* All Sections */}
+                  {Object.entries(sectionComponents).map(([num, Component], index) => {
+                    const title = navigationItems.find(item => item.id === parseInt(num))?.title;
+                    const pageNum = (includeCover ? 1 : 0) + (includeTOC ? 1 : 0) + 2 + index;
+                    return (
+                      <div key={num} className="pdf-page bg-white pdf-section">
+                        <PDFHeader sectionTitle={`Seção ${num} - ${title}`} />
+                        <div className="p-4 pdf-content">
+                          <Component />
+                        </div>
+                        {includePageNumbers && <PDFFooter pageNumber={pageNum} totalPages={estimatedPages} />}
+                      </div>
+                    );
+                  })}
+                </>
+              ) : (
+                /* Single Section */
+                SectionComponent && (
+                  <div className="pdf-page bg-white">
+                    <PDFHeader sectionTitle={`Seção ${sectionNumber} - ${sectionTitle}`} />
+                    <div className="p-4 pdf-content">
+                      <SectionComponent />
+                    </div>
+                    {includePageNumbers && <PDFFooter pageNumber={includeCover ? 2 : 1} totalPages={estimatedPages} />}
+                  </div>
+                )
+              )}
+            </div>
+          </PDFProvider>
         </div>
       </div>
     </div>

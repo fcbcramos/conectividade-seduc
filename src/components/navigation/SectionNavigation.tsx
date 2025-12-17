@@ -3,6 +3,7 @@ import { ChevronLeft, ChevronRight, Home } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { navigationItems } from "@/data/contractData";
 import PDFExportButton from "@/components/pdf/PDFExportButton";
+import { usePDFMode } from "@/contexts/PDFContext";
 
 interface SectionNavigationProps {
   currentSection: number;
@@ -10,6 +11,7 @@ interface SectionNavigationProps {
 }
 
 const SectionNavigation = ({ currentSection, showExport = false }: SectionNavigationProps) => {
+  const { isPDFMode } = usePDFMode();
   const currentIndex = navigationItems.findIndex(item => item.id === currentSection);
   const prevSection = currentIndex > 0 ? navigationItems[currentIndex - 1] : null;
   const nextSection = currentIndex < navigationItems.length - 1 ? navigationItems[currentIndex + 1] : null;
@@ -18,8 +20,13 @@ const SectionNavigation = ({ currentSection, showExport = false }: SectionNaviga
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // Hide navigation completely in PDF mode
+  if (isPDFMode) {
+    return null;
+  }
+
   return (
-    <div className="flex items-center justify-between gap-4 py-4 pdf-hide">
+    <div className="flex items-center justify-between gap-4 py-4 pdf-hide" data-navigation>
       {/* Previous Button */}
       {currentSection === 1 ? (
         <Button variant="outline" asChild onClick={handleClick}>

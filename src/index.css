@@ -202,6 +202,7 @@
   /* PDF Export Styles */
   .pdf-mode {
     font-family: 'Montserrat', sans-serif;
+    background: white !important;
   }
 
   .pdf-mode .shadow-card {
@@ -209,9 +210,96 @@
     border: 1px solid hsl(var(--border));
   }
 
+  /* Remove ALL overflow scrolling in PDF mode */
+  .pdf-mode .overflow-x-auto,
+  .pdf-mode .overflow-auto,
+  .pdf-mode .overflow-y-auto {
+    overflow: visible !important;
+  }
+
+  /* Force tables to fit A4 width */
+  .pdf-mode table {
+    font-size: 8pt !important;
+    width: 100% !important;
+    table-layout: fixed !important;
+  }
+
+  .pdf-mode th,
+  .pdf-mode td {
+    padding: 4px 6px !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
+  /* Reduce badge sizes for print */
+  .pdf-mode .badge,
+  .pdf-mode [class*="Badge"] {
+    font-size: 7pt !important;
+    padding: 2px 6px !important;
+  }
+
+  /* Timeline horizontal -> vertical in PDF */
+  .pdf-mode .timeline-horizontal {
+    flex-direction: column !important;
+    gap: 1rem !important;
+  }
+
+  .pdf-mode .timeline-horizontal > div {
+    min-width: auto !important;
+    width: 100% !important;
+  }
+
+  .pdf-mode .timeline-connector {
+    display: none !important;
+  }
+
+  /* Ensure cards don't overflow */
+  .pdf-mode .grid {
+    gap: 0.75rem !important;
+  }
+
+  .pdf-mode .card,
+  .pdf-mode [class*="Card"] {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Smaller text for print legibility */
+  .pdf-mode {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  .pdf-mode h1 {
+    font-size: 18pt !important;
+  }
+
+  .pdf-mode h2 {
+    font-size: 14pt !important;
+  }
+
+  .pdf-mode h3 {
+    font-size: 12pt !important;
+  }
+
+  .pdf-mode p,
+  .pdf-mode span,
+  .pdf-mode li {
+    font-size: 9pt !important;
+  }
+
+  /* Fix chart containers */
+  .pdf-mode .recharts-wrapper {
+    overflow: visible !important;
+  }
+
   .pdf-page {
     background: white;
     page-break-after: always;
+    min-height: 297mm;
+    width: 210mm;
+    padding: 10mm;
+    box-sizing: border-box;
   }
 
   .pdf-page:last-child {
@@ -231,7 +319,9 @@
   }
 
   /* Hide navigation elements in PDF */
-  .pdf-mode .pdf-hide {
+  .pdf-mode .pdf-hide,
+  .pdf-mode nav,
+  .pdf-mode [data-navigation] {
     display: none !important;
   }
 
@@ -249,6 +339,16 @@
   .pdf-avoid-break {
     break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  .pdf-section {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  .pdf-section:last-child {
+    page-break-after: auto;
+    break-after: auto;
   }
 
   /* Print-specific adjustments */
