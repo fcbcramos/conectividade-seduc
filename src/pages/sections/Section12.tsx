@@ -1,11 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { riskMatrix, Risk, RiskAction } from "@/data/contractData";
-import { Shield, AlertTriangle, CheckCircle, ChevronDown, Target, Activity, Users, FileText, AlertCircle, TrendingUp } from "lucide-react";
+import { Shield, AlertTriangle, CheckCircle, ChevronDown, Target, Activity, Users, FileText, AlertCircle, TrendingUp, PieChart as PieChartIcon, BarChart3 } from "lucide-react";
 import SectionNavigation from "@/components/navigation/SectionNavigation";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-
+import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 const Section12 = () => {
   // Escalas de probabilidade e impacto conforme documento
   const probabilityScale = [
@@ -101,6 +101,33 @@ const Section12 = () => {
     gctic: riskMatrix.filter(r => r.phase === "GCTIC").length
   };
 
+  // Dados para gráfico de pizza - Distribuição por Fase
+  const phaseDistributionData = [
+    { name: "PCTIC", value: risksByPhase.pctic, fullName: "Planejamento da Contratação" },
+    { name: "GCTIC", value: risksByPhase.gctic, fullName: "Gestão do Contrato" }
+  ];
+
+  // Dados para gráfico de barras - Níveis por Fase
+  const levelsByPhaseData = [
+    { 
+      phase: "PCTIC", 
+      Alto: riskMatrix.filter(r => r.phase === "PCTIC" && r.riskLevel === "Alto").length,
+      Médio: riskMatrix.filter(r => r.phase === "PCTIC" && r.riskLevel === "Médio").length,
+      Baixo: riskMatrix.filter(r => r.phase === "PCTIC" && r.riskLevel === "Baixo").length
+    },
+    { 
+      phase: "GCTIC", 
+      Alto: riskMatrix.filter(r => r.phase === "GCTIC" && r.riskLevel === "Alto").length,
+      Médio: riskMatrix.filter(r => r.phase === "GCTIC" && r.riskLevel === "Médio").length,
+      Baixo: riskMatrix.filter(r => r.phase === "GCTIC" && r.riskLevel === "Baixo").length
+    }
+  ];
+
+  const PHASE_COLORS: Record<string, string> = {
+    PCTIC: "#034ea2",
+    GCTIC: "#007932"
+  };
+
   const impactLabels = ["Muito Baixo", "Baixo", "Moderado", "Alto", "Muito Alto"];
   const impactValues = [0.05, 0.10, 0.20, 0.40, 0.80];
   const probLabels = ["Muito Alta", "Alta", "Provável", "Pouco Provável", "Raro"];
@@ -165,6 +192,97 @@ const Section12 = () => {
               <div className="border-l pl-4">
                 <p className="text-lg font-bold text-gov-green">{risksByPhase.gctic}</p>
                 <p className="text-xs text-muted-foreground">GCTIC</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Gráficos de Distribuição de Riscos */}
+      <div className="grid md:grid-cols-2 gap-4">
+        {/* Gráfico de Pizza - Distribuição por Fase */}
+        <Card className="shadow-card">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm flex items-center gap-2">
+              <PieChartIcon className="w-4 h-4 text-primary" />
+              Distribuição por Fase do Contrato
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={phaseDistributionData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={40}
+                    outerRadius={70}
+                    paddingAngle={5}
+                    dataKey="value"
+                    label={({ name, value }) => `${name}: ${value}`}
+                  >
+                    {phaseDistributionData.map((entry) => (
+                      <Cell key={`cell-${entry.name}`} fill={PHASE_COLORS[entry.name]} />
+                    ))}
+                  </Pie>
+                  <Tooltip 
+                    formatter={(value) => [`${value} riscos`, "Total"]}
+                    contentStyle={{ borderRadius: "8px", fontSize: "12px" }}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="space-y-2 mt-2 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded" style={{ backgroundColor: PHASE_COLORS.PCTIC }} />
+                <span><strong>PCTIC</strong> - Planejamento da Contratação de TIC</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded" style={{ backgroundColor: PHASE_COLORS.GCTIC }} />
+                <span><strong>GCTIC</strong> - Gestão do Contrato de TIC</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Gráfico de Barras - Níveis de Risco por Fase */}
+        <Card className="shadow-card">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-sm flex items-center gap-2">
+              <BarChart3 className="w-4 h-4 text-primary" />
+              Níveis de Risco por Fase
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="h-48">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={levelsByPhaseData} layout="vertical" margin={{ left: 10, right: 20 }}>
+                  <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={false} />
+                  <XAxis type="number" tick={{ fontSize: 11 }} allowDecimals={false} />
+                  <YAxis dataKey="phase" type="category" tick={{ fontSize: 12, fontWeight: 600 }} width={50} />
+                  <Tooltip 
+                    contentStyle={{ borderRadius: "8px", fontSize: "12px" }}
+                    formatter={(value, name) => [`${value} riscos`, name]}
+                  />
+                  <Bar dataKey="Alto" stackId="a" fill="hsl(var(--destructive))" name="Alto" />
+                  <Bar dataKey="Médio" stackId="a" fill="hsl(var(--secondary))" name="Médio" />
+                  <Bar dataKey="Baixo" stackId="a" fill="hsl(var(--accent))" name="Baixo" radius={[0, 4, 4, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="flex justify-center gap-6 mt-2 text-xs">
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-destructive" />
+                <span>Alto</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-secondary" />
+                <span>Médio</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-3 h-3 rounded bg-accent" />
+                <span>Baixo</span>
               </div>
             </div>
           </CardContent>
