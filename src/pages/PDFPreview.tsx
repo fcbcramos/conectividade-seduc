@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
-import { Loader2, Printer, ArrowLeft } from "lucide-react";
+import { Loader2, FileDown, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import PDFCoverPage from "@/components/pdf/PDFCoverPage";
 import PDFTableOfContents from "@/components/pdf/PDFTableOfContents";
 import PDFSectionHeader from "@/components/pdf/PDFSectionHeader";
 import { navigationItems } from "@/data/contractData";
 import { PDFProvider } from "@/contexts/PDFContext";
+import { generateSinglePagePDF } from "@/lib/pdfGenerator";
 
 // Import all section components
 import Section1 from "@/pages/sections/Section1";
@@ -46,6 +48,9 @@ const PDFPreview = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const [isReady, setIsReady] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [progressMessage, setProgressMessage] = useState('');
 
   // Parse options from URL
   const mode = searchParams.get("mode") || "full";
@@ -61,33 +66,29 @@ const PDFPreview = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleGeneratePDF = () => {
-    // Calcular altura total do conteúdo para página única
-    const pdfContent = document.querySelector('.pdf-mode');
-    if (pdfContent) {
-      const totalHeight = pdfContent.scrollHeight;
+  const handleGeneratePDF = async () => {
+    try {
+      setIsGenerating(true);
+      setIsReady(false);
       
-      // Criar estilo dinâmico com altura calculada
-      const styleSheet = document.createElement('style');
-      styleSheet.id = 'dynamic-page-size';
-      styleSheet.textContent = `
-        @page {
-          size: 297mm ${totalHeight + 40}px !important;
-          margin: 10mm 12mm !important;
+      await generateSinglePagePDF('.pdf-mode', {
+        filename: 'REGC-Relatorio-Executivo-Governanca.pdf',
+        quality: 2,
+        onProgress: (prog, msg) => {
+          setProgress(prog);
+          setProgressMessage(msg);
         }
-      `;
-      document.head.appendChild(styleSheet);
+      });
       
-      // Imprimir após aplicar estilo
-      setTimeout(() => {
-        window.print();
-        // Remover estilo após impressão
-        setTimeout(() => {
-          document.getElementById('dynamic-page-size')?.remove();
-        }, 1000);
-      }, 100);
-    } else {
-      window.print();
+      toast.success('PDF salvo com sucesso!');
+    } catch (error) {
+      console.error('Erro ao gerar PDF:', error);
+      toast.error('Erro ao gerar PDF. Tente novamente.');
+    } finally {
+      setIsGenerating(false);
+      setIsReady(true);
+      setProgress(0);
+      setProgressMessage('');
     }
   };
 
@@ -97,9 +98,9 @@ const PDFPreview = () => {
     : undefined;
 
   return (
-    <div className="min-h-screen bg-muted/30 print:bg-white">
-      {/* Control Bar - Hidden when printing */}
-      <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm print:hidden">
+    <div className="min-h-screen bg-muted/30">
+      {/* Control Bar */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Button 
@@ -117,51 +118,71 @@ const PDFPreview = () => {
                 {mode === "full" ? "Relatório Completo" : `Seção ${sectionNumber}: ${sectionTitle}`}
               </h1>
               <p className="text-xs text-muted-foreground">
-                Visualização para impressão
+                Pré-visualização para exportação
               </p>
             </div>
           </div>
 
           <Button 
             onClick={handleGeneratePDF}
-            disabled={!isReady}
+            disabled={!isReady || isGenerating}
             className="gap-2"
           >
-            {!isReady ? (
+            {!isReady || isGenerating ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
-                Preparando...
+                {isGenerating ? 'Gerando...' : 'Preparando...'}
               </>
             ) : (
               <>
-                <Printer className="h-4 w-4" />
-                Imprimir / Salvar PDF
+                <FileDown className="h-4 w-4" />
+                Baixar PDF
               </>
             )}
           </Button>
         </div>
       </div>
 
+      {/* Progress Modal */}
+      {isGenerating && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60]">
+          <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
+            <div className="flex items-center gap-3 mb-4">
+              <Loader2 className="h-5 w-5 animate-spin text-primary" />
+              <span className="font-medium">Gerando PDF...</span>
+            </div>
+            <p className="text-sm text-muted-foreground mb-3">{progressMessage}</p>
+            <div className="h-2 bg-muted rounded-full overflow-hidden">
+              <div 
+                className="h-full bg-primary transition-all duration-300" 
+                style={{ width: `${progress}%` }}
+              />
+            </div>
+            <p className="text-xs text-muted-foreground mt-2 text-center">{progress}%</p>
+          </div>
+        </div>
+      )}
+
       {/* PDF Content */}
-      <div className="pt-20 pb-8 px-4 print:pt-0 print:pb-0 print:px-0">
-        <div className="max-w-[297mm] mx-auto print:max-w-none">
-          {/* Preview indicator - Hidden when printing */}
-          <div className="text-center text-sm text-muted-foreground mb-4 print:hidden">
-            Pré-visualização • Clique em "Imprimir / Salvar PDF" e selecione "Salvar como PDF"
+      <div className="pt-20 pb-8 px-4">
+        <div className="max-w-[297mm] mx-auto">
+          {/* Preview indicator */}
+          <div className="text-center text-sm text-muted-foreground mb-4">
+            Pré-visualização • Clique em "Baixar PDF" para salvar o documento
           </div>
 
           {/* PDF Target Container */}
           <PDFProvider isPDFMode={true}>
-            <div className="pdf-mode bg-white shadow-2xl print:shadow-none">
+            <div className="pdf-mode bg-white shadow-2xl" style={{ width: '1120px', margin: '0 auto' }}>
               
-              {/* Cover Page - Isolated page */}
+              {/* Cover Page */}
               {includeCover && (
                 <div className="pdf-cover-page">
                   <PDFCoverPage />
                 </div>
               )}
 
-              {/* Table of Contents - Isolated page */}
+              {/* Table of Contents */}
               {mode === "full" && includeTOC && (
                 <div className="pdf-toc-page">
                   <PDFTableOfContents />
