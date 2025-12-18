@@ -149,17 +149,17 @@ const Section2 = () => {
       {/* Níveis de Governança */}
       <View style={styles.grid}>
         {governanceLevels.map((level, idx) => (
-          <View key={idx} style={[styles.levelCard, { borderLeftWidth: 4, borderLeftColor: level.color }]}>
+          <View key={`level-${idx}`} style={[styles.levelCard, { borderLeftWidth: 4, borderLeftColor: level.color }]}>
             <View style={styles.levelHeader}>
               <Text style={styles.levelTitle}>{level.level}</Text>
               <PDFBadge variant={idx === 0 ? 'info' : idx === 1 ? 'success' : 'warning'}>
-                Nível {idx + 1}
+                {`Nível ${idx + 1}`}
               </PDFBadge>
             </View>
             <Text style={styles.levelActors}>{level.actors}</Text>
             <View style={styles.responsibilityList}>
               {level.responsibilities.map((resp, rIdx) => (
-                <View key={rIdx} style={styles.responsibilityItem}>
+                <View key={`resp-${rIdx}`} style={styles.responsibilityItem}>
                   <Text style={styles.bullet}>•</Text>
                   <Text style={styles.responsibilityText}>{resp}</Text>
                 </View>
