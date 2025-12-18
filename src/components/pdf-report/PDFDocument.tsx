@@ -2,7 +2,7 @@ import { Document, Page } from '@react-pdf/renderer';
 import { styles } from './styles';
 import { PDFHeader, PDFFooter } from './components';
 import {
-  CoverPage, TableOfContents, DashboardSection,
+  CoverPage, ExecutiveSummary, TableOfContents, DashboardSection,
   Section1, Section2, Section3, Section4, Section5, Section6, Section7,
   Section8, Section9, Section10, Section11, Section12, Section13, Section14
 } from './sections';
@@ -12,6 +12,13 @@ const PDFDocument = () => (
     {/* Capa */}
     <Page size="A4" style={styles.coverPage}>
       <CoverPage />
+    </Page>
+
+    {/* Sumário Executivo */}
+    <Page size="A4" style={styles.page}>
+      <PDFHeader />
+      <ExecutiveSummary />
+      <PDFFooter />
     </Page>
 
     {/* Sumário */}

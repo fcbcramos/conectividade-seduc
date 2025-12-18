@@ -1,4 +1,5 @@
 export { default as CoverPage } from './CoverPage';
+export { default as ExecutiveSummary } from './ExecutiveSummary';
 export { default as TableOfContents } from './TableOfContents';
 export { default as DashboardSection } from './DashboardSection';
 export { default as Section1 } from './Section1';

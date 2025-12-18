@@ -2,12 +2,13 @@ import { View, Text, Image, StyleSheet } from '@react-pdf/renderer';
 import { colors, spacing, fonts } from '../styles';
 import { basicInfo } from '@/data/contractData';
 import { pdfImages } from '../imageUrls';
+import { InfoIcon, UsersIcon } from '../icons/PDFIcons';
 
 const CoverPage = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: '20mm 18mm',
+      padding: '24mm 20mm',
       justifyContent: 'space-between',
       backgroundColor: colors.background,
     },
@@ -15,11 +16,11 @@ const CoverPage = () => {
     header: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      marginBottom: spacing.xl,
+      marginBottom: 28,
     },
     seducLogo: {
-      width: 140,
-      height: 50,
+      width: 150,
+      height: 54,
       objectFit: 'contain',
     },
     // Sidebar
@@ -28,7 +29,7 @@ const CoverPage = () => {
       left: 0,
       top: 0,
       bottom: 0,
-      width: 8,
+      width: 10,
       flexDirection: 'column',
     },
     sidebarStripe: {
@@ -37,84 +38,86 @@ const CoverPage = () => {
     // Content
     content: {
       flex: 1,
-      paddingLeft: 8,
+      paddingLeft: 12,
     },
     programName: {
-      fontSize: 42,
+      fontSize: 52,
       fontWeight: 'bold',
       color: colors.govBlue,
-      marginBottom: spacing.md,
-      letterSpacing: 1,
+      marginBottom: 12,
+      letterSpacing: 2,
     },
     title: {
-      fontSize: 18,
+      fontSize: 20,
       fontWeight: 'bold',
-      color: colors.foreground,
-      marginBottom: spacing.sm,
+      color: '#0f172a',
+      marginBottom: 8,
     },
     subtitle: {
       fontSize: 12,
-      color: colors.textMuted,
-      marginBottom: spacing.xxl,
-      lineHeight: 1.5,
-      maxWidth: 420,
+      color: '#64748b',
+      marginBottom: 32,
+      lineHeight: 1.6,
+      maxWidth: 440,
     },
     // Info Sections
     sectionsContainer: {
       flexDirection: 'row',
-      gap: spacing.xl,
-      marginTop: spacing.lg,
+      gap: 24,
+      marginTop: 24,
     },
     infoSection: {
       flex: 1,
-      backgroundColor: colors.muted,
-      borderRadius: 6,
-      padding: spacing.lg,
-      borderLeftWidth: 3,
+      borderRadius: 10,
+      padding: 18,
+      borderLeftWidth: 4,
+    },
+    infoSectionProcess: {
+      backgroundColor: '#f0f9ff',
       borderLeftColor: colors.govBlue,
+    },
+    infoSectionTeam: {
+      backgroundColor: '#f0fdf4',
+      borderLeftColor: colors.govGreen,
     },
     sectionHeader: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.sm,
-      marginBottom: spacing.md,
-      paddingBottom: spacing.sm,
-      borderBottomWidth: 1,
-      borderBottomColor: colors.borderLight,
+      gap: 10,
+      marginBottom: 14,
+      paddingBottom: 10,
+      borderBottomWidth: 1.5,
+      borderBottomColor: '#e2e8f0',
     },
-    sectionIcon: {
-      width: 20,
-      height: 20,
-      borderRadius: 10,
-      backgroundColor: colors.govBlue,
+    sectionIconContainer: {
+      width: 28,
+      height: 28,
+      borderRadius: 6,
+      backgroundColor: '#ffffff',
       alignItems: 'center',
       justifyContent: 'center',
     },
-    sectionIconText: {
-      fontSize: 10,
-      color: colors.background,
-      fontWeight: 'bold',
-    },
     sectionTitle: {
-      fontSize: 10,
+      fontSize: 12,
       fontWeight: 'bold',
-      color: colors.govBlue,
+      color: '#0f172a',
       textTransform: 'uppercase',
-      letterSpacing: 0.5,
+      letterSpacing: 1,
     },
     // Process Info Rows
     infoRow: {
       flexDirection: 'row',
-      marginBottom: spacing.sm,
+      marginBottom: 10,
+      alignItems: 'flex-start',
     },
     infoLabel: {
-      fontSize: 8,
-      color: colors.textMuted,
-      width: 80,
+      fontSize: 9,
+      color: '#475569',
+      width: 90,
     },
     infoValue: {
-      fontSize: 8,
-      color: colors.text,
+      fontSize: 10,
+      color: '#0f172a',
       fontWeight: 'bold',
       flex: 1,
     },
@@ -122,48 +125,52 @@ const CoverPage = () => {
     teamGrid: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: spacing.sm,
+      gap: 12,
     },
     teamMember: {
-      width: '48%',
-      marginBottom: spacing.xs,
+      width: '47%',
+      marginBottom: 8,
+      backgroundColor: '#ffffff',
+      borderRadius: 6,
+      padding: 8,
     },
     teamRole: {
-      fontSize: 7,
-      color: colors.textMuted,
-      marginBottom: 1,
+      fontSize: 8,
+      color: '#64748b',
+      marginBottom: 2,
     },
     teamName: {
-      fontSize: 8,
-      color: colors.text,
+      fontSize: 10,
+      color: '#0f172a',
       fontWeight: 'bold',
     },
     // Footer
     footer: {
-      paddingTop: spacing.lg,
-      borderTopWidth: 1,
-      borderTopColor: colors.border,
-      marginTop: spacing.lg,
+      paddingTop: 24,
+      borderTopWidth: 1.5,
+      borderTopColor: '#e2e8f0',
+      marginTop: 28,
     },
     footerLogos: {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
-      gap: spacing.xxl,
-      marginBottom: spacing.md,
+      gap: 32,
+      marginBottom: 14,
     },
     footerLogo: {
-      height: 32,
+      height: 38,
       objectFit: 'contain',
     },
     footerLogoSmall: {
-      height: 26,
+      height: 32,
       objectFit: 'contain',
     },
     footerDate: {
-      fontSize: 8,
-      color: colors.textMuted,
+      fontSize: 9,
+      color: '#64748b',
       textAlign: 'center',
+      marginTop: 8,
     },
   });
 
@@ -191,10 +198,10 @@ const CoverPage = () => {
         {/* Seções de informação lado a lado */}
         <View style={styles.sectionsContainer}>
           {/* Informações do Processo */}
-          <View style={styles.infoSection}>
+          <View style={[styles.infoSection, styles.infoSectionProcess]}>
             <View style={styles.sectionHeader}>
-              <View style={styles.sectionIcon}>
-                <Text style={styles.sectionIconText}>i</Text>
+              <View style={styles.sectionIconContainer}>
+                <InfoIcon size={18} color={colors.govBlue} />
               </View>
               <Text style={styles.sectionTitle}>Informações do Processo</Text>
             </View>
@@ -213,12 +220,12 @@ const CoverPage = () => {
           </View>
 
           {/* Grupo Técnico de Planejamento */}
-          <View style={styles.infoSection}>
+          <View style={[styles.infoSection, styles.infoSectionTeam]}>
             <View style={styles.sectionHeader}>
-              <View style={styles.sectionIcon}>
-                <Text style={styles.sectionIconText}>👥</Text>
+              <View style={styles.sectionIconContainer}>
+                <UsersIcon size={18} color={colors.govGreen} />
               </View>
-              <Text style={styles.sectionTitle}>Grupo Técnico de Planejamento</Text>
+              <Text style={styles.sectionTitle}>Grupo Técnico</Text>
             </View>
             <View style={styles.teamGrid}>
               {basicInfo.team.map((member, index) => (
