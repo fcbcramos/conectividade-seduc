@@ -9,7 +9,7 @@ export const colors = {
   accentLight: '#86efac',
   destructive: '#ef4444',
   warning: '#f59e0b',
-  muted: '#f1f5f9',
+  muted: '#f8fafc',
   mutedDark: '#e2e8f0',
   border: '#cbd5e1',
   borderLight: '#e2e8f0',
@@ -33,34 +33,34 @@ export const colors = {
   statusPending: '#8b5cf6',
 };
 
-// Tipografia
+// Tipografia - Aumentada para melhor legibilidade
 export const fonts = {
-  title: 28,
-  h1: 20,
-  h2: 14,
-  h3: 11,
-  h4: 10,
-  body: 9,
-  small: 8,
-  tiny: 7,
-  micro: 6,
+  title: 32,
+  h1: 22,
+  h2: 16,
+  h3: 12,
+  h4: 11,
+  body: 10,
+  small: 9,
+  tiny: 8,
+  micro: 7,
 };
 
-// Espaçamentos
+// Espaçamentos - Mais generosos
 export const spacing = {
-  xs: 2,
-  sm: 4,
-  md: 8,
-  lg: 12,
-  xl: 16,
-  xxl: 24,
+  xs: 3,
+  sm: 6,
+  md: 10,
+  lg: 16,
+  xl: 20,
+  xxl: 28,
 };
 
 // Estilos globais - A4 Portrait (210mm × 297mm)
 export const styles = StyleSheet.create({
   // === Página ===
   page: {
-    padding: '12mm 10mm 18mm 10mm',
+    padding: '14mm 12mm 20mm 12mm',
     fontSize: fonts.body,
     fontFamily: 'Helvetica',
     backgroundColor: colors.background,
@@ -80,12 +80,12 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: spacing.lg,
     paddingBottom: spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
+    borderBottomWidth: 2,
+    borderBottomColor: colors.govBlue,
   },
   headerLogo: {
-    width: 60,
-    height: 24,
+    width: 70,
+    height: 28,
     objectFit: 'contain',
   },
   headerTitle: {
@@ -96,30 +96,30 @@ export const styles = StyleSheet.create({
   headerSection: {
     fontSize: fonts.h3,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.govBlue,
     textAlign: 'right',
   },
   
   // === Footer ===
   footer: {
     position: 'absolute',
-    bottom: '8mm',
-    left: '10mm',
-    right: '10mm',
+    bottom: '10mm',
+    left: '12mm',
+    right: '12mm',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingTop: spacing.sm,
-    borderTopWidth: 0.5,
+    paddingTop: spacing.md,
+    borderTopWidth: 1,
     borderTopColor: colors.borderLight,
   },
   footerLogos: {
     flexDirection: 'row',
-    gap: spacing.md,
+    gap: spacing.lg,
     alignItems: 'center',
   },
   footerLogo: {
-    height: 16,
+    height: 18,
     objectFit: 'contain',
   },
   footerText: {
@@ -141,11 +141,11 @@ export const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: fonts.h1,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.govBlue,
     marginBottom: spacing.lg,
     paddingBottom: spacing.sm,
-    borderBottomWidth: 2,
-    borderBottomColor: colors.primary,
+    borderBottomWidth: 3,
+    borderBottomColor: colors.govBlue,
   },
   sectionSubtitle: {
     fontSize: fonts.h2,
@@ -158,29 +158,29 @@ export const styles = StyleSheet.create({
     fontSize: fonts.h3,
     fontWeight: 'bold',
     color: colors.foreground,
-    marginBottom: spacing.sm,
+    marginBottom: spacing.md,
   },
   
-  // === Cards ===
+  // === Cards - Premium Design ===
   card: {
     borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 4,
+    borderColor: colors.borderLight,
+    borderRadius: 8,
     padding: spacing.lg,
     marginBottom: spacing.md,
     backgroundColor: colors.background,
   },
   cardAccent: {
-    borderLeftWidth: 3,
-    borderLeftColor: colors.primary,
+    borderLeftWidth: 4,
+    borderLeftColor: colors.govBlue,
   },
   cardHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: spacing.md,
-    paddingBottom: spacing.sm,
-    borderBottomWidth: 0.5,
+    paddingBottom: spacing.md,
+    borderBottomWidth: 2,
     borderBottomColor: colors.borderLight,
   },
   cardContent: {
@@ -202,39 +202,40 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   
-  // === Métricas/KPIs ===
+  // === Métricas/KPIs - Refined ===
   metricCard: {
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 4,
-    padding: spacing.md,
+    borderWidth: 0,
+    borderRadius: 8,
+    padding: spacing.lg,
     backgroundColor: colors.muted,
     alignItems: 'center',
-    minWidth: 80,
+    minWidth: 90,
   },
   metricValue: {
-    fontSize: fonts.h2,
+    fontSize: 20,
     fontWeight: 'bold',
-    color: colors.primary,
+    color: colors.govBlue,
     marginBottom: spacing.xs,
   },
   metricLabel: {
-    fontSize: fonts.tiny,
+    fontSize: fonts.small,
     color: colors.textMuted,
     textAlign: 'center',
+    letterSpacing: 0.3,
   },
   
-  // === Tabelas ===
+  // === Tabelas - Elegant ===
   table: {
     borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: 4,
+    borderColor: colors.borderLight,
+    borderRadius: 8,
     overflow: 'hidden',
   },
   tableHeader: {
     flexDirection: 'row',
-    backgroundColor: colors.primary,
-    padding: spacing.sm,
+    backgroundColor: colors.govBlue,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.md,
   },
   tableHeaderCell: {
     fontSize: fonts.small,
@@ -243,9 +244,10 @@ export const styles = StyleSheet.create({
   },
   tableRow: {
     flexDirection: 'row',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 1,
     borderBottomColor: colors.borderLight,
-    padding: spacing.sm,
+    paddingVertical: spacing.md,
+    paddingHorizontal: spacing.md,
   },
   tableRowAlt: {
     backgroundColor: colors.muted,
@@ -259,7 +261,7 @@ export const styles = StyleSheet.create({
   badge: {
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
-    borderRadius: 3,
+    borderRadius: 4,
     fontSize: fonts.tiny,
     fontWeight: 'bold',
   },
@@ -290,7 +292,7 @@ export const styles = StyleSheet.create({
   
   // === Listas ===
   list: {
-    gap: spacing.xs,
+    gap: spacing.sm,
   },
   listItem: {
     flexDirection: 'row',
@@ -299,21 +301,21 @@ export const styles = StyleSheet.create({
   },
   listBullet: {
     fontSize: fonts.body,
-    color: colors.primary,
+    color: colors.govBlue,
     lineHeight: 1.4,
   },
   listText: {
     fontSize: fonts.body,
     color: colors.text,
     flex: 1,
-    lineHeight: 1.4,
+    lineHeight: 1.5,
   },
   
   // === Texto ===
   text: {
     fontSize: fonts.body,
     color: colors.text,
-    lineHeight: 1.5,
+    lineHeight: 1.6,
   },
   textSmall: {
     fontSize: fonts.small,
@@ -329,10 +331,10 @@ export const styles = StyleSheet.create({
   
   // === Ícones (simulados com caracteres) ===
   iconCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: colors.primary,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    backgroundColor: colors.govBlue,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -341,12 +343,12 @@ export const styles = StyleSheet.create({
   divider: {
     height: 1,
     backgroundColor: colors.borderLight,
-    marginVertical: spacing.md,
+    marginVertical: spacing.lg,
   },
   
   // === Timeline ===
   timeline: {
-    gap: spacing.sm,
+    gap: spacing.md,
   },
   timelineItem: {
     flexDirection: 'row',
@@ -359,29 +361,29 @@ export const styles = StyleSheet.create({
     flex: 1,
   },
   timelineDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: colors.primary,
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: colors.govBlue,
   },
   
   // === Progress ===
   progressBar: {
-    height: 6,
+    height: 8,
     backgroundColor: colors.muted,
-    borderRadius: 3,
+    borderRadius: 4,
     overflow: 'hidden',
   },
   progressFill: {
     height: '100%',
-    backgroundColor: colors.primary,
-    borderRadius: 3,
+    backgroundColor: colors.govBlue,
+    borderRadius: 4,
   },
   
   // === Cover Page ===
   coverContainer: {
     flex: 1,
-    padding: '20mm',
+    padding: '24mm',
     justifyContent: 'space-between',
   },
   coverHeader: {
@@ -389,17 +391,17 @@ export const styles = StyleSheet.create({
     marginBottom: spacing.xxl,
   },
   coverLogo: {
-    width: 180,
-    height: 60,
+    width: 200,
+    height: 70,
     objectFit: 'contain',
     marginBottom: spacing.lg,
   },
   coverTitle: {
-    fontSize: 32,
+    fontSize: 36,
     fontWeight: 'bold',
     color: colors.govBlue,
     textAlign: 'center',
-    marginBottom: spacing.md,
+    marginBottom: spacing.lg,
   },
   coverSubtitle: {
     fontSize: 18,
@@ -410,20 +412,20 @@ export const styles = StyleSheet.create({
   coverInfo: {
     backgroundColor: colors.muted,
     padding: spacing.xl,
-    borderRadius: 8,
+    borderRadius: 10,
     marginVertical: spacing.xxl,
   },
   coverFooter: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: spacing.xl,
+    gap: spacing.xxl,
     paddingTop: spacing.xl,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
+    borderTopWidth: 2,
+    borderTopColor: colors.borderLight,
   },
   coverFooterLogo: {
-    height: 40,
+    height: 44,
     objectFit: 'contain',
   },
   
@@ -432,15 +434,15 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: spacing.sm,
-    borderBottomWidth: 0.5,
+    paddingVertical: spacing.md,
+    borderBottomWidth: 1,
     borderBottomColor: colors.borderLight,
   },
   tocNumber: {
     fontSize: fonts.body,
     fontWeight: 'bold',
-    color: colors.primary,
-    width: 30,
+    color: colors.govBlue,
+    width: 34,
   },
   tocTitle: {
     fontSize: fonts.body,
@@ -450,7 +452,7 @@ export const styles = StyleSheet.create({
   tocPage: {
     fontSize: fonts.body,
     color: colors.textMuted,
-    width: 30,
+    width: 34,
     textAlign: 'right',
   },
   tocDots: {
@@ -464,9 +466,9 @@ export const styles = StyleSheet.create({
 });
 
 // Utility para criar variantes de estilo
-export const createCardStyle = (accentColor: string = colors.primary) => ({
+export const createCardStyle = (accentColor: string = colors.govBlue) => ({
   ...styles.card,
-  borderLeftWidth: 3,
+  borderLeftWidth: 4,
   borderLeftColor: accentColor,
 });
 
