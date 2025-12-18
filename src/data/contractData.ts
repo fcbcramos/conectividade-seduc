@@ -44,12 +44,268 @@ export const slaMetrics = [
   { metric: "TMR Incidentes", target: "≤8h", current: "-", status: "Planejado" }
 ];
 
-export const riskMatrix = [
-  { id: 1, risk: "Descontinuidade do serviço", category: "Operacional", probability: "Baixa", impact: "Alto", mitigation: "Plano de contingência e backup de conectividade" },
-  { id: 2, risk: "Atraso nas entregas", category: "Operacional", probability: "Média", impact: "Médio", mitigation: "Cronograma detalhado com marcos e penalidades" },
-  { id: 3, risk: "Inadimplência contratual", category: "Financeiro", probability: "Baixa", impact: "Alto", mitigation: "Garantias contratuais e fiscalização rigorosa" },
-  { id: 4, risk: "Obsolescência tecnológica", category: "Tecnológico", probability: "Média", impact: "Médio", mitigation: "Cláusulas de atualização tecnológica" },
-  { id: 5, risk: "Falha na integração", category: "Técnico", probability: "Baixa", impact: "Médio", mitigation: "Testes de integração e homologação" }
+export interface RiskAction {
+  id: string;
+  action: string;
+  responsible: string;
+}
+
+export interface Risk {
+  id: string;
+  risk: string;
+  phase: "PCTIC" | "GCTIC";
+  probability: number;
+  probabilityLabel: string;
+  impact: number;
+  impactLabel: string;
+  riskScore: number;
+  riskLevel: "Baixo" | "Médio" | "Alto";
+  damage: string;
+  treatment: string;
+  preventiveActions: RiskAction[];
+  contingencyActions: RiskAction[];
+}
+
+export const riskMatrix: Risk[] = [
+  {
+    id: "R01",
+    risk: "Questionamentos por órgãos de controle externo",
+    phase: "PCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Atrasos na execução contratual, necessidade de ajustes formais e retrabalho administrativo",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R01-AP-01", action: "Fundamentar tecnicamente ETP, TR e decisões relevantes", responsible: "Equipe de Planejamento" },
+      { id: "R01-AP-02", action: "Garantir aderência às normas e boas práticas de TIC", responsible: "Área Técnica / Jurídica" },
+      { id: "R01-AP-03", action: "Manter registros formais e rastreabilidade", responsible: "Gestor do Contrato" }
+    ],
+    contingencyActions: [
+      { id: "R01-AC-01", action: "Atender diligências dos órgãos de controle", responsible: "Gestor do Contrato" },
+      { id: "R01-AC-02", action: "Ajustar documentos e procedimentos", responsible: "Área Técnica / Jurídica" }
+    ]
+  },
+  {
+    id: "R02",
+    risk: "Especificações de nível de serviço aquém das necessidades da SEDUC-PI",
+    phase: "PCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Entregas com desempenho insuficiente ou não condizentes com a real demanda pedagógica e administrativa",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R02-AP-01", action: "Realizar levantamento técnico detalhado das demandas", responsible: "Equipe de Planejamento" },
+      { id: "R02-AP-02", action: "Consultar benchmarks de conectividade educacional", responsible: "Área Técnica" }
+    ],
+    contingencyActions: [
+      { id: "R02-AC-01", action: "Revisar SLAs e negociar ajustes com a contratada", responsible: "Gestor do Contrato" },
+      { id: "R02-AC-02", action: "Reavaliar dimensionamento técnico", responsible: "Área Técnica" }
+    ]
+  },
+  {
+    id: "R03",
+    risk: "Licitação deserta ou fracassada",
+    phase: "PCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Atraso na contratação, risco de descontinuidade do serviço público essencial",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R03-AP-01", action: "Estudar viabilidade técnica e econômica do mercado fornecedor", responsible: "Equipe de Planejamento" },
+      { id: "R03-AP-02", action: "Estruturar lotes de forma atrativa e sustentável", responsible: "Área Técnica" },
+      { id: "R03-AP-03", action: "Realizar pesquisa de preços ampla", responsible: "Setor de Licitações" }
+    ],
+    contingencyActions: [
+      { id: "R03-AC-01", action: "Revisar modelo de contratação e republicar edital", responsible: "Setor de Licitações" },
+      { id: "R03-AC-02", action: "Consultar empresas para ajuste de condições", responsible: "Área Técnica" }
+    ]
+  },
+  {
+    id: "R04",
+    risk: "Estimativa de preços acima do mercado e/ou fora de referências oficiais",
+    phase: "PCTIC",
+    probability: 0.50,
+    probabilityLabel: "Provável",
+    impact: 0.20,
+    impactLabel: "Moderado",
+    riskScore: 0.10,
+    riskLevel: "Médio",
+    damage: "Risco de sobrepreço, questionamentos em auditorias, reprovação do processo licitatório",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R04-AP-01", action: "Utilizar múltiplas fontes de referência (PNCP, fornecedores, estudos de mercado)", responsible: "Equipe de Planejamento" },
+      { id: "R04-AP-02", action: "Documentar metodologia de formação de preços", responsible: "Setor de Compras" }
+    ],
+    contingencyActions: [
+      { id: "R04-AC-01", action: "Ajustar valores e justificar tecnicamente", responsible: "Área Técnica / Jurídica" },
+      { id: "R04-AC-02", action: "Renegociar preços com licitantes ou republicar edital", responsible: "Setor de Licitações" }
+    ]
+  },
+  {
+    id: "R05",
+    risk: "Descumprimento contratual (parcial ou integral)",
+    phase: "GCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Interrupção do serviço, escolas sem conectividade, penalidades à contratada",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R05-AP-01", action: "Estabelecer cláusulas contratuais claras e mensuráveis", responsible: "Área Jurídica" },
+      { id: "R05-AP-02", action: "Definir processo de fiscalização e indicadores de desempenho", responsible: "Gestor do Contrato" },
+      { id: "R05-AP-03", action: "Realizar diligência prévia sobre a capacidade da contratada", responsible: "Comissão de Licitação" }
+    ],
+    contingencyActions: [
+      { id: "R05-AC-01", action: "Aplicar sanções e notificações previstas no contrato", responsible: "Gestor do Contrato" },
+      { id: "R05-AC-02", action: "Acionar garantia contratual", responsible: "Área Jurídica / Financeiro" },
+      { id: "R05-AC-03", action: "Iniciar processo de rescisão ou substituição da contratada", responsible: "Área Jurídica / Gestor" }
+    ]
+  },
+  {
+    id: "R06",
+    risk: "Inexecução contratual por dificuldades técnicas ou operacionais da contratada",
+    phase: "GCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Atrasos na implantação, baixa qualidade do serviço, impacto no atendimento às escolas",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R06-AP-01", action: "Exigir capacidade técnica comprovada na licitação", responsible: "Comissão de Licitação" },
+      { id: "R06-AP-02", action: "Monitorar execução desde o início do contrato", responsible: "Equipe de Fiscalização" },
+      { id: "R06-AP-03", action: "Prever cronograma realista e escalonamento de entregas", responsible: "Área Técnica" }
+    ],
+    contingencyActions: [
+      { id: "R06-AC-01", action: "Notificar contratada e exigir plano de recuperação", responsible: "Gestor do Contrato" },
+      { id: "R06-AC-02", action: "Aplicar sanções contratuais e/ou desconto por descumprimento", responsible: "Área Jurídica / Gestor" }
+    ]
+  },
+  {
+    id: "R07",
+    risk: "Atraso ou falha na aprovação de projetos de infraestrutura escolar",
+    phase: "GCTIC",
+    probability: 0.50,
+    probabilityLabel: "Provável",
+    impact: 0.20,
+    impactLabel: "Moderado",
+    riskScore: 0.10,
+    riskLevel: "Médio",
+    damage: "Impossibilidade de instalar os equipamentos, atraso no cronograma de implantação",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R07-AP-01", action: "Realizar vistorias antecipadas nas escolas", responsible: "Equipe Técnica" },
+      { id: "R07-AP-02", action: "Estabelecer fluxo ágil de aprovações internas", responsible: "Área Administrativa / Técnica" },
+      { id: "R07-AP-03", action: "Reservar tempo no cronograma para adequações prediais", responsible: "Gestor do Contrato" }
+    ],
+    contingencyActions: [
+      { id: "R07-AC-01", action: "Ajustar cronograma de instalação conforme disponibilidade das escolas", responsible: "Gestor do Contrato" },
+      { id: "R07-AC-02", action: "Priorizar unidades com infraestrutura adequada", responsible: "Equipe de Fiscalização" }
+    ]
+  },
+  {
+    id: "R08",
+    risk: "Atrasos ou bloqueios na liberação de recursos financeiros",
+    phase: "GCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.40,
+    impactLabel: "Alto",
+    riskScore: 0.12,
+    riskLevel: "Médio",
+    damage: "Interrupção de pagamentos, risco de paralisação dos serviços pela contratada",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R08-AP-01", action: "Assegurar dotação orçamentária antes da contratação", responsible: "Setor Financeiro" },
+      { id: "R08-AP-02", action: "Acompanhar liberação de recursos junto ao MEC e Tesouro Estadual", responsible: "Área Administrativa" },
+      { id: "R08-AP-03", action: "Definir fluxo de pagamento claro e realista", responsible: "Gestor do Contrato" }
+    ],
+    contingencyActions: [
+      { id: "R08-AC-01", action: "Reprogramar cronograma de pagamentos", responsible: "Setor Financeiro" },
+      { id: "R08-AC-02", action: "Negociar com contratada prorrogações ou replanejamentos", responsible: "Gestor do Contrato" }
+    ]
+  },
+  {
+    id: "R09",
+    risk: "Ausência de profissional competente para fiscalização técnica",
+    phase: "GCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.20,
+    impactLabel: "Moderado",
+    riskScore: 0.06,
+    riskLevel: "Baixo",
+    damage: "Fiscalização ineficiente, riscos de aceite indevido de entregas ou descumprimento não identificado",
+    treatment: "Mitigar",
+    preventiveActions: [
+      { id: "R09-AP-01", action: "Designar fiscal técnico qualificado desde o início", responsible: "Gestor do Contrato" },
+      { id: "R09-AP-02", action: "Capacitar equipe de fiscalização sobre o objeto contratado", responsible: "Área Técnica" },
+      { id: "R09-AP-03", action: "Utilizar ferramentas de apoio à fiscalização (checklists, sistemas)", responsible: "Equipe de TI" }
+    ],
+    contingencyActions: [
+      { id: "R09-AC-01", action: "Substituir ou reforçar equipe de fiscalização", responsible: "Direção de TI" },
+      { id: "R09-AC-02", action: "Contratar apoio técnico externo se necessário", responsible: "Área Administrativa" }
+    ]
+  },
+  {
+    id: "R10",
+    risk: "Obsolescência tecnológica durante a vigência do contrato",
+    phase: "GCTIC",
+    probability: 0.30,
+    probabilityLabel: "Pouco Provável",
+    impact: 0.20,
+    impactLabel: "Moderado",
+    riskScore: 0.06,
+    riskLevel: "Baixo",
+    damage: "Infraestrutura desatualizada, degradação da qualidade do serviço, desalinhamento com necessidades futuras",
+    treatment: "Aceitar",
+    preventiveActions: [
+      { id: "R10-AP-01", action: "Prever cláusulas de atualização tecnológica", responsible: "Área Jurídica / Técnica" },
+      { id: "R10-AP-02", action: "Monitorar evolução de padrões e demandas", responsible: "Equipe de TI" }
+    ],
+    contingencyActions: [
+      { id: "R10-AC-01", action: "Negociar termo aditivo para upgrade tecnológico", responsible: "Gestor do Contrato" },
+      { id: "R10-AC-02", action: "Planejar migração para novo contrato, se necessário", responsible: "Direção de TI" }
+    ]
+  },
+  {
+    id: "R11",
+    risk: "Interrupção de serviço por caso fortuito ou força maior",
+    phase: "GCTIC",
+    probability: 0.10,
+    probabilityLabel: "Raro",
+    impact: 0.80,
+    impactLabel: "Muito Alto",
+    riskScore: 0.08,
+    riskLevel: "Baixo",
+    damage: "Indisponibilidade temporária do serviço, impacto na operação escolar",
+    treatment: "Aceitar",
+    preventiveActions: [
+      { id: "R11-AP-01", action: "Exigir plano de contingência e continuidade de negócios da contratada", responsible: "Gestor do Contrato" },
+      { id: "R11-AP-02", action: "Prever cláusulas contratuais de responsabilidade e recuperação", responsible: "Área Jurídica" }
+    ],
+    contingencyActions: [
+      { id: "R11-AC-01", action: "Acionar plano de contingência", responsible: "Contratada / Gestor" },
+      { id: "R11-AC-02", action: "Comunicar escolas e ativar alternativas temporárias", responsible: "Equipe de Fiscalização" }
+    ]
+  }
 ];
 
 export const phases = [
