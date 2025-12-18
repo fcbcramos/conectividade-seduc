@@ -13,7 +13,17 @@ const PDFCoverPage = () => {
   });
 
   return (
-    <div className="pdf-page pdf-cover-page relative bg-white min-h-[210mm] w-[297mm] flex flex-col">
+    <div 
+      className="pdf-page pdf-cover-page relative bg-white flex flex-col"
+      style={{
+        width: '297mm',
+        height: '210mm',
+        minWidth: '297mm',
+        minHeight: '210mm',
+        maxHeight: '210mm',
+        overflow: 'hidden',
+      }}
+    >
       {/* Barra lateral colorida (cores institucionais) */}
       <div className="absolute left-0 top-0 bottom-0 w-3 flex flex-col">
         <div className="flex-1 bg-primary" />

@@ -5,45 +5,20 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import PDFCoverPage from "@/components/pdf/PDFCoverPage";
 import PDFTableOfContents from "@/components/pdf/PDFTableOfContents";
-import PDFSectionHeader from "@/components/pdf/PDFSectionHeader";
-import { navigationItems } from "@/data/contractData";
 import { PDFProvider } from "@/contexts/PDFContext";
-import { generateSinglePagePDF } from "@/lib/pdfGenerator";
+import { generatePDFFromPages } from "@/lib/pdfGenerator";
 import governoPiauiLogo from "@/assets/governo-piaui-logo.png";
 
-// Import all section components
-import Section1 from "@/pages/sections/Section1";
-import Section2 from "@/pages/sections/Section2";
-import Section3 from "@/pages/sections/Section3";
-import Section4 from "@/pages/sections/Section4";
-import Section5 from "@/pages/sections/Section5";
-import Section6 from "@/pages/sections/Section6";
-import Section7 from "@/pages/sections/Section7";
-import Section8 from "@/pages/sections/Section8";
-import Section9 from "@/pages/sections/Section9";
-import Section10 from "@/pages/sections/Section10";
-import Section11 from "@/pages/sections/Section11";
-import Section12 from "@/pages/sections/Section12";
-import Section13 from "@/pages/sections/Section13";
-import Section14 from "@/pages/sections/Section14";
-import Dashboard from "@/pages/Dashboard";
-
-const sectionComponents: { [key: number]: React.ComponentType } = {
-  1: Section1,
-  2: Section2,
-  3: Section3,
-  4: Section4,
-  5: Section5,
-  6: Section6,
-  7: Section7,
-  8: Section8,
-  9: Section9,
-  10: Section10,
-  11: Section11,
-  12: Section12,
-  13: Section13,
-  14: Section14,
-};
+// Import PDF section components
+import { 
+  PDFDashboard, 
+  PDFSection1, 
+  PDFSection2, 
+  PDFSection3, 
+  PDFSection4, 
+  PDFSection5,
+  PDFSection6 
+} from "@/components/pdf/sections";
 
 const PDFPreview = () => {
   const [searchParams] = useSearchParams();
@@ -53,13 +28,11 @@ const PDFPreview = () => {
   const [progress, setProgress] = useState(0);
   const [progressMessage, setProgressMessage] = useState('');
 
-  // Parse options from URL
   const mode = searchParams.get("mode") || "full";
-  const sectionNumber = searchParams.get("section") ? parseInt(searchParams.get("section")!) : 1;
-  const includeCover = searchParams.get("cover") !== "false";
-  const includeTOC = searchParams.get("toc") !== "false";
 
-  // Wait for content and images to render before allowing PDF generation
+  // Total de páginas: Capa(1) + Sumário(1) + Dashboard(1) + Seções(6) = 9
+  const totalPages = 9;
+
   useEffect(() => {
     const timer = setTimeout(() => {
       const images = document.querySelectorAll('.pdf-mode img');
@@ -68,7 +41,6 @@ const PDFPreview = () => {
       if (allLoaded) {
         setIsReady(true);
       } else {
-        // Wait more for images to load
         setTimeout(() => setIsReady(true), 1500);
       }
     }, 2000);
@@ -80,7 +52,7 @@ const PDFPreview = () => {
       setIsGenerating(true);
       setIsReady(false);
       
-      await generateSinglePagePDF('.pdf-mode', {
+      await generatePDFFromPages('.pdf-mode', {
         filename: 'REGC-Relatorio-Executivo-Governanca.pdf',
         quality: 2,
         onProgress: (prog, msg) => {
@@ -101,42 +73,24 @@ const PDFPreview = () => {
     }
   };
 
-  const SectionComponent = mode === "section" ? sectionComponents[sectionNumber] : null;
-  const sectionTitle = mode === "section" 
-    ? navigationItems.find(item => item.id === sectionNumber)?.title 
-    : undefined;
-
   return (
     <div className="min-h-screen bg-muted/30">
       {/* Control Bar */}
       <div className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <Button 
-              variant="ghost" 
-              size="sm" 
-              onClick={() => navigate(-1)}
-              className="gap-2"
-            >
+            <Button variant="ghost" size="sm" onClick={() => navigate(-1)} className="gap-2">
               <ArrowLeft className="h-4 w-4" />
               Voltar
             </Button>
             <div className="h-6 w-px bg-border" />
             <div>
-              <h1 className="font-semibold text-sm">
-                {mode === "full" ? "Relatório Completo" : `Seção ${sectionNumber}: ${sectionTitle}`}
-              </h1>
-              <p className="text-xs text-muted-foreground">
-                Pré-visualização para exportação
-              </p>
+              <h1 className="font-semibold text-sm">Relatório Completo (Page-First)</h1>
+              <p className="text-xs text-muted-foreground">{totalPages} páginas A4 landscape</p>
             </div>
           </div>
 
-          <Button 
-            onClick={handleGeneratePDF}
-            disabled={!isReady || isGenerating}
-            className="gap-2"
-          >
+          <Button onClick={handleGeneratePDF} disabled={!isReady || isGenerating} className="gap-2">
             {!isReady || isGenerating ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -156,108 +110,57 @@ const PDFPreview = () => {
       {isGenerating && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60]">
           <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center">
-            {/* Logo com efeito de preenchimento gradual */}
             <div className="relative w-32 h-32 mx-auto mb-6">
-              {/* Logo em escala de cinza (fundo) */}
-              <img 
-                src={governoPiauiLogo} 
-                alt="Governo do Piauí"
-                className="absolute inset-0 w-full h-full object-contain grayscale opacity-40"
-              />
-              {/* Logo colorido com clip-path baseado no progresso */}
-              <img 
-                src={governoPiauiLogo} 
-                alt=""
-                className="absolute inset-0 w-full h-full object-contain transition-all duration-300"
-                style={{
-                  clipPath: `inset(${100 - progress}% 0 0 0)`
-                }}
-              />
+              <img src={governoPiauiLogo} alt="" className="absolute inset-0 w-full h-full object-contain grayscale opacity-40" />
+              <img src={governoPiauiLogo} alt="" className="absolute inset-0 w-full h-full object-contain transition-all duration-300"
+                style={{ clipPath: `inset(${100 - progress}% 0 0 0)` }} />
             </div>
-            
             <span className="font-semibold text-lg block mb-2">Gerando PDF...</span>
             <p className="text-sm text-muted-foreground mb-4">{progressMessage}</p>
-            
-            {/* Barra de progresso */}
             <div className="h-2 bg-muted rounded-full overflow-hidden mb-2">
-              <div 
-                className="h-full bg-primary transition-all duration-300" 
-                style={{ width: `${progress}%` }}
-              />
+              <div className="h-full bg-primary transition-all duration-300" style={{ width: `${progress}%` }} />
             </div>
-            <p className="text-sm font-medium text-primary">
-              {progress.toFixed(2).replace('.', ',')}%
-            </p>
+            <p className="text-sm font-medium text-primary">{progress.toFixed(2).replace('.', ',')}%</p>
           </div>
         </div>
       )}
 
-      {/* PDF Content */}
+      {/* PDF Content - Fixed A4 Landscape Pages */}
       <div className="pt-20 pb-8 px-4">
-        <div className="max-w-[297mm] mx-auto">
-          {/* Preview indicator */}
-          <div className="text-center text-sm text-muted-foreground mb-4">
-            Pré-visualização • Clique em "Baixar PDF" para salvar o documento
-          </div>
-
-          {/* PDF Target Container */}
-          <PDFProvider isPDFMode={true}>
-            <div className="pdf-mode bg-white shadow-2xl" style={{ width: '1120px', margin: '0 auto' }}>
-              
-              {/* Cover Page */}
-              {includeCover && (
-                <div className="pdf-cover-page">
-                  <PDFCoverPage />
-                </div>
-              )}
-
-              {/* Table of Contents */}
-              {mode === "full" && includeTOC && (
-                <div className="pdf-toc-page">
-                  <PDFTableOfContents />
-                </div>
-              )}
-
-              {/* Content Flow */}
-              {mode === "full" ? (
-                <div className="pdf-content-flow">
-                  {/* Dashboard Section */}
-                  <article className="pdf-section-content">
-                    <PDFSectionHeader sectionNumber="Visão Geral" title="Dashboard Executivo" />
-                    <div className="pdf-section-body">
-                      <Dashboard />
-                    </div>
-                  </article>
-
-                  {/* All Sections */}
-                  {Object.entries(sectionComponents).map(([num, Component]) => {
-                    const title = navigationItems.find(item => item.id === parseInt(num))?.title || '';
-                    return (
-                      <article key={num} className="pdf-section-content">
-                        <PDFSectionHeader sectionNumber={parseInt(num)} title={title} />
-                        <div className="pdf-section-body">
-                          <Component />
-                        </div>
-                      </article>
-                    );
-                  })}
-                </div>
-              ) : (
-                /* Single Section */
-                SectionComponent && (
-                  <div className="pdf-content-flow">
-                    <article className="pdf-section-content">
-                      <PDFSectionHeader sectionNumber={sectionNumber} title={sectionTitle || ''} />
-                      <div className="pdf-section-body">
-                        <SectionComponent />
-                      </div>
-                    </article>
-                  </div>
-                )
-              )}
-            </div>
-          </PDFProvider>
+        <div className="text-center text-sm text-muted-foreground mb-4">
+          Pré-visualização • Cada página é A4 landscape (297mm × 210mm)
         </div>
+
+        <PDFProvider isPDFMode={true}>
+          <div className="pdf-mode flex flex-col items-center gap-4">
+            {/* Page 1: Cover */}
+            <PDFCoverPage />
+            
+            {/* Page 2: Table of Contents */}
+            <PDFTableOfContents />
+            
+            {/* Page 3: Dashboard */}
+            <PDFDashboard startPage={3} totalPages={totalPages} />
+            
+            {/* Page 4: Section 1 */}
+            <PDFSection1 startPage={4} totalPages={totalPages} />
+            
+            {/* Page 5: Section 2 */}
+            <PDFSection2 startPage={5} totalPages={totalPages} />
+            
+            {/* Page 6: Section 3 */}
+            <PDFSection3 startPage={6} totalPages={totalPages} />
+            
+            {/* Page 7: Section 4 */}
+            <PDFSection4 startPage={7} totalPages={totalPages} />
+            
+            {/* Page 8: Section 5 */}
+            <PDFSection5 startPage={8} totalPages={totalPages} />
+            
+            {/* Page 9: Section 6 */}
+            <PDFSection6 startPage={9} totalPages={totalPages} />
+          </div>
+        </PDFProvider>
       </div>
     </div>
   );
