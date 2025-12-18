@@ -7,6 +7,19 @@ interface PDFOptions {
   onProgress?: (progress: number, message: string) => void;
 }
 
+// Aguardar carregamento de todas as imagens
+const waitForImages = (container: HTMLElement): Promise<void> => {
+  const images = container.querySelectorAll('img');
+  const promises = Array.from(images).map((img) => {
+    if (img.complete) return Promise.resolve();
+    return new Promise<void>((resolve) => {
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+    });
+  });
+  return Promise.all(promises).then(() => {});
+};
+
 export const generateSinglePagePDF = async (
   contentSelector: string,
   options: PDFOptions = {}
@@ -20,17 +33,42 @@ export const generateSinglePagePDF = async (
   const container = document.querySelector(contentSelector) as HTMLElement;
   if (!container) throw new Error('Conteúdo não encontrado');
 
-  onProgress?.(10, 'Capturando conteúdo...');
+  onProgress?.(5, 'Preparando conteúdo...');
 
-  // Capturar todo o conteúdo como imagem
+  // Scroll para o topo
+  window.scrollTo(0, 0);
+
+  // Aguardar carregamento de imagens
+  onProgress?.(10, 'Carregando imagens...');
+  await waitForImages(container);
+
+  // Delay para renderização completa
+  await new Promise(resolve => setTimeout(resolve, 500));
+
+  onProgress?.(20, 'Capturando conteúdo...');
+
+  // Capturar com configurações otimizadas
   const canvas = await html2canvas(container, {
     scale: quality,
     useCORS: true,
     allowTaint: true,
     backgroundColor: '#ffffff',
-    logging: false,
-    windowWidth: 1120, // ~297mm em 96dpi
+    logging: true,
+    windowWidth: container.scrollWidth,
+    windowHeight: container.scrollHeight,
+    scrollX: 0,
+    scrollY: 0,
+    x: 0,
+    y: 0,
+    width: container.scrollWidth,
+    height: container.scrollHeight,
   });
+
+  console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+
+  if (canvas.width === 0 || canvas.height === 0) {
+    throw new Error('Falha na captura: canvas vazio');
+  }
 
   onProgress?.(60, 'Gerando PDF...');
 

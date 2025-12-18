@@ -58,11 +58,19 @@ const PDFPreview = () => {
   const includeCover = searchParams.get("cover") !== "false";
   const includeTOC = searchParams.get("toc") !== "false";
 
-  // Wait for content to render before allowing PDF generation
+  // Wait for content and images to render before allowing PDF generation
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsReady(true);
-    }, 1500);
+      const images = document.querySelectorAll('.pdf-mode img');
+      const allLoaded = Array.from(images).every(img => (img as HTMLImageElement).complete);
+      
+      if (allLoaded) {
+        setIsReady(true);
+      } else {
+        // Wait more for images to load
+        setTimeout(() => setIsReady(true), 1500);
+      }
+    }, 2000);
     return () => clearTimeout(timer);
   }, []);
 
