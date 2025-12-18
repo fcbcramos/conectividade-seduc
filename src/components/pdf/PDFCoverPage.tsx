@@ -72,12 +72,8 @@ const PDFCoverPage = () => {
                 <p className="font-semibold text-sm">{generationDate}</p>
               </div>
               <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">Unidade</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Área Requisitante</span>
                 <p className="font-semibold text-sm">{basicInfo.requestingArea}</p>
-              </div>
-              <div>
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">Elaborado por</span>
-                <p className="font-semibold text-sm">{basicInfo.elaboratedBy}</p>
               </div>
             </div>
           </div>

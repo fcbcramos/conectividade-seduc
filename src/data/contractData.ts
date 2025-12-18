@@ -1,15 +1,21 @@
 export const basicInfo = {
   processNumber: "00011.034037/2025-79",
   requestingArea: "Unidade de Transformação Digital - UTD",
-  director: "Marcel Rufino de Carvalho",
-  operationalManager: "Heulem Veras Barros",
-  strategyManager: "Lorena Mendes Silva Almeida",
-  purchasingManager: "Clarice Mauriz Lira",
   elaborationDate: new Date().toLocaleDateString('pt-BR'),
-  elaboratedBy: "Felipe Castelo Branco C. Ramos",
   object: "Contratação Integrada de Serviços de Conectividade à Internet e Infraestrutura de Rede Wi-Fi para Unidades Escolares da Rede Estadual da Secretaria da Educação do Estado do Piauí (SEDUC-PI).",
   normativeReference: "Lei nº 14.133/2021, Lei nº 14.172/2021, Decreto nº 11.004/2022 (Regulamenta a Lei que institui FUST).",
-  financingSources: "Recursos do Fundo de Universalização dos Serviços de Telecomunicações (FUST) alocados conforme Lei nº 14.172/2021, complementados por outras fontes orçamentárias da SEDUC-PI, se necessário."
+  financingSources: "Recursos do Fundo de Universalização dos Serviços de Telecomunicações (FUST) alocados conforme Lei nº 14.172/2021, complementados por outras fontes orçamentárias da SEDUC-PI, se necessário.",
+  
+  // Grupo Técnico de Planejamento
+  team: [
+    { role: "Diretoria de Tecnologia", name: "Marcel Rufino de Carvalho" },
+    { role: "Diretoria de Licitação", name: "Larissa Rocha Pires Ferreira" },
+    { role: "Assessoria Jurídica e Administrativa", name: "Vanilson Carvalho Fontenele" },
+    { role: "Gerência Operacional", name: "Heulem Veras Barros" },
+    { role: "Gerência de Compras", name: "Clarice Mauriz Lira" },
+    { role: "Coordenação de Suporte", name: "Felipe Castelo Branco Crisóstomo Ramos" },
+    { role: "Coordenação de Redes", name: "Danilo César Ribeiro da Silva Mendes" }
+  ]
 };
 
 export const kpiData = {

@@ -7,155 +7,239 @@ const CoverPage = () => {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      padding: '25mm 20mm',
+      padding: '20mm 18mm',
       justifyContent: 'space-between',
       backgroundColor: colors.background,
     },
+    // Header
     header: {
-      alignItems: 'center',
-      marginBottom: spacing.xxl,
-    },
-    mainLogo: {
-      width: 200,
-      height: 70,
-      objectFit: 'contain',
+      flexDirection: 'row',
+      justifyContent: 'flex-end',
       marginBottom: spacing.xl,
     },
     seducLogo: {
-      width: 120,
-      height: 40,
+      width: 140,
+      height: 50,
       objectFit: 'contain',
     },
+    // Sidebar
+    sidebar: {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      width: 8,
+      flexDirection: 'column',
+    },
+    sidebarStripe: {
+      flex: 1,
+    },
+    // Content
     content: {
       flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center',
+      paddingLeft: 8,
     },
     programName: {
-      fontSize: 16,
+      fontSize: 42,
+      fontWeight: 'bold',
       color: colors.govBlue,
       marginBottom: spacing.md,
-      fontWeight: 'bold',
+      letterSpacing: 1,
     },
     title: {
-      fontSize: 28,
+      fontSize: 18,
       fontWeight: 'bold',
-      color: colors.govBlue,
-      textAlign: 'center',
-      marginBottom: spacing.lg,
+      color: colors.foreground,
+      marginBottom: spacing.sm,
     },
     subtitle: {
-      fontSize: 14,
+      fontSize: 12,
       color: colors.textMuted,
-      textAlign: 'center',
       marginBottom: spacing.xxl,
-      maxWidth: 400,
       lineHeight: 1.5,
+      maxWidth: 420,
     },
-    infoBox: {
+    // Info Sections
+    sectionsContainer: {
+      flexDirection: 'row',
+      gap: spacing.xl,
+      marginTop: spacing.lg,
+    },
+    infoSection: {
+      flex: 1,
       backgroundColor: colors.muted,
-      padding: spacing.xl,
-      borderRadius: 8,
-      width: '100%',
-      maxWidth: 450,
-      marginTop: spacing.xxl,
+      borderRadius: 6,
+      padding: spacing.lg,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.govBlue,
     },
+    sectionHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      marginBottom: spacing.md,
+      paddingBottom: spacing.sm,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.borderLight,
+    },
+    sectionIcon: {
+      width: 20,
+      height: 20,
+      borderRadius: 10,
+      backgroundColor: colors.govBlue,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    sectionIconText: {
+      fontSize: 10,
+      color: colors.background,
+      fontWeight: 'bold',
+    },
+    sectionTitle: {
+      fontSize: 10,
+      fontWeight: 'bold',
+      color: colors.govBlue,
+      textTransform: 'uppercase',
+      letterSpacing: 0.5,
+    },
+    // Process Info Rows
     infoRow: {
       flexDirection: 'row',
       marginBottom: spacing.sm,
     },
     infoLabel: {
-      fontSize: fonts.small,
+      fontSize: 8,
       color: colors.textMuted,
-      width: 120,
+      width: 80,
     },
     infoValue: {
-      fontSize: fonts.small,
+      fontSize: 8,
       color: colors.text,
       fontWeight: 'bold',
       flex: 1,
     },
-    divider: {
-      height: 1,
-      backgroundColor: colors.borderLight,
-      marginVertical: spacing.md,
+    // Team Grid
+    teamGrid: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: spacing.sm,
     },
+    teamMember: {
+      width: '48%',
+      marginBottom: spacing.xs,
+    },
+    teamRole: {
+      fontSize: 7,
+      color: colors.textMuted,
+      marginBottom: 1,
+    },
+    teamName: {
+      fontSize: 8,
+      color: colors.text,
+      fontWeight: 'bold',
+    },
+    // Footer
     footer: {
-      paddingTop: spacing.xl,
+      paddingTop: spacing.lg,
       borderTopWidth: 1,
       borderTopColor: colors.border,
+      marginTop: spacing.lg,
     },
     footerLogos: {
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'center',
       gap: spacing.xxl,
+      marginBottom: spacing.md,
     },
     footerLogo: {
-      height: 35,
+      height: 32,
       objectFit: 'contain',
     },
     footerLogoSmall: {
-      height: 28,
+      height: 26,
       objectFit: 'contain',
     },
-    date: {
-      fontSize: fonts.small,
+    footerDate: {
+      fontSize: 8,
       color: colors.textMuted,
       textAlign: 'center',
-      marginTop: spacing.lg,
     },
   });
 
   return (
     <View style={styles.container}>
-      {/* Header Logos */}
+      {/* Sidebar colorida */}
+      <View style={styles.sidebar}>
+        <View style={[styles.sidebarStripe, { backgroundColor: colors.govBlue }]} />
+        <View style={[styles.sidebarStripe, { backgroundColor: colors.govYellow }]} />
+        <View style={[styles.sidebarStripe, { backgroundColor: colors.govRed }]} />
+        <View style={[styles.sidebarStripe, { backgroundColor: colors.govGreen }]} />
+      </View>
+
+      {/* Header com logo SEDUC */}
       <View style={styles.header}>
-        <Image src={pdfImages.governoPiauiLogo} style={styles.mainLogo} />
         <Image src={pdfImages.seducLogo} style={styles.seducLogo} />
       </View>
 
-      {/* Main Content */}
+      {/* Conteúdo principal */}
       <View style={styles.content}>
-        <Text style={styles.programName}>CARAVANA DIGITAL</Text>
-        <Text style={styles.title}>REGC</Text>
-        <Text style={styles.subtitle}>
-          Relatório Executivo de Governança Contratual
-        </Text>
-        <Text style={[styles.subtitle, { fontSize: 11, marginBottom: 0 }]}>
-          {basicInfo.object}
-        </Text>
+        <Text style={styles.programName}>Caravana Digital</Text>
+        <Text style={styles.title}>REGC - Relatório Executivo de Governança Contratual</Text>
+        <Text style={styles.subtitle}>{basicInfo.object}</Text>
 
-        {/* Info Box */}
-        <View style={styles.infoBox}>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Processo:</Text>
-            <Text style={styles.infoValue}>{basicInfo.processNumber}</Text>
+        {/* Seções de informação lado a lado */}
+        <View style={styles.sectionsContainer}>
+          {/* Informações do Processo */}
+          <View style={styles.infoSection}>
+            <View style={styles.sectionHeader}>
+              <View style={styles.sectionIcon}>
+                <Text style={styles.sectionIconText}>i</Text>
+              </View>
+              <Text style={styles.sectionTitle}>Informações do Processo</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Processo nº</Text>
+              <Text style={styles.infoValue}>{basicInfo.processNumber}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Data</Text>
+              <Text style={styles.infoValue}>{basicInfo.elaborationDate}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Text style={styles.infoLabel}>Área Requisitante</Text>
+              <Text style={styles.infoValue}>{basicInfo.requestingArea}</Text>
+            </View>
           </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Área Demandante:</Text>
-            <Text style={styles.infoValue}>{basicInfo.requestingArea}</Text>
-          </View>
-          <View style={styles.divider} />
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Elaborado por:</Text>
-            <Text style={styles.infoValue}>{basicInfo.elaboratedBy}</Text>
-          </View>
-          <View style={styles.infoRow}>
-            <Text style={styles.infoLabel}>Data:</Text>
-            <Text style={styles.infoValue}>{basicInfo.elaborationDate}</Text>
+
+          {/* Grupo Técnico de Planejamento */}
+          <View style={styles.infoSection}>
+            <View style={styles.sectionHeader}>
+              <View style={styles.sectionIcon}>
+                <Text style={styles.sectionIconText}>👥</Text>
+              </View>
+              <Text style={styles.sectionTitle}>Grupo Técnico de Planejamento</Text>
+            </View>
+            <View style={styles.teamGrid}>
+              {basicInfo.team.map((member, index) => (
+                <View key={index} style={styles.teamMember}>
+                  <Text style={styles.teamRole}>{member.role}</Text>
+                  <Text style={styles.teamName}>{member.name}</Text>
+                </View>
+              ))}
+            </View>
           </View>
         </View>
       </View>
 
-      {/* Footer Logos */}
+      {/* Footer com logos institucionais */}
       <View style={styles.footer}>
         <View style={styles.footerLogos}>
           <Image src={pdfImages.mecLogo} style={styles.footerLogo} />
           <Image src={pdfImages.escolasConectadasLogo} style={styles.footerLogoSmall} />
           <Image src={pdfImages.novoPacLogo} style={styles.footerLogoSmall} />
         </View>
-        <Text style={styles.date}>
+        <Text style={styles.footerDate}>
           Teresina - PI, {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
         </Text>
       </View>
