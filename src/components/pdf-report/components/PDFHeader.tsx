@@ -1,6 +1,5 @@
-import { View, Text, Image } from '@react-pdf/renderer';
-import { styles } from '../styles';
-import { pdfImages } from '../imageUrls';
+import { View, Text } from '@react-pdf/renderer';
+import { styles, colors } from '../styles';
 
 interface PDFHeaderProps {
   sectionTitle?: string;
@@ -9,7 +8,17 @@ interface PDFHeaderProps {
 
 const PDFHeader = ({ sectionTitle, sectionNumber }: PDFHeaderProps) => (
   <View style={styles.header} fixed>
-    <Image src={pdfImages.seducLogo} style={styles.headerLogo} />
+    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+      <View style={{ 
+        width: 4, 
+        height: 16, 
+        backgroundColor: colors.govBlue, 
+        borderRadius: 2 
+      }} />
+      <Text style={{ fontSize: 9, fontWeight: 'bold', color: colors.govBlue }}>
+        CARAVANA DIGITAL
+      </Text>
+    </View>
     <View>
       <Text style={styles.headerTitle}>REGC - Relatório Executivo de Governança Contratual</Text>
       {sectionTitle && (
