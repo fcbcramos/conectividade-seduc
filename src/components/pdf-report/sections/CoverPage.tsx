@@ -1,11 +1,7 @@
 import { View, Text, Image, StyleSheet } from '@react-pdf/renderer';
 import { colors, spacing, fonts } from '../styles';
 import { basicInfo } from '@/data/contractData';
-import governoPiauiLogo from '@/assets/governo-piaui-logo.png';
-import seducLogo from '@/assets/logo-seduc.png';
-import mecLogo from '@/assets/mec-gov-federal-logo.png';
-import escolasConectadasLogo from '@/assets/escolas-conectadas-logo.png';
-import novoPacLogo from '@/assets/novo-pac-logo.png';
+import { pdfImages } from '../imageUrls';
 
 const CoverPage = () => {
   const styles = StyleSheet.create({
@@ -115,8 +111,8 @@ const CoverPage = () => {
     <View style={styles.container}>
       {/* Header Logos */}
       <View style={styles.header}>
-        <Image src={governoPiauiLogo} style={styles.mainLogo} />
-        <Image src={seducLogo} style={styles.seducLogo} />
+        <Image src={pdfImages.governoPiauiLogo} style={styles.mainLogo} />
+        <Image src={pdfImages.seducLogo} style={styles.seducLogo} />
       </View>
 
       {/* Main Content */}
@@ -155,9 +151,9 @@ const CoverPage = () => {
       {/* Footer Logos */}
       <View style={styles.footer}>
         <View style={styles.footerLogos}>
-          <Image src={mecLogo} style={styles.footerLogo} />
-          <Image src={escolasConectadasLogo} style={styles.footerLogoSmall} />
-          <Image src={novoPacLogo} style={styles.footerLogoSmall} />
+          <Image src={pdfImages.mecLogo} style={styles.footerLogo} />
+          <Image src={pdfImages.escolasConectadasLogo} style={styles.footerLogoSmall} />
+          <Image src={pdfImages.novoPacLogo} style={styles.footerLogoSmall} />
         </View>
         <Text style={styles.date}>
           Teresina - PI, {new Date().toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' })}
