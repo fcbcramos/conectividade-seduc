@@ -45,59 +45,84 @@ export const generateSinglePagePDF = async (
   // Delay para renderização completa
   await new Promise(resolve => setTimeout(resolve, 500));
 
-  onProgress?.(20, 'Capturando conteúdo...');
+  onProgress?.(15, 'Identificando seções...');
 
-  // Capturar com configurações otimizadas
-  const canvas = await html2canvas(container, {
-    scale: quality,
-    useCORS: true,
-    allowTaint: true,
-    backgroundColor: '#ffffff',
-    logging: true,
-    windowWidth: container.scrollWidth,
-    windowHeight: container.scrollHeight,
-    scrollX: 0,
-    scrollY: 0,
-    x: 0,
-    y: 0,
-    width: container.scrollWidth,
-    height: container.scrollHeight,
-  });
+  // Identificar todas as seções para captura individual
+  const sections = container.querySelectorAll(
+    '.pdf-cover-page, .pdf-toc-page, [class*="pdf-section"]'
+  );
 
-  console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
+  // Se não encontrou seções específicas, captura o container inteiro em partes
+  const elementsToCapture = sections.length > 0 
+    ? Array.from(sections) as HTMLElement[]
+    : [container];
 
-  if (canvas.width === 0 || canvas.height === 0) {
-    throw new Error('Falha na captura: canvas vazio');
-  }
+  console.log(`Encontradas ${elementsToCapture.length} seções para capturar`);
 
-  onProgress?.(60, 'Gerando PDF...');
-
-  // Dimensões A4 landscape
-  const pageWidth = 297; // mm
-  const margin = 12; // mm
-  const contentWidth = pageWidth - (margin * 2);
-
-  // Calcular altura proporcional
-  const aspectRatio = canvas.height / canvas.width;
-  const contentHeight = contentWidth * aspectRatio;
-  const pageHeight = contentHeight + (margin * 2);
-
-  // Criar PDF com página única de altura dinâmica
+  // Criar PDF A4 landscape
   const pdf = new jsPDF({
     orientation: 'landscape',
     unit: 'mm',
-    format: [pageWidth, pageHeight],
+    format: 'a4', // 297 x 210 mm
   });
 
-  onProgress?.(80, 'Finalizando...');
+  const pageWidth = 297;
+  const pageHeight = 210;
+  const margin = 8;
+  const contentWidth = pageWidth - (margin * 2);
+  const contentHeight = pageHeight - (margin * 2);
 
-  // Adicionar imagem ao PDF
-  const imgData = canvas.toDataURL('image/jpeg', 0.92);
-  pdf.addImage(imgData, 'JPEG', margin, margin, contentWidth, contentHeight);
+  for (let i = 0; i < elementsToCapture.length; i++) {
+    const section = elementsToCapture[i];
+    
+    onProgress?.(20 + (i / elementsToCapture.length) * 70, `Capturando seção ${i + 1} de ${elementsToCapture.length}...`);
+
+    // Scroll para a seção
+    section.scrollIntoView({ behavior: 'instant', block: 'start' });
+    await new Promise(resolve => setTimeout(resolve, 100));
+
+    // Capturar seção
+    const canvas = await html2canvas(section, {
+      scale: quality,
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+    });
+
+    if (canvas.width === 0 || canvas.height === 0) {
+      console.warn(`Seção ${i + 1} vazia, pulando...`);
+      continue;
+    }
+
+    // Adicionar nova página (exceto primeira)
+    if (i > 0) pdf.addPage();
+
+    // Calcular dimensões mantendo proporção
+    const imgAspect = canvas.width / canvas.height;
+    const pageAspect = contentWidth / contentHeight;
+    
+    let imgWidth: number, imgHeight: number;
+    if (imgAspect > pageAspect) {
+      // Imagem mais larga - ajustar pela largura
+      imgWidth = contentWidth;
+      imgHeight = contentWidth / imgAspect;
+    } else {
+      // Imagem mais alta - ajustar pela altura
+      imgHeight = contentHeight;
+      imgWidth = contentHeight * imgAspect;
+    }
+
+    // Centralizar na página
+    const x = margin + (contentWidth - imgWidth) / 2;
+    const y = margin + (contentHeight - imgHeight) / 2;
+
+    const imgData = canvas.toDataURL('image/jpeg', 0.92);
+    pdf.addImage(imgData, 'JPEG', x, y, imgWidth, imgHeight);
+  }
 
   onProgress?.(95, 'Salvando arquivo...');
 
-  // SALVAR DIRETAMENTE - Download automático!
   pdf.save(filename);
 
   onProgress?.(100, 'Concluído!');
