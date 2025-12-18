@@ -6,7 +6,17 @@ interface PDFTableOfContentsProps {
 
 const PDFTableOfContents = ({ includeDashboard = true }: PDFTableOfContentsProps) => {
   return (
-    <div className="pdf-page pdf-toc bg-white min-h-[297mm] w-[210mm] p-12">
+    <div 
+      className="pdf-page pdf-toc-page bg-white p-10"
+      style={{
+        width: '297mm',
+        height: '210mm',
+        minWidth: '297mm',
+        minHeight: '210mm',
+        maxHeight: '210mm',
+        overflow: 'hidden',
+      }}
+    >
       <h2 className="text-3xl font-bold text-[#034ea2] mb-8">Sumário</h2>
       
       <div className="space-y-1">
