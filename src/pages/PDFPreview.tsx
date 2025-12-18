@@ -9,6 +9,7 @@ import PDFSectionHeader from "@/components/pdf/PDFSectionHeader";
 import { navigationItems } from "@/data/contractData";
 import { PDFProvider } from "@/contexts/PDFContext";
 import { generateSinglePagePDF } from "@/lib/pdfGenerator";
+import governoPiauiLogo from "@/assets/governo-piaui-logo.png";
 
 // Import all section components
 import Section1 from "@/pages/sections/Section1";
@@ -154,19 +155,39 @@ const PDFPreview = () => {
       {/* Progress Modal */}
       {isGenerating && (
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[60]">
-          <div className="bg-white p-6 rounded-lg shadow-xl max-w-sm w-full mx-4">
-            <div className="flex items-center gap-3 mb-4">
-              <Loader2 className="h-5 w-5 animate-spin text-primary" />
-              <span className="font-medium">Gerando PDF...</span>
+          <div className="bg-white p-8 rounded-lg shadow-xl max-w-sm w-full mx-4 text-center">
+            {/* Logo com efeito de preenchimento gradual */}
+            <div className="relative w-32 h-32 mx-auto mb-6">
+              {/* Logo em escala de cinza (fundo) */}
+              <img 
+                src={governoPiauiLogo} 
+                alt="Governo do Piauí"
+                className="absolute inset-0 w-full h-full object-contain grayscale opacity-40"
+              />
+              {/* Logo colorido com clip-path baseado no progresso */}
+              <img 
+                src={governoPiauiLogo} 
+                alt=""
+                className="absolute inset-0 w-full h-full object-contain transition-all duration-300"
+                style={{
+                  clipPath: `inset(${100 - progress}% 0 0 0)`
+                }}
+              />
             </div>
-            <p className="text-sm text-muted-foreground mb-3">{progressMessage}</p>
-            <div className="h-2 bg-muted rounded-full overflow-hidden">
+            
+            <span className="font-semibold text-lg block mb-2">Gerando PDF...</span>
+            <p className="text-sm text-muted-foreground mb-4">{progressMessage}</p>
+            
+            {/* Barra de progresso */}
+            <div className="h-2 bg-muted rounded-full overflow-hidden mb-2">
               <div 
                 className="h-full bg-primary transition-all duration-300" 
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="text-xs text-muted-foreground mt-2 text-center">{progress}%</p>
+            <p className="text-sm font-medium text-primary">
+              {progress.toFixed(2).replace('.', ',')}%
+            </p>
           </div>
         </div>
       )}
