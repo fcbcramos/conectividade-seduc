@@ -426,17 +426,13 @@
    ======================================== */
 
 @media print {
-  /* Page setup - LANDSCAPE */
+  /* Page setup - SINGLE CONTINUOUS PAGE (dynamic height) */
   @page {
-    size: A4 landscape;
-    margin: 10mm 12mm 12mm 12mm;
+    size: 297mm 99999mm; /* Will be overridden by JS */
+    margin: 10mm 12mm;
   }
 
-  @page :first {
-    margin-top: 0;
-  }
-
-  /* Reset everything for print - LANDSCAPE dimensions */
+  /* Reset everything for print - continuous flow */
   html, body {
     width: 297mm !important;
     height: auto !important;
@@ -445,6 +441,7 @@
     background: white !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
+    overflow: visible !important;
   }
 
   /* Hide non-print elements */
@@ -461,28 +458,47 @@
     display: none !important;
   }
 
-  /* PDF container reset */
+  /* PDF container - continuous flow */
   .pdf-mode {
     width: 100% !important;
     margin: 0 !important;
     padding: 0 !important;
     box-shadow: none !important;
+    overflow: visible !important;
   }
 
-  /* Cover page full bleed - LANDSCAPE */
+  /* DISABLE ALL PAGE BREAKS */
+  * {
+    page-break-before: auto !important;
+    page-break-after: auto !important;
+    page-break-inside: auto !important;
+    break-before: auto !important;
+    break-after: auto !important;
+    break-inside: auto !important;
+  }
+
+  /* Cover page - NO page break, just visual separation */
   .pdf-cover-page {
     margin: -10mm -12mm 0 -12mm !important;
     padding: 0 !important;
     width: calc(100% + 24mm) !important;
     min-height: 210mm !important;
-    page-break-after: always !important;
+    border-bottom: 3px solid hsl(213 97% 32%) !important;
+    margin-bottom: 15mm !important;
   }
 
   .pdf-cover-page > * {
     min-height: 210mm !important;
   }
 
-  /* Grids optimizados para landscape - mais colunas */
+  /* TOC - visual separation */
+  .pdf-toc-page {
+    padding: 15mm 10mm !important;
+    border-bottom: 2px solid hsl(213 97% 32% / 0.3) !important;
+    margin-bottom: 15mm !important;
+  }
+
+  /* Grids optimizados para landscape */
   .pdf-mode .md\\:grid-cols-2 {
     grid-template-columns: repeat(2, 1fr) !important;
   }
@@ -499,20 +515,16 @@
     grid-template-columns: repeat(4, 1fr) !important;
   }
 
-  /* Section content - mais padding lateral para landscape */
+  /* Section content - visual separation instead of page breaks */
   .pdf-section-content {
     padding: 12mm 15mm 15mm 15mm !important;
+    border-top: 2px solid hsl(213 97% 32% / 0.2) !important;
+    margin-top: 10mm !important;
   }
 
-  /* TOC styling */
-  .pdf-toc-page {
-    padding: 15mm 10mm !important;
-  }
-
-  /* Section pages */
-  .pdf-section-content {
-    padding: 0 !important;
-    page-break-before: always !important;
+  .pdf-section-content:first-child {
+    border-top: none !important;
+    margin-top: 0 !important;
   }
 
   /* Section header prominent */
@@ -522,7 +534,6 @@
     margin-bottom: 12pt !important;
     border-left: 4px solid hsl(213 97% 32%) !important;
     border-bottom: none !important;
-    page-break-after: avoid !important;
   }
 
   .pdf-section-header h2 {
@@ -530,7 +541,7 @@
   }
 
   /* Force colors */
-  * {
+  .pdf-mode * {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     color-adjust: exact !important;
@@ -552,10 +563,9 @@
     overflow: visible !important;
   }
 
-  /* Ensure images load */
+  /* Images */
   img {
     max-width: 100% !important;
-    page-break-inside: avoid !important;
   }
 
   /* Links - show as text */
@@ -564,12 +574,8 @@
     color: inherit !important;
   }
 
-  /* Footer for pages - using CSS counters */
+  /* Content flow - continuous */
   .pdf-content-flow {
-    counter-reset: page-counter;
-  }
-
-  .pdf-section-content {
-    counter-increment: page-counter;
+    display: block !important;
   }
 }

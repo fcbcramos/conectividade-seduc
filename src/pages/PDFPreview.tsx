@@ -62,7 +62,33 @@ const PDFPreview = () => {
   }, []);
 
   const handleGeneratePDF = () => {
-    window.print();
+    // Calcular altura total do conteúdo para página única
+    const pdfContent = document.querySelector('.pdf-mode');
+    if (pdfContent) {
+      const totalHeight = pdfContent.scrollHeight;
+      
+      // Criar estilo dinâmico com altura calculada
+      const styleSheet = document.createElement('style');
+      styleSheet.id = 'dynamic-page-size';
+      styleSheet.textContent = `
+        @page {
+          size: 297mm ${totalHeight + 40}px !important;
+          margin: 10mm 12mm !important;
+        }
+      `;
+      document.head.appendChild(styleSheet);
+      
+      // Imprimir após aplicar estilo
+      setTimeout(() => {
+        window.print();
+        // Remover estilo após impressão
+        setTimeout(() => {
+          document.getElementById('dynamic-page-size')?.remove();
+        }, 1000);
+      }, 100);
+    } else {
+      window.print();
+    }
   };
 
   const SectionComponent = mode === "section" ? sectionComponents[sectionNumber] : null;
