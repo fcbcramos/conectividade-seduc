@@ -426,19 +426,19 @@
    ======================================== */
 
 @media print {
-  /* Page setup */
+  /* Page setup - LANDSCAPE */
   @page {
-    size: A4 portrait;
-    margin: 12mm 10mm 15mm 10mm;
+    size: A4 landscape;
+    margin: 10mm 12mm 12mm 12mm;
   }
 
   @page :first {
     margin-top: 0;
   }
 
-  /* Reset everything for print */
+  /* Reset everything for print - LANDSCAPE dimensions */
   html, body {
-    width: 210mm !important;
+    width: 297mm !important;
     height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
@@ -469,17 +469,39 @@
     box-shadow: none !important;
   }
 
-  /* Cover page full bleed */
+  /* Cover page full bleed - LANDSCAPE */
   .pdf-cover-page {
-    margin: -12mm -10mm 0 -10mm !important;
+    margin: -10mm -12mm 0 -12mm !important;
     padding: 0 !important;
-    width: calc(100% + 20mm) !important;
-    min-height: 297mm !important;
+    width: calc(100% + 24mm) !important;
+    min-height: 210mm !important;
     page-break-after: always !important;
   }
 
   .pdf-cover-page > * {
-    min-height: 297mm !important;
+    min-height: 210mm !important;
+  }
+
+  /* Grids optimizados para landscape - mais colunas */
+  .pdf-mode .md\\:grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .pdf-mode .md\\:grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  .pdf-mode .md\\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  .pdf-mode .lg\\:grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr) !important;
+  }
+
+  /* Section content - mais padding lateral para landscape */
+  .pdf-section-content {
+    padding: 12mm 15mm 15mm 15mm !important;
   }
 
   /* TOC styling */

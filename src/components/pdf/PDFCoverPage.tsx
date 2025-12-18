@@ -13,7 +13,7 @@ const PDFCoverPage = () => {
   });
 
   return (
-    <div className="pdf-page pdf-cover-page relative bg-white min-h-[297mm] w-[210mm] flex flex-col">
+    <div className="pdf-page pdf-cover-page relative bg-white min-h-[210mm] w-[297mm] flex flex-col">
       {/* Barra lateral colorida (cores institucionais) */}
       <div className="absolute left-0 top-0 bottom-0 w-3 flex flex-col">
         <div className="flex-1 bg-primary" />
@@ -23,50 +23,51 @@ const PDFCoverPage = () => {
       </div>
 
       {/* Header com logo SEDUC */}
-      <header className="pt-8 pr-8 flex justify-end">
+      <header className="pt-6 pr-10 flex justify-end">
         <img 
           src={seducLogo} 
           alt="SEDUC - Secretaria da Educação" 
-          className="h-16 w-auto object-contain"
+          className="h-14 w-auto object-contain"
         />
       </header>
 
-      {/* Conteúdo central */}
-      <main className="flex-1 flex flex-col justify-center px-12 pl-16">
-        <div className="space-y-6">
-          {/* Título principal */}
-          <h1 className="text-5xl font-extrabold text-primary tracking-tight leading-tight">
-            Caravana Digital
-          </h1>
-          
-          {/* Subtítulo */}
-          <div className="space-y-2">
-            <p className="text-2xl font-semibold text-foreground">
-              REGC - Relatório Executivo de Governança Contratual
-            </p>
-            <p className="text-lg text-muted-foreground max-w-xl">
-              Conectividade à Internet e Infraestrutura Wi-Fi para a Rede Estadual de Educação do Piauí
-            </p>
+      {/* Conteúdo central - otimizado para landscape */}
+      <main className="flex-1 flex flex-col justify-center px-16 pl-20">
+        <div className="flex items-start gap-16">
+          {/* Coluna esquerda: Título e subtítulo */}
+          <div className="flex-1 space-y-4">
+            <h1 className="text-6xl font-extrabold text-primary tracking-tight leading-tight">
+              Caravana Digital
+            </h1>
+            
+            <div className="space-y-2">
+              <p className="text-2xl font-semibold text-foreground">
+                REGC - Relatório Executivo de Governança Contratual
+              </p>
+              <p className="text-lg text-muted-foreground max-w-2xl">
+                Conectividade à Internet e Infraestrutura Wi-Fi para a Rede Estadual de Educação do Piauí
+              </p>
+            </div>
           </div>
 
-          {/* Informações do processo */}
-          <div className="mt-12 pt-8 border-t border-border space-y-3">
-            <div className="grid grid-cols-2 gap-4 text-sm">
+          {/* Coluna direita: Informações do processo */}
+          <div className="w-80 pt-2">
+            <div className="border-l-2 border-primary pl-6 space-y-4">
               <div>
-                <span className="text-muted-foreground">Processo nº:</span>
-                <span className="ml-2 font-semibold">{basicInfo.processNumber}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Processo nº</span>
+                <p className="font-semibold text-sm">{basicInfo.processNumber}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Data:</span>
-                <span className="ml-2 font-semibold">{generationDate}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Data</span>
+                <p className="font-semibold text-sm">{generationDate}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Unidade:</span>
-                <span className="ml-2 font-semibold">{basicInfo.requestingArea}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Unidade</span>
+                <p className="font-semibold text-sm">{basicInfo.requestingArea}</p>
               </div>
               <div>
-                <span className="text-muted-foreground">Elaborado por:</span>
-                <span className="ml-2 font-semibold">{basicInfo.elaboratedBy}</span>
+                <span className="text-xs text-muted-foreground uppercase tracking-wider">Elaborado por</span>
+                <p className="font-semibold text-sm">{basicInfo.elaboratedBy}</p>
               </div>
             </div>
           </div>

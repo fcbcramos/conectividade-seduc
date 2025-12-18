@@ -118,7 +118,7 @@ const PDFPreview = () => {
 
       {/* PDF Content */}
       <div className="pt-20 pb-8 px-4 print:pt-0 print:pb-0 print:px-0">
-        <div className="max-w-[210mm] mx-auto print:max-w-none">
+        <div className="max-w-[297mm] mx-auto print:max-w-none">
           {/* Preview indicator - Hidden when printing */}
           <div className="text-center text-sm text-muted-foreground mb-4 print:hidden">
             Pré-visualização • Clique em "Imprimir / Salvar PDF" e selecione "Salvar como PDF"
