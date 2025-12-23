@@ -4,7 +4,7 @@ import { PDFSectionTitle, PDFCard, PDFList, PDFBadge, PDFMetricCard } from '../c
 import { basicInfo, kpiData } from '@/data/contractData';
 
 const formatCurrency = (value: number) => {
-  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+  return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2, maximumFractionDigits: 2 });
 };
 
 const Section1 = () => {
