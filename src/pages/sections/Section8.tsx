@@ -88,10 +88,10 @@ const Section8 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={8} />
+      <SectionNavigation currentSection={9} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 8</Badge>
+        <Badge variant="outline" className="mb-2">Seção 9</Badge>
         <h1 className="text-3xl font-bold text-foreground">Modelo de Fiscalização</h1>
         <p className="text-muted-foreground mt-2">
           Dimensões e processos de acompanhamento da execução contratual
@@ -438,7 +438,7 @@ const Section8 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={8} />
+      <SectionNavigation currentSection={9} />
     </div>
   );
 };

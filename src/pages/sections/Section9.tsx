@@ -25,10 +25,10 @@ const Section9 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={9} />
+      <SectionNavigation currentSection={10} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 9</Badge>
+        <Badge variant="outline" className="mb-2">Seção 10</Badge>
         <h1 className="text-3xl font-bold text-foreground">Artefatos Contratuais</h1>
         <p className="text-muted-foreground mt-2">
           Documentos obrigatórios previstos no contrato e sua periodicidade
@@ -116,7 +116,7 @@ const Section9 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={9} />
+      <SectionNavigation currentSection={10} />
     </div>
   );
 };

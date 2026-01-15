@@ -41,6 +41,7 @@ export const getTipoIntervencao = (ciclo: string): TipoIntervencao => {
 };
 
 // Resumo por ciclo - DADOS CORRETOS DA PLANILHA (88+88+88+110+110+100 = 584)
+// Início do programa: 02/02/2026
 export const ciclosResumo: Record<string, { 
   escolas: number; 
   mesInicio: string; 
@@ -52,7 +53,7 @@ export const ciclosResumo: Record<string, {
 }> = {
   "CICLO 001": { 
     escolas: 88, 
-    mesInicio: "Fev/2026", 
+    mesInicio: "Mar/2026", 
     prioridade: true,
     tipoIntervencao: "IMPLANTAÇÃO",
     gres: ["01ª GRE - PARNAIBA", "02ª GRE - BARRAS", "03ª GRE - PIRIPIRI", "05ª GRE - CAMPO MAIOR", "06ª GRE - REGENERAÇÃO"],
@@ -61,7 +62,7 @@ export const ciclosResumo: Record<string, {
   },
   "CICLO 002": { 
     escolas: 88, 
-    mesInicio: "Mar/2026", 
+    mesInicio: "Abr/2026", 
     prioridade: true,
     tipoIntervencao: "IMPLANTAÇÃO",
     gres: ["06ª GRE - REGENERAÇÃO", "07ª GRE - VALENÇA", "08ª GRE - OEIRAS", "09ª GRE - PICOS", "10ª GRE - FLORIANO", "11ª GRE - URUÇUI"],
@@ -70,7 +71,7 @@ export const ciclosResumo: Record<string, {
   },
   "CICLO 003": { 
     escolas: 88, 
-    mesInicio: "Abr/2026", 
+    mesInicio: "Mai/2026", 
     prioridade: true,
     tipoIntervencao: "IMPLANTAÇÃO",
     gres: ["12ª GRE - SÃO JOÃO DO PIAUÍ", "13ª GRE - SÃO RAIMUNDO NONATO", "14ª GRE - BOM JESUS", "15ª GRE - CORRENTE", "16ª GRE - FRONTEIRAS", "17ª GRE - PAULISTANA", "18ª GRE - TERESINA"],
@@ -79,7 +80,7 @@ export const ciclosResumo: Record<string, {
   },
   "CICLO 004": { 
     escolas: 110, 
-    mesInicio: "Mai/2026", 
+    mesInicio: "Jun/2026", 
     prioridade: false,
     tipoIntervencao: "MODERNIZAÇÃO",
     gres: ["01ª GRE - PARNAIBA", "02ª GRE - BARRAS", "03ª GRE - PIRIPIRI", "04ª GRE - TERESINA", "05ª GRE - CAMPO MAIOR", "06ª GRE - REGENERAÇÃO", "07ª GRE - VALENÇA", "08ª GRE - OEIRAS"],
@@ -88,7 +89,7 @@ export const ciclosResumo: Record<string, {
   },
   "CICLO 005": { 
     escolas: 110, 
-    mesInicio: "Jun/2026", 
+    mesInicio: "Jul/2026", 
     prioridade: false,
     tipoIntervencao: "MODERNIZAÇÃO",
     gres: ["07ª GRE - VALENÇA", "08ª GRE - OEIRAS", "09ª GRE - PICOS", "10ª GRE - FLORIANO", "11ª GRE - URUÇUI", "12ª GRE - SÃO JOÃO DO PIAUÍ", "13ª GRE - SÃO RAIMUNDO NONATO", "14ª GRE - BOM JESUS", "15ª GRE - CORRENTE"],
@@ -97,7 +98,7 @@ export const ciclosResumo: Record<string, {
   },
   "CICLO 006": { 
     escolas: 100, 
-    mesInicio: "Jul/2026", 
+    mesInicio: "Ago/2026", 
     prioridade: false,
     tipoIntervencao: "MODERNIZAÇÃO",
     gres: ["16ª GRE - FRONTEIRAS", "17ª GRE - PAULISTANA", "18ª GRE - TERESINA", "19ª GRE - TERESINA", "20ª GRE - TERESINA", "21ª GRE - TERESINA"],

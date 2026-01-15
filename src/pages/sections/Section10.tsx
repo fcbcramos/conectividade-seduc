@@ -24,10 +24,10 @@ const Section10 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={10} />
+      <SectionNavigation currentSection={11} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 10</Badge>
+        <Badge variant="outline" className="mb-2">Seção 11</Badge>
         <h1 className="text-3xl font-bold text-foreground">Instrumentos de Medição</h1>
         <p className="text-muted-foreground mt-2">
           Ferramentas e metodologias para aferição da qualidade dos serviços
@@ -86,7 +86,7 @@ const Section10 = () => {
               <Gauge className="w-5 h-5 text-primary" />
               Metas de Qualidade por Dimensão
             </CardTitle>
-            <p className="text-xs text-muted-foreground">Valores a aferir após início da execução (Jan/2026)</p>
+            <p className="text-xs text-muted-foreground">Valores a aferir após início da execução (Fev/2026)</p>
           </CardHeader>
           <CardContent>
             <div className="h-80">
@@ -188,7 +188,7 @@ const Section10 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={10} />
+      <SectionNavigation currentSection={11} />
     </div>
   );
 };

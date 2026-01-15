@@ -125,10 +125,10 @@ const Section11 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={11} />
+      <SectionNavigation currentSection={12} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 11</Badge>
+        <Badge variant="outline" className="mb-2">Seção 12</Badge>
         <h1 className="text-3xl font-bold text-foreground">Modelo de Execução e Gestão de Nível de Serviço (SLA)</h1>
         <p className="text-muted-foreground mt-2">
           Pagamento por resultado, indicadores, metodologia de medição, glosas e procedimentos de ateste
@@ -544,7 +544,7 @@ const Section11 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={11} />
+      <SectionNavigation currentSection={12} />
     </div>
   );
 };

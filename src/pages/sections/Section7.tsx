@@ -99,10 +99,10 @@ const Section7 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={7} />
+      <SectionNavigation currentSection={8} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 7</Badge>
+        <Badge variant="outline" className="mb-2">Seção 8</Badge>
         <h1 className="text-3xl font-bold text-foreground">Cronograma de Desembolso</h1>
         <p className="text-muted-foreground mt-2">
           Distribuição financeira por fase do projeto - Previsão para 2026
@@ -146,8 +146,8 @@ const Section7 = () => {
                 <Calendar className="w-6 h-6 text-secondary-foreground" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground uppercase">Início Previsto</p>
-                <p className="text-xl font-bold">Janeiro/2026</p>
+              <p className="text-xs text-muted-foreground uppercase">Início Previsto</p>
+                <p className="text-xl font-bold">Fevereiro/2026</p>
               </div>
             </div>
           </CardContent>
@@ -195,7 +195,7 @@ const Section7 = () => {
                 <tr className="font-bold bg-muted/30">
                   <td className="py-3 px-4">Total</td>
                   <td className="py-3 px-4">Implantação</td>
-                  <td className="text-center py-3 px-4">Jan-Jul/26</td>
+                  <td className="text-center py-3 px-4">Fev-Ago/26</td>
                   <td className="text-right py-3 px-4">60%</td>
                   <td className="text-right py-3 px-4">{formatCurrency(totalImplantation)}</td>
                   <td></td>
@@ -297,7 +297,7 @@ const Section7 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={7} />
+      <SectionNavigation currentSection={8} />
     </div>
   );
 };
