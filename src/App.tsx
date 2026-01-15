@@ -48,15 +48,15 @@ const App = () => (
             <Route path="/secao/4" element={<Section4 />} />
             <Route path="/secao/5" element={<Section5 />} />
             <Route path="/secao/6" element={<Section6 />} />
-            <Route path="/secao/7" element={<Section7 />} />
-            <Route path="/secao/8" element={<Section8 />} />
-            <Route path="/secao/9" element={<Section9 />} />
-            <Route path="/secao/10" element={<Section10 />} />
-            <Route path="/secao/11" element={<Section11 />} />
-            <Route path="/secao/12" element={<Section12 />} />
-            <Route path="/secao/13" element={<Section13 />} />
-            <Route path="/secao/14" element={<Section14 />} />
-            <Route path="/secao/15" element={<Section15 />} />
+            <Route path="/secao/7" element={<Section15 />} />
+            <Route path="/secao/8" element={<Section7 />} />
+            <Route path="/secao/9" element={<Section8 />} />
+            <Route path="/secao/10" element={<Section9 />} />
+            <Route path="/secao/11" element={<Section10 />} />
+            <Route path="/secao/12" element={<Section11 />} />
+            <Route path="/secao/13" element={<Section12 />} />
+            <Route path="/secao/14" element={<Section13 />} />
+            <Route path="/secao/15" element={<Section14 />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>

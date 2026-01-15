@@ -26,19 +26,19 @@ export const kpiData = {
   totalPhases: 7,
   completedPhases: 0,
   executionPeriod: "36 meses",
-  startDate: "Janeiro/2026",
+  startDate: "Fevereiro/2026",
   contractModel: "Integrada, Lote Único, As a Service",
   status: "Aguardando"
 };
 
 export const disbursementData = [
-  { phase: "RPTI", name: "Planejamento", value: 8997127.50, percentage: 10, month: "Jan/26", status: "Planejado", type: "planejamento" },
-  { phase: "PEP-I", name: "Mobilização", value: 5416478.70, percentage: 6, month: "Fev/26", status: "Planejado", type: "mobilizacao" },
-  { phase: "PEP-M1", name: "Onda 1", value: 8124717.00, percentage: 9, month: "Mar/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-M2", name: "Onda 2", value: 9027464.50, percentage: 10, month: "Abr/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-M3", name: "Onda 3", value: 9027464.50, percentage: 10, month: "Mai/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-F", name: "Finalização", value: 8124717.00, percentage: 9, month: "Jun/26", status: "Planejado", type: "execucao" },
-  { phase: "RTF", name: "Entrega", value: 5416480.80, percentage: 6, month: "Jul/26", status: "Planejado", type: "entrega" }
+  { phase: "RPTI", name: "Planejamento", value: 8997127.50, percentage: 10, month: "Fev/26", status: "Planejado", type: "planejamento" },
+  { phase: "PEP-I", name: "Mobilização", value: 5416478.70, percentage: 6, month: "Mar/26", status: "Planejado", type: "mobilizacao" },
+  { phase: "PEP-M1", name: "Onda 1", value: 8124717.00, percentage: 9, month: "Abr/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M2", name: "Onda 2", value: 9027464.50, percentage: 10, month: "Mai/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M3", name: "Onda 3", value: 9027464.50, percentage: 10, month: "Jun/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-F", name: "Finalização", value: 8124717.00, percentage: 9, month: "Jul/26", status: "Planejado", type: "execucao" },
+  { phase: "RTF", name: "Entrega", value: 5416480.80, percentage: 6, month: "Ago/26", status: "Planejado", type: "entrega" }
 ];
 
 export const slaMetrics = [
@@ -321,7 +321,7 @@ export const phases = [
     description: "Documento técnico contendo o planejamento detalhado da execução, incluindo dimensionamento de recursos, cronograma de atividades e metodologia de implantação.",
     deliverables: ["Cronograma executivo", "Plano de recursos", "Metodologia de implantação"],
     percentage: 10,
-    month: "Jan/26",
+    month: "Fev/26",
     status: "Planejado"
   },
   {
@@ -330,7 +330,7 @@ export const phases = [
     description: "Etapa de mobilização operacional e início da execução, contemplando a instalação piloto e validação dos processos de implantação.",
     deliverables: ["Mobilização de equipes", "Instalações piloto", "Validação de processos"],
     percentage: 6,
-    month: "Fev/26",
+    month: "Mar/26",
     status: "Planejado"
   },
   {
@@ -339,7 +339,7 @@ export const phases = [
     description: "Continuidade da implantação com ampliação dos serviços de conectividade para o primeiro grupo de escolas da rede estadual.",
     deliverables: ["Escolas conectadas (Onda 1)", "Infraestrutura Wi-Fi instalada", "Relatório de aceite"],
     percentage: 9,
-    month: "Mar/26",
+    month: "Abr/26",
     status: "Planejado"
   },
   {
@@ -348,7 +348,7 @@ export const phases = [
     description: "Expansão da cobertura para o segundo grupo de escolas, com instalação de infraestrutura e ativação de serviços.",
     deliverables: ["Escolas conectadas (Onda 2)", "Ativos de rede configurados", "Testes de qualidade"],
     percentage: 10,
-    month: "Abr/26",
+    month: "Mai/26",
     status: "Planejado"
   },
   {
@@ -357,7 +357,7 @@ export const phases = [
     description: "Terceira onda de implantação, consolidando a expansão da conectividade para mais unidades escolares.",
     deliverables: ["Escolas conectadas (Onda 3)", "Monitoramento ativo", "Relatório de desempenho"],
     percentage: 10,
-    month: "Mai/26",
+    month: "Jun/26",
     status: "Planejado"
   },
   {
@@ -366,7 +366,7 @@ export const phases = [
     description: "Conclusão da implantação e estabilização dos serviços, com foco na operação assistida e ajustes finais.",
     deliverables: ["Operação estabilizada", "Suporte técnico ativo", "Relatórios mensais"],
     percentage: 9,
-    month: "Jun/26",
+    month: "Jul/26",
     status: "Planejado"
   },
   {
@@ -375,7 +375,7 @@ export const phases = [
     description: "Documento conclusivo que apresenta a consolidação dos resultados, documentação técnica completa e transferência de conhecimento.",
     deliverables: ["Documentação as-built", "Manual operacional", "Termo de encerramento"],
     percentage: 6,
-    month: "Jul/26",
+    month: "Ago/26",
     status: "Planejado"
   }
 ];
@@ -445,15 +445,15 @@ export const navigationItems = [
   { id: 4, title: "Papéis e Responsabilidades", path: "/secao/4" },
   { id: 5, title: "Ciclo de Vida da Execução", path: "/secao/5" },
   { id: 6, title: "Fases do Projeto e Marcos", path: "/secao/6" },
-  { id: 7, title: "Cronograma de Desembolso", path: "/secao/7" },
-  { id: 8, title: "Modelo de Fiscalização", path: "/secao/8" },
-  { id: 9, title: "Artefatos Contratuais", path: "/secao/9" },
-  { id: 10, title: "Instrumentos de Medição", path: "/secao/10" },
-  { id: 11, title: "Gestão de SLA e Penalidades", path: "/secao/11" },
-  { id: 12, title: "Gestão de Riscos", path: "/secao/12" },
-  { id: 13, title: "Governança da Operação", path: "/secao/13" },
-  { id: 14, title: "Encerramento e Legado", path: "/secao/14" },
-  { id: 15, title: "Cronograma de Atendimento", path: "/secao/15" }
+  { id: 7, title: "Cronograma de Atendimento", path: "/secao/7" },
+  { id: 8, title: "Cronograma de Desembolso", path: "/secao/8" },
+  { id: 9, title: "Modelo de Fiscalização", path: "/secao/9" },
+  { id: 10, title: "Artefatos Contratuais", path: "/secao/10" },
+  { id: 11, title: "Instrumentos de Medição", path: "/secao/11" },
+  { id: 12, title: "Gestão de SLA e Penalidades", path: "/secao/12" },
+  { id: 13, title: "Gestão de Riscos", path: "/secao/13" },
+  { id: 14, title: "Governança da Operação", path: "/secao/14" },
+  { id: 15, title: "Encerramento e Legado", path: "/secao/15" }
 ];
 
 export const solutionArchitecture = [

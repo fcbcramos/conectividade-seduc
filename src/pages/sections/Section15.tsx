@@ -106,11 +106,11 @@ const Section15 = () => {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={15} />
+      <SectionNavigation currentSection={7} />
       
       {/* Header */}
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 15</Badge>
+        <Badge variant="outline" className="mb-2">Seção 7</Badge>
         <h1 className="text-3xl font-bold text-foreground">Cronograma de Atendimento</h1>
         <p className="text-muted-foreground mt-2">
           Detalhamento das 584 escolas distribuídas em 6 ciclos de atendimento, 
@@ -205,7 +205,7 @@ const Section15 = () => {
         filters={filters}
       />
 
-      <SectionNavigation currentSection={15} />
+      <SectionNavigation currentSection={7} />
     </div>
   );
 };

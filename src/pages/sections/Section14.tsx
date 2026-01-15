@@ -38,10 +38,10 @@ const Section14 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={14} />
+      <SectionNavigation currentSection={15} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 14</Badge>
+        <Badge variant="outline" className="mb-2">Seção 15</Badge>
         <h1 className="text-3xl font-bold text-foreground">Encerramento Contratual e Legado</h1>
         <p className="text-muted-foreground mt-2">
           Procedimentos de encerramento e garantia de continuidade dos serviços
@@ -169,7 +169,7 @@ const Section14 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={14} />
+      <SectionNavigation currentSection={15} />
     </div>
   );
 };

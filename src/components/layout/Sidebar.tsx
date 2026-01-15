@@ -31,15 +31,15 @@ const iconMap: Record<number, React.ComponentType<{ className?: string }>> = {
   4: Clock,
   5: Milestone,
   6: Wallet,
-  7: ClipboardCheck,
-  8: FolderOpen,
-  9: Gauge,
-  10: AlertTriangle,
-  11: Shield,
-  12: Settings,
-  13: Flag,
-  14: Flag,
-  15: CalendarClock,
+  7: CalendarClock,    // Cronograma de Atendimento (era 15)
+  8: ClipboardCheck,   // Cronograma de Desembolso (era 7)
+  9: FolderOpen,       // Modelo de Fiscalização (era 8)
+  10: Gauge,           // Artefatos Contratuais (era 9)
+  11: AlertTriangle,   // Instrumentos de Medição (era 10)
+  12: Shield,          // Gestão de SLA (era 11)
+  13: Settings,        // Gestão de Riscos (era 12)
+  14: Flag,            // Governança da Operação (era 13)
+  15: Flag,            // Encerramento e Legado (era 14)
 };
 
 const Sidebar = () => {

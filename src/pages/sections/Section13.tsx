@@ -69,10 +69,10 @@ const Section13 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={13} />
+      <SectionNavigation currentSection={14} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 13</Badge>
+        <Badge variant="outline" className="mb-2">Seção 14</Badge>
         <h1 className="text-3xl font-bold text-foreground">Governança da Operação Contínua</h1>
         <p className="text-muted-foreground mt-2">
           Rotinas de acompanhamento e estrutura de governança durante a operação
@@ -464,7 +464,7 @@ const Section13 = () => {
         </CardContent>
       </Card>
 
-      <SectionNavigation currentSection={13} />
+      <SectionNavigation currentSection={14} />
     </div>
   );
 };

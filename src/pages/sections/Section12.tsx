@@ -135,10 +135,10 @@ const Section12 = () => {
 
   return (
     <div className="max-w-5xl mx-auto space-y-6 animate-fade-in">
-      <SectionNavigation currentSection={12} />
+      <SectionNavigation currentSection={13} />
       
       <div className="mb-8">
-        <Badge variant="outline" className="mb-2">Seção 12</Badge>
+        <Badge variant="outline" className="mb-2">Seção 13</Badge>
         <h1 className="text-3xl font-bold text-foreground">Gestão de Riscos</h1>
         <p className="text-muted-foreground mt-2">
           Matriz de Riscos e Responsabilidades conforme Lei nº 14.133/2021
@@ -602,7 +602,7 @@ const Section12 = () => {
         </Accordion>
       </div>
 
-      <SectionNavigation currentSection={12} />
+      <SectionNavigation currentSection={13} />
     </div>
   );
 };
