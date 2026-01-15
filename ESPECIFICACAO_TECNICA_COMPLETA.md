@@ -55,7 +55,7 @@ Contratação Integrada de Serviços de Conectividade à Internet e Infraestrutu
 - Lei 14.172/2021 (FUST): R$ 54.134.450,00
 - Tesouro Estadual: R$ 35.836.825,00
 
-**Período de Execução:** 36 meses (início previsto: Janeiro/2026)
+**Período de Execução:** 36 meses (início previsto: Fevereiro/2026)
 
 **Modelo de Contratação:** Integrada, Lote Único, As a Service
 

@@ -12,8 +12,8 @@ const Section5 = () => {
       name: "Mobilização",
       description: "Preparação inicial, planejamento detalhado e alocação de recursos",
       icon: PlayCircle,
-      duration: "2 meses",
-      period: "Jan-Fev/2026",
+      duration: "1 mês",
+      period: "Fev/2026",
       status: "Pendente",
       activities: ["Planejamento técnico", "Alocação de equipe", "Definição de cronograma"]
     },
@@ -21,8 +21,8 @@ const Section5 = () => {
       name: "Implantação",
       description: "Instalação física da infraestrutura nas unidades escolares",
       icon: Settings,
-      duration: "5 meses",
-      period: "Mar-Jul/2026",
+      duration: "6 meses",
+      period: "Mar-Ago/2026",
       status: "Pendente",
       activities: ["Instalação de links", "Configuração Wi-Fi", "Testes de qualidade"]
     },
@@ -30,8 +30,8 @@ const Section5 = () => {
       name: "Estabilização",
       description: "Ajustes finos e validação do funcionamento",
       icon: Clock,
-      duration: "5 meses",
-      period: "Ago-Dez/2026",
+      duration: "4 meses",
+      period: "Set-Dez/2026",
       status: "Pendente",
       activities: ["Otimização de rede", "Correção de falhas", "Validação de SLAs"]
     },
