@@ -86,7 +86,7 @@ const Section10 = () => {
               <Gauge className="w-5 h-5 text-primary" />
               Metas de Qualidade por Dimensão
             </CardTitle>
-            <p className="text-xs text-muted-foreground">Valores a aferir após início da execução (Fev/2026)</p>
+            <p className="text-xs text-muted-foreground">Valores a aferir após início da execução (Mar/2026)</p>
           </CardHeader>
           <CardContent>
             <div className="h-80">

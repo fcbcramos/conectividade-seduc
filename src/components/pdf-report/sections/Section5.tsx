@@ -108,12 +108,12 @@ const Section5 = () => {
   ];
 
   const milestones = [
-    { name: "Início do Contrato", month: "Jan/2026", status: "Planejado" },
-    { name: "Conclusão Fase Piloto", month: "Fev/2026", status: "Planejado" },
-    { name: "50% das Escolas", month: "Mai/2026", status: "Planejado" },
-    { name: "100% das Escolas", month: "Jul/2026", status: "Planejado" },
-    { name: "Operação Plena", month: "Jul/2027", status: "Planejado" },
-    { name: "Encerramento", month: "Dez/2028", status: "Planejado" },
+    { name: "Início do Contrato", month: "Fev/2026", status: "Planejado" },
+    { name: "Conclusão Fase Piloto", month: "Mar/2026", status: "Planejado" },
+    { name: "50% das Escolas", month: "Jun/2026", status: "Planejado" },
+    { name: "100% das Escolas", month: "Ago/2026", status: "Planejado" },
+    { name: "Operação Plena", month: "Ago/2027", status: "Planejado" },
+    { name: "Encerramento", month: "Jan/2029", status: "Planejado" },
   ];
 
   return (

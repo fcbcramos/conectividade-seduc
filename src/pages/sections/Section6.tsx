@@ -31,7 +31,7 @@ const Section6 = () => {
               <div>
                 <p className="text-sm text-muted-foreground">Total de Fases</p>
                 <p className="text-3xl font-bold">{phases.length} fases</p>
-                <p className="text-xs text-muted-foreground mt-1">Início: Janeiro/2026</p>
+                <p className="text-xs text-muted-foreground mt-1">Início: Fevereiro/2026</p>
               </div>
             </div>
             <div className="text-right">

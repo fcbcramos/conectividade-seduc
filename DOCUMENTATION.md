@@ -233,13 +233,13 @@ Componentes exibidos:
 
 | Fase | Nome | Percentual | Valor | Mês |
 |------|------|------------|-------|-----|
-| RPTI | Planejamento | 10% | R$ 8.997.127,50 | Jan/26 |
-| PEP-I | Mobilização | 6% | R$ 5.416.478,70 | Fev/26 |
-| PEP-M1 | Onda 1 | 9% | R$ 8.124.717,00 | Mar/26 |
-| PEP-M2 | Onda 2 | 10% | R$ 9.027.464,50 | Abr/26 |
-| PEP-M3 | Onda 3 | 10% | R$ 9.027.464,50 | Mai/26 |
-| PEP-F | Finalização | 9% | R$ 8.124.717,00 | Jun/26 |
-| RTF | Entrega | 6% | R$ 5.416.480,80 | Jul/26 |
+| RPTI | Planejamento | 10% | R$ 8.997.127,50 | Fev/26 |
+| PEP-I | Mobilização | 6% | R$ 5.416.478,70 | Mar/26 |
+| PEP-M1 | Onda 1 | 9% | R$ 8.124.717,00 | Abr/26 |
+| PEP-M2 | Onda 2 | 10% | R$ 9.027.464,50 | Mai/26 |
+| PEP-M3 | Onda 3 | 10% | R$ 9.027.464,50 | Jun/26 |
+| PEP-F | Finalização | 9% | R$ 8.124.717,00 | Jul/26 |
+| RTF | Entrega | 6% | R$ 5.416.480,80 | Ago/26 |
 
 ### Métricas de SLA
 

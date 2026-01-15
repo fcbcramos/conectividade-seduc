@@ -38,7 +38,7 @@ const PDFSection6 = ({ startPage, totalPages }: PDFSection6Props) => {
                   <div>
                     <p className="text-xs text-muted-foreground">Total de Fases</p>
                     <p className="text-xl font-bold">{phases.length} fases</p>
-                    <p className="text-[10px] text-muted-foreground">Início: Janeiro/2026</p>
+                    <p className="text-[10px] text-muted-foreground">Início: Fevereiro/2026</p>
                   </div>
                 </div>
                 <div className="text-right">
