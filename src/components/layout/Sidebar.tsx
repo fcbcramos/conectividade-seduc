@@ -16,6 +16,7 @@ import {
   Shield, 
   Settings, 
   Flag,
+  CalendarClock,
   ChevronLeft,
   ChevronRight,
   Menu
@@ -37,6 +38,8 @@ const iconMap: Record<number, React.ComponentType<{ className?: string }>> = {
   11: Shield,
   12: Settings,
   13: Flag,
+  14: Flag,
+  15: CalendarClock,
 };
 
 const Sidebar = () => {

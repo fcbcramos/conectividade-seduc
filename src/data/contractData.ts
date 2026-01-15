@@ -452,7 +452,8 @@ export const navigationItems = [
   { id: 11, title: "Gestão de SLA e Penalidades", path: "/secao/11" },
   { id: 12, title: "Gestão de Riscos", path: "/secao/12" },
   { id: 13, title: "Governança da Operação", path: "/secao/13" },
-  { id: 14, title: "Encerramento e Legado", path: "/secao/14" }
+  { id: 14, title: "Encerramento e Legado", path: "/secao/14" },
+  { id: 15, title: "Cronograma de Atendimento", path: "/secao/15" }
 ];
 
 export const solutionArchitecture = [
