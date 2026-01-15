@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -5,13 +6,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { 
   School, 
   MapPin, 
   Building2, 
   TreePine,
-  Calendar
+  Calendar,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import { 
   ciclosResumo, 
@@ -25,17 +29,44 @@ interface CicloAccordionProps {
   onExpandChange?: (ciclo: string) => void;
 }
 
+const ESCOLAS_POR_PAGINA = 15;
+
 const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) => {
+  const [paginaAtual, setPaginaAtual] = useState<Record<string, number>>({});
+
   const ciclosOrdenados = Object.entries(ciclosResumo).sort((a, b) => {
-    // Prioritários primeiro
     if (a[1].prioridade && !b[1].prioridade) return -1;
     if (!a[1].prioridade && b[1].prioridade) return 1;
-    // Depois por número do ciclo
     return a[0].localeCompare(b[0]);
   });
 
-  const getEscolasPorCiclo = (cicloNome: string): EscolaCronograma[] => {
-    return escolasCronograma.filter(e => e.cicloAtendimento === cicloNome).slice(0, 10);
+  const getEscolasPorCiclo = (cicloNome: string): { escolas: EscolaCronograma[]; total: number; pagina: number; totalPaginas: number } => {
+    const todasEscolas = escolasCronograma.filter(e => e.cicloAtendimento === cicloNome);
+    const pagina = paginaAtual[cicloNome] || 0;
+    const inicio = pagina * ESCOLAS_POR_PAGINA;
+    const escolasPaginadas = todasEscolas.slice(inicio, inicio + ESCOLAS_POR_PAGINA);
+    const totalPaginas = Math.ceil(todasEscolas.length / ESCOLAS_POR_PAGINA);
+    
+    return {
+      escolas: escolasPaginadas,
+      total: todasEscolas.length,
+      pagina,
+      totalPaginas
+    };
+  };
+
+  const handlePaginaAnterior = (cicloNome: string) => {
+    setPaginaAtual(prev => ({
+      ...prev,
+      [cicloNome]: Math.max(0, (prev[cicloNome] || 0) - 1)
+    }));
+  };
+
+  const handleProximaPagina = (cicloNome: string, totalPaginas: number) => {
+    setPaginaAtual(prev => ({
+      ...prev,
+      [cicloNome]: Math.min(totalPaginas - 1, (prev[cicloNome] || 0) + 1)
+    }));
   };
 
   return (
@@ -53,8 +84,10 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
         className="px-4 pb-4"
       >
         {ciclosOrdenados.map(([cicloNome, dados]) => {
-          const escolas = getEscolasPorCiclo(cicloNome);
+          const { escolas, total, pagina, totalPaginas } = getEscolasPorCiclo(cicloNome);
           const prioridade = isPrioridade(cicloNome);
+          const inicioExibicao = pagina * ESCOLAS_POR_PAGINA + 1;
+          const fimExibicao = Math.min((pagina + 1) * ESCOLAS_POR_PAGINA, total);
           
           return (
             <AccordionItem 
@@ -76,7 +109,7 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                       {cicloNome}
                     </span>
                     <Badge variant="secondary" className="text-xs">
-                      {dados.escolas} escolas
+                      {total} escolas
                     </Badge>
                     {prioridade && (
                       <Badge variant="destructive" className="text-xs">
@@ -99,7 +132,7 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                     <div className="bg-muted/50 rounded-lg p-3 text-center">
                       <School className="w-5 h-5 mx-auto mb-1 text-primary" />
-                      <p className="text-lg font-bold text-foreground">{dados.escolas}</p>
+                      <p className="text-lg font-bold text-foreground">{total}</p>
                       <p className="text-xs text-muted-foreground">Total</p>
                     </div>
                     <div className="bg-muted/50 rounded-lg p-3 text-center">
@@ -131,10 +164,10 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                     </div>
                   </div>
                   
-                  {/* Mini tabela de escolas */}
+                  {/* Tabela de escolas */}
                   <div>
                     <p className="text-sm font-medium text-muted-foreground mb-2">
-                      Amostra de escolas ({Math.min(10, escolas.length)} de {dados.escolas})
+                      Escolas do Ciclo (mostrando {inicioExibicao}-{fimExibicao} de {total})
                     </p>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
@@ -157,15 +190,15 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                               <td className="py-2 px-2 text-xs">{escola.municipio}</td>
                               <td className="py-2 px-2">
                                 <Badge variant={escola.tipologia === "CETI" ? "default" : "secondary"} className="text-xs">
-                                  {escola.tipologia}
+                                  {escola.tipologia.split(' ')[0]}
                                 </Badge>
                               </td>
                               <td className="py-2 px-2 text-center">
                                 <Badge 
-                                  variant={escola.statusMeta2026 === "C" ? "default" : "outline"} 
-                                  className={`text-xs ${escola.statusMeta2026 === "NC" ? 'border-amber-500 text-amber-600' : ''}`}
+                                  variant={escola.statusMeta2026 === "CONFORME" ? "default" : "outline"} 
+                                  className={`text-xs ${escola.statusMeta2026 === "NÃO CONFORME" ? 'border-amber-500 text-amber-600' : ''}`}
                                 >
-                                  {escola.statusMeta2026}
+                                  {escola.statusMeta2026 === "NÃO CONFORME" ? "NC" : "C"}
                                 </Badge>
                               </td>
                             </tr>
@@ -173,6 +206,35 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                         </tbody>
                       </table>
                     </div>
+                    
+                    {/* Controles de paginação */}
+                    {totalPaginas > 1 && (
+                      <div className="flex items-center justify-between mt-4 pt-3 border-t">
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handlePaginaAnterior(cicloNome)}
+                          disabled={pagina === 0}
+                          className="flex items-center gap-1"
+                        >
+                          <ChevronLeft className="w-4 h-4" />
+                          Anterior
+                        </Button>
+                        <span className="text-sm text-muted-foreground">
+                          Página {pagina + 1} de {totalPaginas}
+                        </span>
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => handleProximaPagina(cicloNome, totalPaginas)}
+                          disabled={pagina >= totalPaginas - 1}
+                          className="flex items-center gap-1"
+                        >
+                          Próxima
+                          <ChevronRight className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
               </AccordionContent>
