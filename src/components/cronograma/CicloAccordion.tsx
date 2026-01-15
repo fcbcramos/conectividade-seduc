@@ -111,9 +111,13 @@ const CicloAccordion = ({ expandedCiclo, onExpandChange }: CicloAccordionProps) 
                     <Badge variant="secondary" className="text-xs">
                       {total} escolas
                     </Badge>
-                    {prioridade && (
+                    {prioridade ? (
                       <Badge variant="destructive" className="text-xs">
-                        PRIORIDADE
+                        IMPLANTAÇÃO
+                      </Badge>
+                    ) : (
+                      <Badge className="text-xs bg-blue-500 hover:bg-blue-600">
+                        MODERNIZAÇÃO
                       </Badge>
                     )}
                   </div>
