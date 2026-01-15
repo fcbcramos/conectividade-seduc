@@ -21,6 +21,7 @@ import Section11 from "./pages/sections/Section11";
 import Section12 from "./pages/sections/Section12";
 import Section13 from "./pages/sections/Section13";
 import Section14 from "./pages/sections/Section14";
+import Section15 from "./pages/sections/Section15";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -55,6 +56,7 @@ const App = () => (
             <Route path="/secao/12" element={<Section12 />} />
             <Route path="/secao/13" element={<Section13 />} />
             <Route path="/secao/14" element={<Section14 />} />
+            <Route path="/secao/15" element={<Section15 />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
