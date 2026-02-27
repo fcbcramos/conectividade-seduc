@@ -1,211 +1,134 @@
 
+# Replanejamento Contratual: Inicio Marco/2026, 12 meses, Fonte Unica 14.172
 
-# Plano Completo: Sistema de Coleta de Evidencias das Instalacoes
+## Resumo das Mudancas
 
-## 1. Contexto do Projeto
+Tres grandes eixos de alteracao:
 
-A plataforma **Caravana Digital** e o sistema de governanca contratual do programa **Escolas Conectadas Piaui**, que gerencia a modernizacao da infraestrutura de conectividade de **584 escolas** da rede estadual. O contrato tem valor de **R$ 89,9 milhoes**, executado em **6 ciclos de atendimento** (Fev a Ago/2026), distribuidos em **21 GREs** (Gerencias Regionais de Educacao).
-
-Atualmente a plataforma possui 15 secoes do relatorio executivo, um dashboard, cronograma de atendimento com filtros, e visualizacoes de dados. O que falta e o **modulo de coleta de evidencias** para controlar e documentar as instalacoes em campo.
-
----
-
-## 2. O Que Sera Construido
-
-Um modulo completo de **prototipos de telas** do sistema de coleta de evidencias, com **5 novas paginas** acessiveis via navegacao lateral, cobrindo todo o ciclo de vida da instalacao: do planejamento (PPI) ate o monitoramento continuo (SQS/SIMET).
-
-**Importante:** O RAT (Relatorio de Atividade Tecnica) NAO faz parte deste escopo.
+1. **Data de inicio**: de 02/02/2026 para **02/03/2026** (todos os ciclos, fases, desembolsos deslocam 1 mes)
+2. **Fonte de financiamento**: remover Tesouro Estadual, **somente Lei 14.172/2021 (FUST)**
+3. **Prazo contratual**: de 36 meses para **12 meses**, com novo valor total baseado na tabela de itens
+4. **Tabela de itens contratados**: atualizar servicos/equipamentos e valor total conforme Anexo VIII
+5. **Distribuicao de itens por escola**: integrar itens contratados no modulo de evidencias (PPI/PDI)
 
 ---
 
-## 3. Artefatos Contratuais Base
+## Dados Extraidos do Anexo VIII
 
-Os prototipos sao baseados em dois anexos contratuais reais:
+| IT | Especificacao | Unidade | Qtd | Meses | Vr. Unit. | Vr. Mensal | Vr. Anual (12m) |
+|----|---------------|---------|-----|-------|-----------|------------|------------------|
+| 01 | Internet Dedicado (fibra, simetrico 1:1) | Mbps | 92.000 | 12 | R$ 4,10 | R$ 377.200,00 | R$ 4.526.400,00 |
+| 02 | Internet Satelite (LEO) | Unid | 50 | 12 | R$ 2.200,00 | R$ 110.000,00 | R$ 1.320.000,00 |
+| 03 | Wi-Fi KIT I (ate 400 m2) | Unid | 327 | 12 | R$ 2.300,24 | R$ 752.178,48 | R$ 9.026.141,76 |
+| 04 | Wi-Fi KIT II (401-800 m2) | Unid | 161 | 12 | R$ 3.138,31 | R$ 505.267,91 | R$ 6.063.214,92 |
+| 05 | Wi-Fi KIT III (801-1500 m2) | Unid | 15 | 12 | R$ 5.506,31 | R$ 82.594,65 | R$ 991.135,80 |
+| 06 | Adequacao Cab. Estruturado + SQS | Unid | 150 | 12 | R$ 1.663,37 | R$ 249.505,50 | R$ 2.994.066,00 |
+| 07 | Suporte Tecnico Especializado | Unid | 631 | 12 | R$ 1.455,04 | R$ 918.130,24 | R$ 11.017.562,88 |
+| **TOTAL** | | | | | | **R$ 2.994.876,78** | **R$ 35.938.521,36** |
 
-### PPI - Projeto Provisorio de Instalacao (pre-instalacao)
-Documento elaborado ANTES da ida a campo, com 4 secoes:
-- Resumo da escola (INEP, endereco, coordenadas GPS, contato)
-- Lista de equipamentos planejados (modelo, fabricante, quantidade)
-- Mapa de cobertura estimado 2,4 GHz (heatmap preditivo)
-- Mapa de cobertura estimado 5 GHz (heatmap preditivo)
-
-### PDI - Projeto Definitivo de Instalacao (pos-instalacao)
-Documento elaborado APOS a instalacao, com 7 secoes:
-- Resumo + checklist de aprovacao (7 itens com status Aprovado/Reprovado/Pendente)
-- Descritivo de infraestrutura (servicos, arquitetura, rede eletrica, aterramento)
-- Lista de materiais utilizados com quantidades
-- Inventario de equipamentos com numeros de serie
-- Relatorio fotografico padronizado (20 fotos obrigatorias)
-- Mapa de cobertura as-built 2,4 GHz (medido em campo)
-- Mapa de cobertura as-built 5 GHz (medido em campo)
+**Novo valor total do contrato: R$ 35.938.521,36 (12 meses)**
 
 ---
 
-## 4. Evidencias a Coletar por Fase
+## Alteracoes por Arquivo
 
-### FASE 1 - Pre-Instalacao (PPI)
-| # | Evidencia | Tipo | Controle |
-|---|-----------|------|----------|
-| 1 | Ficha da escola | Documental | INEP, GRE, Zona, Tipo Link |
-| 2 | Lista de equipamentos | Documental | Modelo, fabricante, qtd |
-| 3 | Mapa cobertura 2,4 GHz | Tecnica | Heatmap estimado |
-| 4 | Mapa cobertura 5 GHz | Tecnica | Heatmap estimado |
-| 5 | Site survey / Planta baixa | Tecnica | Posicionamento de APs |
+### 1. `src/data/contractData.ts` — Dados centrais
 
-### FASE 2 - Execucao em Campo
-| # | Evidencia | Tipo | Controle |
-|---|-----------|------|----------|
-| 1 | 20 fotos padronizadas | Fotografica | Fachada, rack, cabos, APs |
-| 2 | Geolocalizacao do tecnico | Digital | GPS no momento da execucao |
-| 3 | Checklist eletrico | Tecnica | Aterramento, tensoes |
-| 4 | Certificacao de cabos Cat.6 | Tecnica | NEXT, FEXT, Return Loss |
+**kpiData:**
+- `totalValue`: 89.971.275,00 -> **35.938.521,36**
+- `fonte14172`: 54.134.450,00 -> **35.938.521,36** (100% do valor)
+- Remover `fontTesouro` (ou setar 0)
+- `executionPeriod`: "36 meses" -> **"12 meses"**
+- `startDate`: "Fevereiro/2026" -> **"Marco/2026"**
+- `totalPhases`: 7 (manter, recalcular valores)
 
-### FASE 3 - Pos-Instalacao (PDI)
-| # | Evidencia | Tipo | Controle |
-|---|-----------|------|----------|
-| 1 | Checklist aprovacao (7 itens) | Documental | Status por item |
-| 2 | Descritivo infraestrutura | Tecnica | Servicos e arquitetura |
-| 3 | Lista de materiais | Documental | Quantidades |
-| 4 | Inventario com seriais | Patrimonial | Num. serie, firmware |
-| 5 | Mapas as-built 2,4/5 GHz | Tecnica | Cobertura real medida |
-| 6 | Certificacao de cabos | Tecnica | PDFs do Cable Analyzer |
+**financingSources:** Remover mencao a "complementados por outras fontes orcamentarias da SEDUC-PI". Somente Lei 14.172/2021 (FUST).
 
-### FASE 4 - Monitoramento Continuo (Sonda SQS/SIMET)
-| # | Evidencia | Meta Dedicado | Meta Satelital |
-|---|-----------|---------------|----------------|
-| 1 | Disponibilidade | >= 99,0% | >= 98,5% |
-| 2 | Latencia (RTT) | <= 50ms | <= 60ms |
-| 3 | Jitter | <= 10ms | <= 20ms |
-| 4 | Perda de pacotes | <= 0,50% | <= 0,50% |
-| 5 | Velocidade contratada vs entregue | Tolerancia 10% | Tolerancia 10% |
-| 6 | Diagnostico causa raiz | Falha eletrica vs enlace |
-| 7 | Analise de saturacao | Operadora vs demanda interna |
-| 8 | Estabilidade (flapping) | Quedas intermitentes |
-| 9 | Status IPv4/IPv6 | Dual Stack |
-| 10 | Serie historica | ~6 medicoes/dia |
+**disbursementData:** Deslocar todos os meses em +1 (Fev->Mar, Mar->Abr, ..., Ago->Set). Recalcular valores proporcionalmente ao novo total (R$ 35.938.521,36):
+- RPTI: Mar/26, 10%, R$ 3.593.852,14
+- PEP-I: Abr/26, 6%, R$ 2.156.311,28
+- PEP-M1: Mai/26, 9%, R$ 3.234.466,92
+- PEP-M2: Jun/26, 10%, R$ 3.593.852,14
+- PEP-M3: Jul/26, 10%, R$ 3.593.852,14
+- PEP-F: Ago/26, 9%, R$ 3.234.466,92
+- RTF: Set/26, 6%, R$ 2.156.311,28
 
----
+**phases:** Deslocar todos os meses em +1:
+- RPTI: Mar/26, PEP-I: Abr/26, PEP-M1: Mai/26, PEP-M2: Jun/26, PEP-M3: Jul/26, PEP-F: Ago/26, RTF: Set/26
 
-## 5. Dimensoes de Controle
+Adicionar novo export `contractItems` com os 7 itens contratados do Anexo VIII (IT 01-07) com todos os campos (especificacao, unidade, quantidade, meses, vr. unitario, vr. mensal, vr. anual).
 
-Todas as telas terao filtros e agrupamentos por:
-- **GRE** (21 Gerencias Regionais de Educacao)
-- **INEP** (codigo unico de cada escola - chave primaria)
-- **Zona** (Urbana ou Rural)
-- **Tipo de Link** (Dedicado ou Satelital)
-- **Ciclo de Atendimento** (001 a 006)
-- **Status da Evidencia** (Pendente / Em Andamento / Concluido)
+### 2. `src/components/layout/Header.tsx`
+- `startDate`: '2026-02-02' -> **'2026-03-02'**
+- Texto: "Inicio: 02/02/2026" -> **"Inicio: 02/03/2026"**
 
-**Regra de derivacao do Tipo de Link:**
-- Urbana = Dedicado (fibra optica)
-- Rural = Satelital
-- Pode ser sobrescrito manualmente no PPI
+### 3. `src/components/dashboard/KPICards.tsx`
+- Remover card "Fonte Tesouro"
+- Atualizar subtitle do valor total para "R$ 35,9 milhoes"
+- Card "Fonte Lei 14.172" agora reflete 100% do contrato
 
----
+### 4. `src/components/dashboard/ExecutiveTimeline.tsx`
+- Meses: ["Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26"]
+- Footer: "Periodo: Marco - Setembro 2026"
 
-## 6. Arquitetura das 5 Telas
+### 5. `src/pages/sections/Section1.tsx`
+- Atualizar serviceMetrics para refletir Anexo VIII (remover "Banda Larga 631 Links", adicionar KIT I/II/III, Cab. Estruturado + SQS, Suporte Tecnico)
+- Remover "Fonte Tesouro R$ 35.836.825,00" dos dados contratuais
+- Atualizar valor total para R$ 35.938.521,36
+- Atualizar equipmentMetrics com quantidades do Anexo VIII
 
-### Tela 1: Dashboard de Evidencias (`/evidencias`)
+### 6. `src/pages/sections/Section7.tsx` — Cronograma de Desembolso
+- Remover "Tesouro" da `resourceAllocation` — todos os itens sao **somente "Lei 14.172"** por 12 meses (1 ano apenas)
+- Simplificar matriz: remover colunas Ano 2027 e Ano 2028 (contrato e de 12 meses)
+- Atualizar "Inicio Previsto: Fevereiro/2026" -> **"Marco/2026"**
+- Remover secao "Estrategia de Transicao e Sustentabilidade" (nao ha transicao, so 1 fonte)
 
-KPIs no topo com contadores:
-- Total de escolas (584), PPI concluidos/pendentes, PDI concluidos/pendentes, Sondas SQS ativas
+### 7. `src/data/cronogramaData.ts`
+- Deslocar ciclosResumo: CICLO 001 Mar/2026, CICLO 002 Abr/2026, CICLO 003 Mai/2026, CICLO 004 Jun/2026, CICLO 005 Jul/2026, CICLO 006 Ago/2026
+- Atualizar comentario "Inicio do programa: 02/03/2026"
 
-Fluxo horizontal das 4 fases com cards coloridos:
-```text
-PRE-INSTALACAO (Azul) -> CAMPO (Amarelo) -> POS-INSTALACAO (Verde) -> MONITORAMENTO (Vermelho)
-   5 evidencias           4 evidencias          6 evidencias            10 metricas
-```
+### 8. `src/data/evidenciasData.ts`
+- Adicionar interface `ItemContratadoEscola` com campos: tipoKit (KIT I/II/III), qtdAPs, temSQS, temAdequacao, bandaContratada (Mbps)
+- Derivar distribuicao de itens por escola com base no Anexo VIII:
+  - KIT I (327 escolas ate 400m2), KIT II (161 escolas 401-800m2), KIT III (15 escolas 801-1500m2)
+  - Dedicado: 92.000 Mbps / ~581 escolas urbanas ≈ distribuicao proporcional
+  - Satelital: 50 kits para escolas rurais
+  - Adequacao + SQS: 150 unidades
+  - Suporte: 631 unidades (todos)
+- Exportar `getItensContratadosEscola(escola)` para uso nas telas PPI/PDI
 
-Progresso por GRE (barras horizontais mostrando % de escolas com PPI/PDI completos).
+### 9. `src/pages/evidencias/PPIFormulario.tsx`
+- Substituir equipamentos genericos pela distribuicao real baseada em `getItensContratadosEscola()`
+- Mostrar tipo de KIT atribuido, banda contratada, se tem adequacao + SQS
 
-Progresso por Ciclo (6 cards com contadores e badges de prioridade).
+### 10. `src/pages/evidencias/PDIFormulario.tsx`
+- Inventario pre-preenchido com itens contratados para aquela escola
+- Metricas SQS com banda contratada real
 
-### Tela 2: Lista de Escolas (`/evidencias/escolas`)
+### 11. Componentes PDF afetados (atualizacao de dados):
+- `src/components/pdf-report/sections/Section1.tsx` — remover fontTesouro
+- `src/components/pdf-report/sections/Section7.tsx` — remover fontTesouro
+- `src/components/pdf-report/sections/ExecutiveSummary.tsx` — atualizar valores
+- `src/components/pdf-report/sections/DashboardSection.tsx` — atualizar valores
+- `src/components/pdf/sections/PDFDashboard.tsx` — remover Tesouro
+- `src/components/pdf/sections/PDFSection1.tsx` — remover Tesouro, atualizar valores
+- `src/components/pdf/sections/PDFSection6.tsx` — atualizar meses das fases
 
-Barra de filtros: Busca por INEP/Nome, Select GRE, Select Zona, Select Tipo Link, Select Ciclo, Select Status.
-
-Tabela com colunas: INEP | Escola | Municipio | GRE | Zona | Tipo Link | Ciclo | PPI | PDI | SQS | Acoes.
-
-Paginacao e ordenacao por qualquer coluna.
-
-### Tela 3: Ficha da Escola (`/evidencias/escola/:inep`)
-
-Cabecalho com dados da escola (nome, INEP, municipio, GRE, zona, tipo link, ciclo, coordenadas GPS).
-
-Timeline vertical das 4 fases com status e botoes de acao:
-```text
-[1] PPI -----------> Concluido/Pendente   [Abrir PPI]
-[2] Campo ---------> Em Andamento         [Ver Checklist]
-[3] PDI -----------> Pendente             [Abrir PDI]
-[4] SQS/SIMET -----> Ativo/Inativo        [Ver Metricas]
-```
-
-Checklist de campo (sem RAT): verificacao eletrica, certificacao cabos, 20 fotos, geolocalizacao, disjuntor dedicado.
-
-### Tela 4: Formulario PPI (`/evidencias/ppi/:inep`)
-
-5 secoes em abas ou accordion:
-1. Dados da escola (pre-preenchidos do cronograma)
-2. Lista de equipamentos (tabela: AP, Switch, Firewall, SQS, Rack, Nobreak)
-3. Upload mapa cobertura 2,4 GHz (area de upload + observacoes)
-4. Upload mapa cobertura 5 GHz (area de upload + observacoes)
-5. Site survey / planta baixa (area de upload + observacoes)
-
-Botoes: Salvar Rascunho | Finalizar PPI
-
-### Tela 5: Formulario PDI (`/evidencias/pdi/:inep`)
-
-6 secoes:
-1. **Checklist aprovacao** - 7 toggles com status (Aprovado/Reprovado/Pendente)
-2. **Descritivo infraestrutura** - Textareas + verificacao eletrica (aterramento Sim/Nao, tensoes em V, disjuntor 25A, cabeamento 4,0mm2)
-3. **Inventario** - Tabela com tipo, modelo, num. serie, firmware, local
-4. **Relatorio fotografico** - Grid 4x5 com 20 slots rotulados (fachada, rack, cabos, APs, eletrica, aterramento)
-5. **Mapas as-built** - Uploads 2,4 GHz e 5 GHz
-6. **Metricas SQS/SIMET** - Dashboard read-only com SLAs diferenciados por tipo de link
+### 12. `src/components/layout/BasicInfoCard.tsx`
+- Atualizar financingSources para refletir apenas Lei 14.172
 
 ---
 
-## 7. Detalhes Tecnicos
+## Sequencia de Implementacao
 
-### Arquivos a criar (6 novos):
-| Arquivo | Descricao |
-|---------|-----------|
-| `src/data/evidenciasData.ts` | Dados mockados: status por escola, metricas SQS, contadores |
-| `src/pages/evidencias/EvidenciasDashboard.tsx` | Dashboard com KPIs, fluxo 4 fases, progresso GRE/Ciclo |
-| `src/pages/evidencias/EscolasLista.tsx` | Tabela filtrada com GRE, Zona, Tipo Link, Status |
-| `src/pages/evidencias/EscolaFicha.tsx` | Ficha individual com timeline de 4 fases |
-| `src/pages/evidencias/PPIFormulario.tsx` | Prototipo formulario PPI (5 secoes) |
-| `src/pages/evidencias/PDIFormulario.tsx` | Prototipo formulario PDI (6 secoes + SQS) |
-
-### Arquivos a modificar (3 existentes):
-| Arquivo | Alteracao |
-|---------|-----------|
-| `src/App.tsx` | Adicionar 5 rotas: `/evidencias`, `/evidencias/escolas`, `/evidencias/escola/:inep`, `/evidencias/ppi/:inep`, `/evidencias/pdi/:inep` |
-| `src/data/contractData.ts` | Adicionar item de navegacao "Coleta de Evidencias" no `navigationItems` |
-| `src/components/layout/Sidebar.tsx` | Adicionar link para `/evidencias` na navegacao lateral, com icone e separador visual |
-
-### Stack reutilizada:
-- Componentes shadcn/ui: Card, Badge, Button, Table, Input, Select, Checkbox, Tabs, Progress, Switch
-- Icones Lucide: Camera, MapPin, Wifi, Activity, Shield, FileCheck, Radio, Zap, etc.
-- Dados reais das 584 escolas do `cronogramaData.ts` (INEP, GRE, Zona, Ciclo)
-- Padroes visuais existentes (border-l-4, grids responsivos, cores institucionais)
-
-### Observacoes:
-- Todas as telas sao **prototipos interativos** com estado local (useState), sem backend
-- Formularios funcionam visualmente (preenchimento, toggles) mas nao persistem dados
-- Os dados mockados simulam diferentes status para demonstracao
-- O campo `tipoLink` sera derivado da zona (Urbana=Dedicado, Rural=Satelital)
-- O RAT esta **excluido** do escopo conforme solicitado
-
----
-
-## 8. Sequencia de Implementacao
-
-1. Criar `evidenciasData.ts` com dados mock e tipos
-2. Criar `EvidenciasDashboard.tsx` (tela principal do modulo)
-3. Criar `EscolasLista.tsx` (lista filtrada)
-4. Criar `EscolaFicha.tsx` (ficha individual)
-5. Criar `PPIFormulario.tsx` (formulario pre-instalacao)
-6. Criar `PDIFormulario.tsx` (formulario pos-instalacao + SQS)
-7. Modificar `App.tsx` (rotas), `contractData.ts` (navegacao), `Sidebar.tsx` (menu)
-
+1. Atualizar `contractData.ts` (dados centrais: valor, fonte, datas, fases, desembolso, itens contratados)
+2. Atualizar `cronogramaData.ts` (ciclos deslocados +1 mes)
+3. Atualizar `Header.tsx` (data de inicio)
+4. Atualizar `KPICards.tsx` (remover Tesouro)
+5. Atualizar `ExecutiveTimeline.tsx` (meses)
+6. Atualizar `Section1.tsx` (servicos, valores, itens do Anexo VIII)
+7. Atualizar `Section7.tsx` (desembolso, remover transicao, 12 meses)
+8. Atualizar `evidenciasData.ts` (distribuicao de itens por escola)
+9. Atualizar `PPIFormulario.tsx` e `PDIFormulario.tsx` (itens contratados por escola)
+10. Atualizar componentes PDF (6 arquivos com dados de fonte/valor)
+11. Atualizar `BasicInfoCard.tsx` (financiamento)
