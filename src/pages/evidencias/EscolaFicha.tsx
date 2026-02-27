@@ -9,6 +9,7 @@ import {
   CheckCircle, Clock, AlertCircle, ExternalLink,
 } from "lucide-react";
 import { evidenciasEscolas, checklistCampoDefault, type StatusFase } from "@/data/evidenciasData";
+import DadosExemploBanner from "@/components/evidencias/DadosExemploBanner";
 
 const statusConfig: Record<StatusFase, { icon: typeof CheckCircle; color: string; bg: string }> = {
   "Concluído": { icon: CheckCircle, color: "text-accent", bg: "bg-accent/10 border-accent/30" },
@@ -55,6 +56,8 @@ const EscolaFicha = () => {
           <p className="text-sm text-muted-foreground">INEP: {escola.inep} • {escola.municipio}</p>
         </div>
       </div>
+
+      <DadosExemploBanner />
 
       {/* Info Card */}
       <Card>

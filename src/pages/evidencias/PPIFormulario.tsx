@@ -14,6 +14,7 @@ import {
   ArrowLeft, Save, CheckCircle, School, Package, Wifi, Map, Upload,
 } from "lucide-react";
 import { evidenciasEscolas, equipamentosPPIPadrao } from "@/data/evidenciasData";
+import DadosExemploBanner from "@/components/evidencias/DadosExemploBanner";
 import { toast } from "@/hooks/use-toast";
 
 const PPIFormulario = () => {
@@ -47,6 +48,7 @@ const PPIFormulario = () => {
 
   return (
     <div className="space-y-6">
+      <DadosExemploBanner />
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">

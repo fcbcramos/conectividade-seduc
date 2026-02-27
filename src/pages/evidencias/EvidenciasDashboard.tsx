@@ -17,6 +17,7 @@ import {
   Activity,
 } from "lucide-react";
 import { getContadores, getProgressoPorGRE, getProgressoPorCiclo } from "@/data/evidenciasData";
+import DadosExemploBanner from "@/components/evidencias/DadosExemploBanner";
 
 const EvidenciasDashboard = () => {
   const navigate = useNavigate();
@@ -87,6 +88,8 @@ const EvidenciasDashboard = () => {
           <ChevronRight className="w-4 h-4" />
         </Button>
       </div>
+
+      <DadosExemploBanner />
 
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">

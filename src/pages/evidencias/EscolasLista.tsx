@@ -19,6 +19,7 @@ import {
   type EvidenciaEscola,
   type StatusFase,
 } from "@/data/evidenciasData";
+import DadosExemploBanner from "@/components/evidencias/DadosExemploBanner";
 
 const ITEMS_PER_PAGE = 20;
 
@@ -81,6 +82,8 @@ const EscolasLista = () => {
           </p>
         </div>
       </div>
+
+      <DadosExemploBanner />
 
       {/* Filtros */}
       <Card>
