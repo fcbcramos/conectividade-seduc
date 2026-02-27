@@ -1,10 +1,23 @@
 import { escolasCronograma, type EscolaCronograma } from "./cronogramaData";
+import { contractItems } from "./contractData";
 
 // ===================== TIPOS =====================
 
 export type TipoLink = "Dedicado" | "Satelital";
 export type StatusEvidencia = "Pendente" | "Em Andamento" | "Concluído";
 export type StatusFase = "Pendente" | "Em Andamento" | "Concluído" | "N/A";
+
+export type TipoKit = "KIT I" | "KIT II" | "KIT III";
+
+export interface ItemContratadoEscola {
+  tipoKit: TipoKit;
+  qtdAPs: number;
+  temSQS: boolean;
+  temAdequacao: boolean;
+  bandaContratada: number; // Mbps
+  tipoLink: TipoLink;
+  suporteTecnico: boolean;
+}
 
 export interface EvidenciaEscola {
   inep: string;
@@ -23,6 +36,7 @@ export interface EvidenciaEscola {
   statusPDI: StatusFase;
   statusSQS: StatusFase;
   statusGeral: StatusEvidencia;
+  itensContratados?: ItemContratadoEscola;
 }
 
 export interface MetricaSQS {
@@ -67,6 +81,53 @@ export const derivarTipoLink = (zona: string): TipoLink => {
   return zona === "RURAL" ? "Satelital" : "Dedicado";
 };
 
+// ===================== DISTRIBUIÇÃO DE ITENS POR ESCOLA =====================
+
+// Distribui itens contratados conforme Anexo VIII:
+// KIT I (327 escolas até 400m²), KIT II (161 escolas 401-800m²), KIT III (15 escolas 801+m²)
+// Dedicado: 92.000 Mbps para ~544 escolas urbanas
+// Satelital: 50 kits para escolas rurais
+// Adequação + SQS: 150 unidades (prioridade para ciclos 001-003)
+// Suporte: 631 unidades (todas as escolas do projeto)
+
+const getKitPorIndice = (index: number, metaWifi: number): TipoKit => {
+  // Escolas maiores (mais APs) recebem kits maiores
+  if (metaWifi >= 8) return "KIT III";
+  if (metaWifi >= 6) return "KIT II";
+  if (index < 327) return "KIT I";
+  if (index < 327 + 161) return "KIT II";
+  return "KIT III";
+};
+
+const getQtdAPsPorKit = (kit: TipoKit): number => {
+  switch (kit) {
+    case "KIT I": return 3;
+    case "KIT II": return 5;
+    case "KIT III": return 8;
+  }
+};
+
+export const getItensContratadosEscola = (escola: EscolaCronograma, index: number): ItemContratadoEscola => {
+  const isRural = escola.localizacao === "RURAL";
+  const tipoLink: TipoLink = isRural ? "Satelital" : "Dedicado";
+  const tipoKit = getKitPorIndice(index, escola.metaWifi2026);
+  const isPrioridade = ["CICLO 001", "CICLO 002", "CICLO 003"].includes(escola.cicloAtendimento);
+  
+  // Banda: distribui 92.000 Mbps entre ~544 escolas urbanas = ~169 Mbps média
+  // Proporcional ao metaWifi (quantidade de APs)
+  const bandaBase = isRural ? 0 : Math.round((escola.metaWifi2026 / 4) * 150);
+  
+  return {
+    tipoKit,
+    qtdAPs: getQtdAPsPorKit(tipoKit),
+    temSQS: isPrioridade || index < 150,
+    temAdequacao: isPrioridade && index < 150,
+    bandaContratada: isRural ? 50 : Math.max(100, bandaBase),
+    tipoLink,
+    suporteTecnico: true,
+  };
+};
+
 // ===================== MOCK: STATUS POR ESCOLA =====================
 
 const gerarStatusMock = (index: number): Pick<EvidenciaEscola, "statusPPI" | "statusCampo" | "statusPDI" | "statusSQS" | "statusGeral"> => {
@@ -98,6 +159,7 @@ export const evidenciasEscolas: EvidenciaEscola[] = escolasCronograma.map((escol
   latitude: escola.latitude,
   longitude: escola.longitude,
   endereco: escola.endereco,
+  itensContratados: getItensContratadosEscola(escola, index),
   ...gerarStatusMock(index),
 }));
 

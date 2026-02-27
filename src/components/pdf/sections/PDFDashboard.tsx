@@ -75,7 +75,7 @@ const PDFDashboard = ({ startPage, totalPages }: PDFDashboardProps) => {
                 <div className="flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-accent" />
                   <div>
-                    <p className="text-xs text-muted-foreground">Fonte Lei 14.172</p>
+                    <p className="text-xs text-muted-foreground">Fonte Lei 14.172 (FUST)</p>
                     <p className="text-sm font-bold text-accent">{formatCurrency(kpiData.fonte14172)}</p>
                   </div>
                 </div>

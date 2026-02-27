@@ -268,7 +268,7 @@ const ExecutiveSummary = () => {
             <View style={styles.kpiIconContainer}>
               <SchoolIcon size={22} color={colors.govBlue} />
             </View>
-            <Text style={styles.kpiValue}>1.142</Text>
+            <Text style={styles.kpiValue}>584</Text>
             <Text style={styles.kpiLabel}>Escolas</Text>
           </View>
           
@@ -325,15 +325,11 @@ const ExecutiveSummary = () => {
         <View style={[styles.infoCard, styles.infoCardBlue]}>
           <Text style={styles.cardTitle}>Fontes de Recurso</Text>
           <View style={styles.fundingRow}>
-            <Text style={styles.fundingLabel}>Lei nº 14.172/2021</Text>
+            <Text style={styles.fundingLabel}>Lei nº 14.172/2021 (FUST)</Text>
             <Text style={styles.fundingValue}>{formatCurrency(kpiData.fonte14172)}</Text>
           </View>
-          <View style={styles.fundingRow}>
-            <Text style={styles.fundingLabel}>Tesouro Estadual</Text>
-            <Text style={styles.fundingValue}>{formatCurrency(kpiData.fontTesouro)}</Text>
-          </View>
           <View style={[styles.fundingRow, { borderBottomWidth: 0 }]}>
-            <Text style={[styles.fundingLabel, { fontWeight: 'bold' }]}>Total</Text>
+            <Text style={[styles.fundingLabel, { fontWeight: 'bold' }]}>Total (12 meses)</Text>
             <Text style={styles.fundingValue}>{formatCurrency(kpiData.totalValue)}</Text>
           </View>
           <View style={styles.modelBadge}>

@@ -4,7 +4,7 @@ export const basicInfo = {
   elaborationDate: new Date().toLocaleDateString('pt-BR'),
   object: "Contratação Integrada de Serviços de Conectividade à Internet e Infraestrutura de Rede Wi-Fi para Unidades Escolares da Rede Estadual da Secretaria da Educação do Estado do Piauí (SEDUC-PI).",
   normativeReference: "Lei nº 14.133/2021, Lei nº 14.172/2021, Decreto nº 11.004/2022 (Regulamenta a Lei que institui FUST).",
-  financingSources: "Recursos do Fundo de Universalização dos Serviços de Telecomunicações (FUST) alocados conforme Lei nº 14.172/2021, complementados por outras fontes orçamentárias da SEDUC-PI, se necessário.",
+  financingSources: "Recursos do Fundo de Universalização dos Serviços de Telecomunicações (FUST) alocados conforme Lei nº 14.172/2021.",
   
   // Grupo Técnico de Planejamento
   team: [
@@ -19,26 +19,48 @@ export const basicInfo = {
 };
 
 export const kpiData = {
-  totalValue: 89971275.00,
-  fonte14172: 54134450.00,
-  fontTesouro: 35836825.00,
+  totalValue: 35938521.36,
+  fonte14172: 35938521.36,
+  fontTesouro: 0,
   disbursedValue: 0,
   totalPhases: 7,
   completedPhases: 0,
-  executionPeriod: "36 meses",
-  startDate: "Fevereiro/2026",
+  executionPeriod: "12 meses",
+  startDate: "Março/2026",
   contractModel: "Integrada, Lote Único, As a Service",
   status: "Aguardando"
 };
 
 export const disbursementData = [
-  { phase: "RPTI", name: "Planejamento", value: 8997127.50, percentage: 10, month: "Fev/26", status: "Planejado", type: "planejamento" },
-  { phase: "PEP-I", name: "Mobilização", value: 5416478.70, percentage: 6, month: "Mar/26", status: "Planejado", type: "mobilizacao" },
-  { phase: "PEP-M1", name: "Onda 1", value: 8124717.00, percentage: 9, month: "Abr/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-M2", name: "Onda 2", value: 9027464.50, percentage: 10, month: "Mai/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-M3", name: "Onda 3", value: 9027464.50, percentage: 10, month: "Jun/26", status: "Planejado", type: "execucao" },
-  { phase: "PEP-F", name: "Finalização", value: 8124717.00, percentage: 9, month: "Jul/26", status: "Planejado", type: "execucao" },
-  { phase: "RTF", name: "Entrega", value: 5416480.80, percentage: 6, month: "Ago/26", status: "Planejado", type: "entrega" }
+  { phase: "RPTI", name: "Planejamento", value: 3593852.14, percentage: 10, month: "Mar/26", status: "Planejado", type: "planejamento" },
+  { phase: "PEP-I", name: "Mobilização", value: 2156311.28, percentage: 6, month: "Abr/26", status: "Planejado", type: "mobilizacao" },
+  { phase: "PEP-M1", name: "Onda 1", value: 3234466.92, percentage: 9, month: "Mai/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M2", name: "Onda 2", value: 3593852.14, percentage: 10, month: "Jun/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-M3", name: "Onda 3", value: 3593852.14, percentage: 10, month: "Jul/26", status: "Planejado", type: "execucao" },
+  { phase: "PEP-F", name: "Finalização", value: 3234466.92, percentage: 9, month: "Ago/26", status: "Planejado", type: "execucao" },
+  { phase: "RTF", name: "Entrega", value: 2156311.28, percentage: 6, month: "Set/26", status: "Planejado", type: "entrega" }
+];
+
+// Tabela de Itens Contratados - Anexo VIII
+export interface ContractItem {
+  id: string;
+  especificacao: string;
+  unidade: string;
+  quantidade: number;
+  meses: number;
+  valorUnitario: number;
+  valorMensal: number;
+  valorAnual: number;
+}
+
+export const contractItems: ContractItem[] = [
+  { id: "IT-01", especificacao: "Internet Dedicado (fibra, simétrico 1:1)", unidade: "Mbps", quantidade: 92000, meses: 12, valorUnitario: 4.10, valorMensal: 377200.00, valorAnual: 4526400.00 },
+  { id: "IT-02", especificacao: "Internet Satélite (LEO)", unidade: "Unid", quantidade: 50, meses: 12, valorUnitario: 2200.00, valorMensal: 110000.00, valorAnual: 1320000.00 },
+  { id: "IT-03", especificacao: "Wi-Fi KIT I (até 400 m²)", unidade: "Unid", quantidade: 327, meses: 12, valorUnitario: 2300.24, valorMensal: 752178.48, valorAnual: 9026141.76 },
+  { id: "IT-04", especificacao: "Wi-Fi KIT II (401-800 m²)", unidade: "Unid", quantidade: 161, meses: 12, valorUnitario: 3138.31, valorMensal: 505267.91, valorAnual: 6063214.92 },
+  { id: "IT-05", especificacao: "Wi-Fi KIT III (801-1500 m²)", unidade: "Unid", quantidade: 15, meses: 12, valorUnitario: 5506.31, valorMensal: 82594.65, valorAnual: 991135.80 },
+  { id: "IT-06", especificacao: "Adequação Cab. Estruturado + SQS", unidade: "Unid", quantidade: 150, meses: 12, valorUnitario: 1663.37, valorMensal: 249505.50, valorAnual: 2994066.00 },
+  { id: "IT-07", especificacao: "Suporte Técnico Especializado", unidade: "Unid", quantidade: 631, meses: 12, valorUnitario: 1455.04, valorMensal: 918130.24, valorAnual: 11017562.88 },
 ];
 
 export const slaMetrics = [
@@ -321,7 +343,7 @@ export const phases = [
     description: "Documento técnico contendo o planejamento detalhado da execução, incluindo dimensionamento de recursos, cronograma de atividades e metodologia de implantação.",
     deliverables: ["Cronograma executivo", "Plano de recursos", "Metodologia de implantação"],
     percentage: 10,
-    month: "Fev/26",
+    month: "Mar/26",
     status: "Planejado"
   },
   {
@@ -330,7 +352,7 @@ export const phases = [
     description: "Etapa de mobilização operacional e início da execução, contemplando a instalação piloto e validação dos processos de implantação.",
     deliverables: ["Mobilização de equipes", "Instalações piloto", "Validação de processos"],
     percentage: 6,
-    month: "Mar/26",
+    month: "Abr/26",
     status: "Planejado"
   },
   {
@@ -339,7 +361,7 @@ export const phases = [
     description: "Continuidade da implantação com ampliação dos serviços de conectividade para o primeiro grupo de escolas da rede estadual.",
     deliverables: ["Escolas conectadas (Onda 1)", "Infraestrutura Wi-Fi instalada", "Relatório de aceite"],
     percentage: 9,
-    month: "Abr/26",
+    month: "Mai/26",
     status: "Planejado"
   },
   {
@@ -348,7 +370,7 @@ export const phases = [
     description: "Expansão da cobertura para o segundo grupo de escolas, com instalação de infraestrutura e ativação de serviços.",
     deliverables: ["Escolas conectadas (Onda 2)", "Ativos de rede configurados", "Testes de qualidade"],
     percentage: 10,
-    month: "Mai/26",
+    month: "Jun/26",
     status: "Planejado"
   },
   {
@@ -357,7 +379,7 @@ export const phases = [
     description: "Terceira onda de implantação, consolidando a expansão da conectividade para mais unidades escolares.",
     deliverables: ["Escolas conectadas (Onda 3)", "Monitoramento ativo", "Relatório de desempenho"],
     percentage: 10,
-    month: "Jun/26",
+    month: "Jul/26",
     status: "Planejado"
   },
   {
@@ -366,7 +388,7 @@ export const phases = [
     description: "Conclusão da implantação e estabilização dos serviços, com foco na operação assistida e ajustes finais.",
     deliverables: ["Operação estabilizada", "Suporte técnico ativo", "Relatórios mensais"],
     percentage: 9,
-    month: "Jul/26",
+    month: "Ago/26",
     status: "Planejado"
   },
   {
@@ -375,7 +397,7 @@ export const phases = [
     description: "Documento conclusivo que apresenta a consolidação dos resultados, documentação técnica completa e transferência de conhecimento.",
     deliverables: ["Documentação as-built", "Manual operacional", "Termo de encerramento"],
     percentage: 6,
-    month: "Ago/26",
+    month: "Set/26",
     status: "Planejado"
   }
 ];

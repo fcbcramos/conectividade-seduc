@@ -16,26 +16,18 @@ const KPICards = () => {
     {
       title: "Valor Total do Contrato",
       value: formatCurrency(kpiData.totalValue),
-      subtitle: "R$ 89,9 milhões",
+      subtitle: "R$ 35,9 milhões",
       icon: Wallet,
       color: "primary",
       bgColor: "bg-primary/10"
     },
     {
-      title: "Fonte Lei 14.172",
+      title: "Fonte Lei 14.172 (FUST)",
       value: formatCurrency(kpiData.fonte14172),
-      subtitle: "FUST - Escolas Conectadas",
+      subtitle: "100% do contrato",
       icon: TrendingUp,
       color: "accent",
       bgColor: "bg-accent/10"
-    },
-    {
-      title: "Fonte Tesouro",
-      value: formatCurrency(kpiData.fontTesouro),
-      subtitle: "Recursos estaduais",
-      icon: Wallet,
-      color: "secondary",
-      bgColor: "bg-secondary/20"
     },
     {
       title: "Prazo de Execução",
