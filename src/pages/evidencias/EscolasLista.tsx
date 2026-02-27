@@ -1,5 +1,5 @@
-import { useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useMemo, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -39,6 +39,7 @@ const StatusBadge = ({ status }: { status: StatusFase }) => {
 
 const EscolasLista = () => {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [greFilter, setGreFilter] = useState("all");
@@ -46,6 +47,14 @@ const EscolasLista = () => {
   const [tipoLinkFilter, setTipoLinkFilter] = useState("all");
   const [cicloFilter, setCicloFilter] = useState("all");
   const [statusFilter, setStatusFilter] = useState("all");
+  const [faseFilter, setFaseFilter] = useState("all");
+
+  useEffect(() => {
+    const fase = searchParams.get("fase");
+    if (fase && ["ppi", "pdi", "campo", "sqs"].includes(fase)) {
+      setFaseFilter(fase);
+    }
+  }, [searchParams]);
 
   const filtered = useMemo(() => {
     return evidenciasEscolas.filter((e: EvidenciaEscola) => {
@@ -55,9 +64,13 @@ const EscolasLista = () => {
       if (tipoLinkFilter !== "all" && e.tipoLink !== tipoLinkFilter) return false;
       if (cicloFilter !== "all" && e.ciclo !== cicloFilter) return false;
       if (statusFilter !== "all" && e.statusGeral !== statusFilter) return false;
+      if (faseFilter === "ppi" && e.statusPPI === "N/A") return false;
+      if (faseFilter === "pdi" && e.statusPDI === "N/A") return false;
+      if (faseFilter === "sqs" && e.statusSQS === "N/A") return false;
+      if (faseFilter === "campo" && e.statusPPI === "N/A") return false;
       return true;
     });
-  }, [search, greFilter, zonaFilter, tipoLinkFilter, cicloFilter, statusFilter]);
+  }, [search, greFilter, zonaFilter, tipoLinkFilter, cicloFilter, statusFilter, faseFilter]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
   const paginated = filtered.slice((page - 1) * ITEMS_PER_PAGE, page * ITEMS_PER_PAGE);
@@ -65,6 +78,7 @@ const EscolasLista = () => {
   const clearFilters = () => {
     setSearch(""); setGreFilter("all"); setZonaFilter("all");
     setTipoLinkFilter("all"); setCicloFilter("all"); setStatusFilter("all");
+    setFaseFilter("all");
     setPage(1);
   };
 
@@ -88,7 +102,17 @@ const EscolasLista = () => {
       {/* Filtros */}
       <Card>
         <CardContent className="p-4">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-7 gap-3">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3">
+            <Select value={faseFilter} onValueChange={(v) => { setFaseFilter(v); setPage(1); }}>
+              <SelectTrigger><SelectValue placeholder="Fase" /></SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Todas as Fases</SelectItem>
+                <SelectItem value="ppi">PPI</SelectItem>
+                <SelectItem value="campo">Campo</SelectItem>
+                <SelectItem value="pdi">PDI</SelectItem>
+                <SelectItem value="sqs">SQS/SIMET</SelectItem>
+              </SelectContent>
+            </Select>
             <div className="lg:col-span-2 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <Input
@@ -134,7 +158,7 @@ const EscolasLista = () => {
               </SelectContent>
             </Select>
           </div>
-          {(search || greFilter !== "all" || zonaFilter !== "all" || tipoLinkFilter !== "all" || cicloFilter !== "all" || statusFilter !== "all") && (
+          {(search || greFilter !== "all" || zonaFilter !== "all" || tipoLinkFilter !== "all" || cicloFilter !== "all" || statusFilter !== "all" || faseFilter !== "all") && (
             <div className="mt-3 flex justify-end">
               <Button variant="ghost" size="sm" onClick={clearFilters}>Limpar filtros</Button>
             </div>

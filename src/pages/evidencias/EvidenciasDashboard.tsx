@@ -26,11 +26,11 @@ const EvidenciasDashboard = () => {
   const progressoCiclo = getProgressoPorCiclo();
 
   const kpis = [
-    { label: "Total de Escolas", value: contadores.total, icon: School, color: "text-primary" },
-    { label: "PPI Concluídos", value: contadores.ppiConcluido, icon: FileCheck, color: "text-primary" },
-    { label: "PDI Concluídos", value: contadores.pdiConcluido, icon: ClipboardList, color: "text-accent" },
-    { label: "Sondas SQS Ativas", value: contadores.sqsAtivo, icon: Radio, color: "text-destructive" },
-    { label: "Em Campo", value: contadores.campoEmAndamento, icon: MapPin, color: "text-secondary-foreground" },
+    { label: "Total de Escolas", value: contadores.total, icon: School, color: "text-primary", link: null },
+    { label: "PPI Concluídos", value: contadores.ppiConcluido, icon: FileCheck, color: "text-primary", link: "/evidencias/escolas?fase=ppi" },
+    { label: "PDI Concluídos", value: contadores.pdiConcluido, icon: ClipboardList, color: "text-accent", link: "/evidencias/escolas?fase=pdi" },
+    { label: "Sondas SQS Ativas", value: contadores.sqsAtivo, icon: Radio, color: "text-destructive", link: "/evidencias/escolas?fase=sqs" },
+    { label: "Em Campo", value: contadores.campoEmAndamento, icon: MapPin, color: "text-secondary-foreground", link: "/evidencias/escolas?fase=campo" },
   ];
 
   const fases = [
@@ -42,6 +42,7 @@ const EvidenciasDashboard = () => {
       corBadge: "bg-primary text-primary-foreground",
       icon: FileCheck,
       items: ["Ficha da escola", "Lista de equipamentos", "Mapa 2,4 GHz", "Mapa 5 GHz", "Site survey"],
+      link: "/evidencias/escolas?fase=ppi",
     },
     {
       titulo: "Execução em Campo",
@@ -51,6 +52,7 @@ const EvidenciasDashboard = () => {
       corBadge: "bg-secondary text-secondary-foreground",
       icon: Camera,
       items: ["20 fotos padronizadas", "Geolocalização", "Checklist elétrico", "Certificação cabos"],
+      link: "/evidencias/escolas?fase=campo",
     },
     {
       titulo: "Pós-Instalação",
@@ -60,6 +62,7 @@ const EvidenciasDashboard = () => {
       corBadge: "bg-accent text-accent-foreground",
       icon: ClipboardList,
       items: ["Checklist aprovação", "Infraestrutura", "Materiais", "Inventário", "Mapas as-built", "Certificação"],
+      link: "/evidencias/escolas?fase=pdi",
     },
     {
       titulo: "Monitoramento",
@@ -69,6 +72,7 @@ const EvidenciasDashboard = () => {
       corBadge: "bg-destructive text-destructive-foreground",
       icon: Activity,
       items: ["Disponibilidade", "Latência", "Jitter", "Perda pacotes", "Velocidade", "Diagnóstico", "Saturação", "Estabilidade", "IPv4/IPv6", "Histórico"],
+      link: "/evidencias/escolas?fase=sqs",
     },
   ];
 
@@ -94,7 +98,11 @@ const EvidenciasDashboard = () => {
       {/* KPIs */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         {kpis.map((kpi) => (
-          <Card key={kpi.label} className="card-hover">
+          <Card
+            key={kpi.label}
+            className={`card-hover transition-all ${kpi.link ? "cursor-pointer hover:shadow-md hover:scale-[1.02]" : ""}`}
+            onClick={() => kpi.link && navigate(kpi.link)}
+          >
             <CardContent className="p-4 flex items-center gap-3">
               <div className={`p-2 rounded-lg bg-muted`}>
                 <kpi.icon className={`w-5 h-5 ${kpi.color}`} />
@@ -119,7 +127,7 @@ const EvidenciasDashboard = () => {
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             {fases.map((fase, i) => (
-              <div key={fase.subtitulo} className="relative">
+              <div key={fase.subtitulo} className="relative cursor-pointer hover:scale-[1.02] transition-all" onClick={() => navigate(fase.link)}>
                 <div className={`border-l-4 ${fase.cor} rounded-lg p-4 h-full`}>
                   <div className="flex items-center justify-between mb-2">
                     <Badge className={fase.corBadge}>{fase.subtitulo}</Badge>
