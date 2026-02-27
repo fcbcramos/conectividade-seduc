@@ -105,10 +105,10 @@ const Section1 = () => {
   ];
 
   const serviceMetrics = [
-    { value: "1.142", label: "Escolas" },
+    { value: "584", label: "Escolas" },
     { value: "100%", label: "Cobertura Wi-Fi" },
     { value: "99,5%", label: "Disponibilidade" },
-    { value: "24x7", label: "Suporte" },
+    { value: "12m", label: "Contrato" },
   ];
 
   return (
@@ -177,12 +177,12 @@ const Section1 = () => {
           <PDFCard title="Fontes de Financiamento" variant="accent" accentColor={colors.govGreen}>
             <View style={styles.infoGrid}>
               <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>Lei 14.172/2021</Text>
+                <Text style={styles.infoLabel}>Lei 14.172/2021 (FUST)</Text>
                 <Text style={styles.infoValue}>{formatCurrency(kpiData.fonte14172)}</Text>
               </View>
               <View style={styles.infoItem}>
-                <Text style={styles.infoLabel}>Tesouro Estadual</Text>
-                <Text style={styles.infoValue}>{formatCurrency(kpiData.fontTesouro)}</Text>
+                <Text style={styles.infoLabel}>Fonte Única</Text>
+                <Text style={styles.infoValue}>100% FUST</Text>
               </View>
             </View>
             <Text style={[styles.infoLabel, { marginTop: spacing.md }]}>

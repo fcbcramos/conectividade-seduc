@@ -43,14 +43,27 @@ const PDIFormulario = () => {
   const [descServicos, setDescServicos] = useState("");
   const [descArquitetura, setDescArquitetura] = useState("");
 
-  const [inventario, setInventario] = useState([
-    { tipo: "Access Point Indoor", modelo: "", numSerie: "", firmware: "", local: "" },
-    { tipo: "Access Point Outdoor", modelo: "", numSerie: "", firmware: "", local: "" },
-    { tipo: "Switch PoE", modelo: "", numSerie: "", firmware: "", local: "" },
-    { tipo: "Firewall/Router", modelo: "", numSerie: "", firmware: "", local: "" },
-    { tipo: "Sonda SQS (SIMET Box)", modelo: "SIMET Box v3", numSerie: "", firmware: "", local: "" },
-    { tipo: "Nobreak", modelo: "", numSerie: "", firmware: "", local: "" },
-  ]);
+  // Inventário pré-preenchido com itens contratados
+  const gerarInventarioInicial = () => {
+    if (!escola?.itensContratados) return [
+      { tipo: "Access Point Indoor", modelo: "", numSerie: "", firmware: "", local: "" },
+    ];
+    const itens = escola.itensContratados;
+    const inv = [];
+    for (let i = 0; i < itens.qtdAPs - 1; i++) {
+      inv.push({ tipo: `AP Indoor ${i + 1} (${itens.tipoKit})`, modelo: "", numSerie: "", firmware: "", local: "" });
+    }
+    inv.push({ tipo: `AP Outdoor (${itens.tipoKit})`, modelo: "", numSerie: "", firmware: "", local: "" });
+    inv.push({ tipo: "Switch PoE", modelo: "", numSerie: "", firmware: "", local: "" });
+    inv.push({ tipo: "Firewall/Router", modelo: "", numSerie: "", firmware: "", local: "" });
+    if (itens.temSQS) {
+      inv.push({ tipo: "Sonda SQS (SIMET Box)", modelo: "SIMET Box v3", numSerie: "", firmware: "", local: "" });
+    }
+    inv.push({ tipo: "Nobreak", modelo: "", numSerie: "", firmware: "", local: "" });
+    return inv;
+  };
+  
+  const [inventario, setInventario] = useState(gerarInventarioInicial());
 
   const [fotos] = useState(fotosObrigatorias.map(f => ({ ...f })));
 

@@ -1,89 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { disbursementData, kpiData } from "@/data/contractData";
-import { Wallet, TrendingUp, Calendar, Landmark, ArrowRight } from "lucide-react";
+import { disbursementData, kpiData, contractItems } from "@/data/contractData";
+import { Wallet, TrendingUp, Calendar, Landmark } from "lucide-react";
 import ExecutiveTimeline from "@/components/dashboard/ExecutiveTimeline";
 import SectionNavigation from "@/components/navigation/SectionNavigation";
-
-const resourceAllocation = [
-  { 
-    item: 1, 
-    name: "Serviço de Acesso à Internet (Dedicado)", 
-    description: "Link dedicado, simétrico, garantia de banda, fibra óptica",
-    ano1: "Lei 14.172", 
-    ano2: "Tesouro", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 2, 
-    name: "Serviço de Acesso à Internet (Satélite)", 
-    description: "Tecnologia satelital LEO para áreas sem infraestrutura terrestre",
-    ano1: "Lei 14.172", 
-    ano2: "Tesouro", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 3, 
-    name: "Serviço de Acesso à Internet (Banda Larga)", 
-    description: "Banda larga, mín. 300 Mbps, fibra óptica",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 4, 
-    name: "Infraestrutura Wi-Fi (KIT I)", 
-    description: "Até 400 m² de cobertura",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 5, 
-    name: "Infraestrutura Wi-Fi (KIT II)", 
-    description: "401 a 800 m² de cobertura",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 6, 
-    name: "Infraestrutura Wi-Fi (KIT III)", 
-    description: "801 a 1500 m² de cobertura",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "Tesouro" 
-  },
-  { 
-    item: 7, 
-    name: "Cabeamento Estruturado e Infraestrutura", 
-    description: "150 unidades escolares",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "N/A" 
-  },
-  { 
-    item: 8, 
-    name: "Suporte Técnico Especializado", 
-    description: "Gestão e suporte fim a fim da conectividade",
-    ano1: "Lei 14.172", 
-    ano2: "Lei 14.172", 
-    ano3: "Tesouro" 
-  },
-];
-
-const getSourceStyle = (source: string) => {
-  switch (source) {
-    case "Lei 14.172":
-      return "bg-primary text-primary-foreground";
-    case "Tesouro":
-      return "bg-destructive text-destructive-foreground";
-    case "N/A":
-      return "bg-muted text-muted-foreground";
-    default:
-      return "bg-muted text-muted-foreground";
-  }
-};
 
 const formatCurrency = (value: number) => {
   return new Intl.NumberFormat('pt-BR', {
@@ -147,7 +67,7 @@ const Section7 = () => {
               </div>
               <div>
               <p className="text-xs text-muted-foreground uppercase">Início Previsto</p>
-                <p className="text-xl font-bold">Fevereiro/2026</p>
+                <p className="text-xl font-bold">Março/2026</p>
               </div>
             </div>
           </CardContent>
@@ -195,7 +115,7 @@ const Section7 = () => {
                 <tr className="font-bold bg-muted/30">
                   <td className="py-3 px-4">Total</td>
                   <td className="py-3 px-4">Implantação</td>
-                  <td className="text-center py-3 px-4">Fev-Ago/26</td>
+                  <td className="text-center py-3 px-4">Mar-Set/26</td>
                   <td className="text-right py-3 px-4">60%</td>
                   <td className="text-right py-3 px-4">{formatCurrency(totalImplantation)}</td>
                   <td></td>
@@ -206,12 +126,12 @@ const Section7 = () => {
         </CardContent>
       </Card>
 
-      {/* Resource Allocation Matrix */}
+      {/* Resource Allocation - Simplified: only Lei 14.172 for 12 months */}
       <Card className="shadow-card">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Landmark className="w-5 h-5 text-primary" />
-            Matriz de Alocação de Recursos por Fonte
+            Alocação de Recursos por Item Contratado
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
@@ -219,80 +139,48 @@ const Section7 = () => {
           <div className="flex flex-wrap gap-4">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded bg-primary"></div>
-              <span className="text-sm">Lei 14.172/2021 (FUST)</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded bg-destructive"></div>
-              <span className="text-sm">Tesouro Estadual</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-4 h-4 rounded bg-muted"></div>
-              <span className="text-sm">N/A</span>
+              <span className="text-sm">Lei 14.172/2021 (FUST) — Fonte única</span>
             </div>
           </div>
 
-          {/* Matrix Table */}
+          {/* Items Table */}
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b">
                   <th className="text-left py-3 px-4">Item</th>
                   <th className="text-left py-3 px-4">Serviço</th>
-                  <th className="text-center py-3 px-4">Ano 2026</th>
-                  <th className="text-center py-3 px-4">Ano 2027</th>
-                  <th className="text-center py-3 px-4">Ano 2028</th>
+                  <th className="text-center py-3 px-4">Qtd</th>
+                  <th className="text-right py-3 px-4">Vr. Mensal</th>
+                  <th className="text-right py-3 px-4">Vr. Anual (12m)</th>
+                  <th className="text-center py-3 px-4">Fonte</th>
                 </tr>
               </thead>
               <tbody>
-                {resourceAllocation.map((item) => (
-                  <tr key={item.item} className="border-b hover:bg-muted/30">
-                    <td className="py-3 px-4 font-semibold">{item.item}</td>
+                {contractItems.map((item) => (
+                  <tr key={item.id} className="border-b hover:bg-muted/30">
+                    <td className="py-3 px-4 font-semibold">{item.id}</td>
                     <td className="py-3 px-4">
-                      <div>
-                        <p className="font-medium">{item.name}</p>
-                        <p className="text-xs text-muted-foreground">{item.description}</p>
-                      </div>
+                      <p className="font-medium">{item.especificacao}</p>
                     </td>
+                    <td className="text-center py-3 px-4">{item.quantidade.toLocaleString('pt-BR')}</td>
+                    <td className="text-right py-3 px-4">{formatCurrency(item.valorMensal)}</td>
+                    <td className="text-right py-3 px-4 font-medium">{formatCurrency(item.valorAnual)}</td>
                     <td className="text-center py-3 px-4">
-                      <Badge className={getSourceStyle(item.ano1)}>{item.ano1}</Badge>
-                    </td>
-                    <td className="text-center py-3 px-4">
-                      <Badge className={getSourceStyle(item.ano2)}>{item.ano2}</Badge>
-                    </td>
-                    <td className="text-center py-3 px-4">
-                      <Badge className={getSourceStyle(item.ano3)}>{item.ano3}</Badge>
+                      <Badge className="bg-primary text-primary-foreground">Lei 14.172</Badge>
                     </td>
                   </tr>
                 ))}
               </tbody>
+              <tfoot>
+                <tr className="font-bold bg-muted/30">
+                  <td className="py-3 px-4" colSpan={3}>Total</td>
+                  <td className="text-right py-3 px-4">{formatCurrency(contractItems.reduce((s, i) => s + i.valorMensal, 0))}</td>
+                  <td className="text-right py-3 px-4">{formatCurrency(contractItems.reduce((s, i) => s + i.valorAnual, 0))}</td>
+                  <td></td>
+                </tr>
+              </tfoot>
             </table>
-          </div>
-
-          {/* Transition Strategy */}
-          <div className="bg-muted/30 rounded-lg p-4">
-            <h4 className="font-semibold mb-3">Estratégia de Transição e Sustentabilidade</h4>
-            <div className="flex items-center justify-center gap-4 flex-wrap">
-              <div className="text-center p-3 bg-primary/10 rounded-lg">
-                <p className="text-xs text-muted-foreground">ANO 001</p>
-                <p className="font-bold text-primary">Lei 14.172</p>
-                <p className="text-xs">100% FUST</p>
-              </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground" />
-              <div className="text-center p-3 bg-gradient-to-r from-primary/10 to-destructive/10 rounded-lg">
-                <p className="text-xs text-muted-foreground">ANO 002</p>
-                <p className="font-bold">Transição</p>
-                <p className="text-xs">Misto</p>
-              </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground" />
-              <div className="text-center p-3 bg-destructive/10 rounded-lg">
-                <p className="text-xs text-muted-foreground">ANO 003</p>
-                <p className="font-bold text-destructive">Tesouro</p>
-                <p className="text-xs">Estadual</p>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground mt-4 text-center">
-              A transição gradual garante a continuidade dos serviços após o encerramento dos recursos federais da Lei 14.172/2021.
-            </p>
           </div>
         </CardContent>
       </Card>

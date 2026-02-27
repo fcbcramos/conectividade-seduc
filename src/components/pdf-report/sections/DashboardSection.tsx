@@ -123,12 +123,12 @@ const DashboardSection = () => {
         />
         <PDFMetricCard 
           value={formatCurrency(kpiData.fonte14172)} 
-          label="Lei 14.172/2021" 
+          label="Lei 14.172 (FUST)" 
           color={colors.govGreen}
         />
         <PDFMetricCard 
-          value={formatCurrency(kpiData.fontTesouro)} 
-          label="Tesouro Estadual" 
+          value={kpiData.executionPeriod} 
+          label="Prazo" 
           color={colors.govBlue}
         />
         <PDFMetricCard 

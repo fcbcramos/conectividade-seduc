@@ -15,7 +15,7 @@ const formatCurrencyFull = (value: number) => {
 };
 
 const ExecutiveTimeline = () => {
-  const months = ["Fev/26", "Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26"];
+  const months = ["Mar/26", "Abr/26", "Mai/26", "Jun/26", "Jul/26", "Ago/26", "Set/26"];
   const totalValue = disbursementData.reduce((acc, item) => acc + item.value, 0);
 
   const getBarColor = (type: string) => {
@@ -123,7 +123,7 @@ const ExecutiveTimeline = () => {
               <span className="text-xl font-bold text-primary">{formatCurrencyFull(totalValue)}</span>
             </div>
             <div className="text-xs text-muted-foreground">
-              Período: Fevereiro - Agosto 2026
+              Período: Março - Setembro 2026
             </div>
           </div>
         </div>

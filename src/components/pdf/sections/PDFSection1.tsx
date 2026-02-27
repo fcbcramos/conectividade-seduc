@@ -2,7 +2,7 @@ import PDFPage from "../PDFPage";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { kpiData, basicInfo } from "@/data/contractData";
-import { Globe, Wifi, Building2, Target, CheckCircle, Satellite, Radio, Wrench, Router, Shield, Network } from "lucide-react";
+import { Globe, Wifi, Building2, Target, CheckCircle, Satellite, Wrench, Router } from "lucide-react";
 
 interface PDFSection1Props {
   startPage: number;
@@ -18,18 +18,16 @@ const PDFSection1 = ({ startPage, totalPages }: PDFSection1Props) => {
   ];
 
   const serviceMetrics = [
-    { icon: Globe, label: "Serviço de Acesso à Internet (Dedicado)", value: "92.000", unit: "Mbps" },
-    { icon: Satellite, label: "Serviço de Acesso à Internet (Satélite)", value: "50", unit: "Kits" },
-    { icon: Radio, label: "Serviço de Acesso à Internet (Banda Larga)", value: "631", unit: "Links" },
-    { icon: Wrench, label: "Serviço de Adequação de Infraestrutura", value: "150", unit: "Unidades" },
+    { icon: Globe, label: "Internet Dedicado (fibra 1:1)", value: "92.000", unit: "Mbps" },
+    { icon: Satellite, label: "Internet Satélite (LEO)", value: "50", unit: "Unidades" },
+    { icon: Wifi, label: "Wi-Fi KIT I (até 400 m²)", value: "327", unit: "Unidades" },
+    { icon: Wrench, label: "Adequação Cab. Estruturado + SQS", value: "150", unit: "Unidades" },
   ];
 
   const equipmentMetrics = [
-    { icon: Wifi, label: "Access Points (Novos)", value: "2.776" },
-    { icon: Wifi, label: "Access Points (Legados)", value: "950" },
-    { icon: Router, label: "SQS - Sonda SIMET Box", value: "631" },
-    { icon: Shield, label: "Appliance Firewall", value: "631" },
-    { icon: Network, label: "Switches", value: "664" },
+    { icon: Wifi, label: "Wi-Fi KIT II (401-800 m²)", value: "161" },
+    { icon: Wifi, label: "Wi-Fi KIT III (801-1500 m²)", value: "15" },
+    { icon: Router, label: "Suporte Técnico", value: "631" },
   ];
 
   return (
@@ -128,15 +126,11 @@ const PDFSection1 = ({ startPage, totalPages }: PDFSection1Props) => {
               <CardContent className="py-2 space-y-1.5">
                 <div className="flex justify-between items-center py-1 border-b text-xs">
                   <span className="text-muted-foreground">Valor Total</span>
-                  <span className="font-bold">R$ 89.971.275,00</span>
+                  <span className="font-bold">R$ 35.938.521,36</span>
                 </div>
                 <div className="flex justify-between items-center py-1 border-b text-xs">
-                  <span className="text-muted-foreground">Fonte 14.172</span>
-                  <span className="font-bold text-primary">R$ 54.134.450,00</span>
-                </div>
-                <div className="flex justify-between items-center py-1 border-b text-xs">
-                  <span className="text-muted-foreground">Fonte Tesouro</span>
-                  <span className="font-bold text-destructive">R$ 35.836.825,00</span>
+                  <span className="text-muted-foreground">Fonte Lei 14.172 (FUST)</span>
+                  <span className="font-bold text-primary">R$ 35.938.521,36</span>
                 </div>
                 <div className="flex justify-between items-center py-1 border-b text-xs">
                   <span className="text-muted-foreground">Prazo</span>

@@ -13,7 +13,7 @@ import {
 import {
   ArrowLeft, Save, CheckCircle, School, Package, Wifi, Map, Upload,
 } from "lucide-react";
-import { evidenciasEscolas, equipamentosPPIPadrao } from "@/data/evidenciasData";
+import { evidenciasEscolas, type EquipamentoPPI } from "@/data/evidenciasData";
 import DadosExemploBanner from "@/components/evidencias/DadosExemploBanner";
 import { toast } from "@/hooks/use-toast";
 
@@ -21,7 +21,26 @@ const PPIFormulario = () => {
   const { inep } = useParams<{ inep: string }>();
   const navigate = useNavigate();
   const escola = evidenciasEscolas.find(e => e.inep === inep);
-  const [equipamentos, setEquipamentos] = useState(equipamentosPPIPadrao.map(e => ({ ...e })));
+  
+  // Gera equipamentos baseados nos itens contratados da escola
+  const gerarEquipamentos = (): EquipamentoPPI[] => {
+    if (!escola?.itensContratados) return [];
+    const itens = escola.itensContratados;
+    const eqs: EquipamentoPPI[] = [
+      { tipo: `Wi-Fi ${itens.tipoKit} - Access Point Indoor`, modelo: "Wi-Fi 6 AX3600", fabricante: "A definir", quantidade: itens.qtdAPs - 1 },
+      { tipo: `Wi-Fi ${itens.tipoKit} - Access Point Outdoor`, modelo: "Wi-Fi 6 AX3600", fabricante: "A definir", quantidade: 1 },
+      { tipo: "Switch PoE", modelo: "24P Gigabit PoE+", fabricante: "A definir", quantidade: 1 },
+      { tipo: "Firewall/Router", modelo: "UTM 1Gbps", fabricante: "A definir", quantidade: 1 },
+    ];
+    if (itens.temSQS) {
+      eqs.push({ tipo: "Sonda SQS (SIMET Box)", modelo: "SIMET Box v3", fabricante: "NIC.br", quantidade: 1 });
+    }
+    eqs.push({ tipo: "Rack/Gabinete", modelo: '19" 12U', fabricante: "A definir", quantidade: 1 });
+    eqs.push({ tipo: "Nobreak", modelo: "1500VA Online", fabricante: "A definir", quantidade: 1 });
+    return eqs;
+  };
+  
+  const [equipamentos, setEquipamentos] = useState(gerarEquipamentos());
   const [obs24, setObs24] = useState("");
   const [obs5, setObs5] = useState("");
   const [obsSite, setObsSite] = useState("");
@@ -66,7 +85,7 @@ const PPIFormulario = () => {
       <Tabs defaultValue="dados" className="space-y-4">
         <TabsList className="grid grid-cols-5 w-full">
           <TabsTrigger value="dados" className="text-xs gap-1"><School className="w-3.5 h-3.5" />Dados</TabsTrigger>
-          <TabsTrigger value="equipamentos" className="text-xs gap-1"><Package className="w-3.5 h-3.5" />Equipamentos</TabsTrigger>
+          <TabsTrigger value="itens" className="text-xs gap-1"><Package className="w-3.5 h-3.5" />Itens</TabsTrigger>
           <TabsTrigger value="mapa24" className="text-xs gap-1"><Wifi className="w-3.5 h-3.5" />2,4 GHz</TabsTrigger>
           <TabsTrigger value="mapa5" className="text-xs gap-1"><Wifi className="w-3.5 h-3.5" />5 GHz</TabsTrigger>
           <TabsTrigger value="site" className="text-xs gap-1"><Map className="w-3.5 h-3.5" />Site Survey</TabsTrigger>
@@ -133,8 +152,42 @@ const PPIFormulario = () => {
           </Card>
         </TabsContent>
 
-        {/* Aba 2: Equipamentos */}
-        <TabsContent value="equipamentos">
+        {/* Aba 2: Itens Contratados + Equipamentos */}
+        <TabsContent value="itens">
+          {/* Itens Contratados da Escola */}
+          {escola.itensContratados && (
+            <Card className="mb-4">
+              <CardHeader>
+                <CardTitle className="text-base">Itens Contratados para esta Escola</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground">Kit Wi-Fi</p>
+                    <p className="text-lg font-bold text-primary">{escola.itensContratados.tipoKit}</p>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground">Access Points</p>
+                    <p className="text-lg font-bold">{escola.itensContratados.qtdAPs}</p>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground">Banda Contratada</p>
+                    <p className="text-lg font-bold">{escola.itensContratados.bandaContratada} Mbps</p>
+                  </div>
+                  <div className="bg-muted/50 rounded-lg p-3 text-center">
+                    <p className="text-xs text-muted-foreground">Tipo de Link</p>
+                    <p className="text-lg font-bold">{escola.itensContratados.tipoLink}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 flex-wrap">
+                  {escola.itensContratados.temSQS && <Badge variant="outline" className="border-accent/30 text-accent">SQS/SIMET</Badge>}
+                  {escola.itensContratados.temAdequacao && <Badge variant="outline" className="border-primary/30 text-primary">Adequação Infraestrutura</Badge>}
+                  {escola.itensContratados.suporteTecnico && <Badge variant="outline">Suporte Técnico</Badge>}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
           <Card>
             <CardHeader>
               <CardTitle className="text-base">Lista de Equipamentos Planejados</CardTitle>
