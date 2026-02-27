@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ClipboardList as EvidenciasIcon } from "lucide-react";
 
 const iconMap: Record<number, React.ComponentType<{ className?: string }>> = {
   1: FileText,
@@ -95,6 +96,24 @@ const Sidebar = () => {
           >
             <LayoutDashboard className="w-5 h-5 flex-shrink-0" />
             {!collapsed && <span className="font-medium text-sm">Dashboard</span>}
+          </NavLink>
+        </div>
+
+        {/* Link Evidências */}
+        <div className={cn("mb-4", collapsed ? "px-2" : "px-3")}>
+          <NavLink
+            to="/evidencias"
+            className={({ isActive }) =>
+              cn(
+                "flex items-center gap-3 px-3 py-2.5 rounded-lg transition-all",
+                isActive
+                  ? "bg-destructive/20 text-destructive-foreground font-semibold border border-destructive/30"
+                  : "hover:bg-sidebar-accent text-sidebar-foreground"
+              )
+            }
+          >
+            <EvidenciasIcon className="w-5 h-5 flex-shrink-0" />
+            {!collapsed && <span className="font-medium text-sm">Coleta de Evidências</span>}
           </NavLink>
         </div>
 

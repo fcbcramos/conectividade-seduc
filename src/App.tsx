@@ -24,6 +24,11 @@ import Section13 from "./pages/sections/Section13";
 import Section14 from "./pages/sections/Section14";
 import Section15 from "./pages/sections/Section15";
 import NotFound from "./pages/NotFound";
+import EvidenciasDashboard from "./pages/evidencias/EvidenciasDashboard";
+import EscolasLista from "./pages/evidencias/EscolasLista";
+import EscolaFicha from "./pages/evidencias/EscolaFicha";
+import PPIFormulario from "./pages/evidencias/PPIFormulario";
+import PDIFormulario from "./pages/evidencias/PDIFormulario";
 
 const queryClient = new QueryClient();
 
@@ -59,6 +64,11 @@ const App = () => (
             <Route path="/secao/13" element={<Section12 />} />
             <Route path="/secao/14" element={<Section13 />} />
             <Route path="/secao/15" element={<Section14 />} />
+            <Route path="/evidencias" element={<EvidenciasDashboard />} />
+            <Route path="/evidencias/escolas" element={<EscolasLista />} />
+            <Route path="/evidencias/escola/:inep" element={<EscolaFicha />} />
+            <Route path="/evidencias/ppi/:inep" element={<PPIFormulario />} />
+            <Route path="/evidencias/pdi/:inep" element={<PDIFormulario />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Routes>
